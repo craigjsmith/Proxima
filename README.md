@@ -115,6 +115,8 @@ Discover nearby attractions, sights, and hidden gems around you.
 <img src="wireframes/leaderboard.png" width=600>
 
 ### [BONUS] Interactive Prototype
+View on Figma: https://www.figma.com/file/G4TraKzuTCOQRkE9yrGVye/Proxima-Wireframe?node-id=0%3A1
+<img src="wireframes/demo.gif" width=600>
 
 ## Schema 
 [This section will be completed in Unit 9]
