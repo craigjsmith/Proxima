@@ -106,13 +106,13 @@ Discover nearby attractions, sights, and hidden gems around you.
 
 
 ## Wireframes
-<img src="home.png" width=600>
-<img src="map.png" width=600>
-<img src="feed.png" width=600>
-<img src="view_location.png" width=600>
-<img src="add_location.png" width=600>
-<img src="profile.png" width=600>
-<img src="leaderboard.png" width=600>
+<img src="wireframes/home.png" width=600>
+<img src="wireframes/map.png" width=600>
+<img src="wireframes/feed.png" width=600>
+<img src="wireframes/view_location.png" width=600>
+<img src="wireframes/add_location.png" width=600>
+<img src="wireframes/profile.png" width=600>
+<img src="wireframes/leaderboard.png" width=600>
 
 ### [BONUS] Interactive Prototype
 
