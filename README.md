@@ -119,7 +119,65 @@ View on Figma: https://www.figma.com/file/G4TraKzuTCOQRkE9yrGVye/Proxima-Wirefra
 <img src="wireframes/demo.gif" width=600>
 
 ## Schema 
-[This section will be completed in Unit 9]
+Location
+
+| Property | Type | Description |
+| -------- | -------- | --------|
+| Name     | String     | Name of location     |
+| Description  | String     | Description of location 
+| Categories   | String[]   | Categories location belongs to     |
+| Coordinates  | String     | Geographical coordinates     |
+| Pictures     | File[]     |   Holds the pictures associated with this location.   |
+| User     | Pointer to PFUser     | The user who submited the story     |
+| Comments     | Pointers to Comments     | Comments associated with location     |
+
+Comment
+| Property | Type | Description |
+| -------- | -------- | --------|
+| User     | Pointer to PFUser  | User who made comment  |
+| Message  | String     | Content of comment     |
+| Time     | TimeDate   | Time comment was made  |
+
+
+User
+| Property | Type | Description |
+| -------- | -------- | --------|
+| User     | Pointer to PFUser     | User      |
+| Name     | String   | Content of comment     |
+| Profile picture     | File[]     | Picture     |
+| Created Locations   | Pointer to Locations     | Locations user created     |
+| Visited Locations   | Pointer to Locations     | Locations user visited     |
+| Score     | Number  | Points earned by user |
+| Achievements     | Pointer to Achievements  | Achievements awarded to user |
+
+
+
+**Login / Register**
+(Read/GET) Get user
+(Create/POST) Create new users
+
+**Map**
+- (Read/GET) Get Locations
+
+**Feed**
+- (Read/GET) Get Locations
+
+**Add Location**
+- (Create/POST) Create new Locations
+
+**View Location**
+- (Read/GET) Get locations
+- (Delete) Delete a Comment belonging to location
+
+**Add Comment**
+- (Create/POST) Create new Comment
+
+**Leaderboard**
+- (Read/GET) Get all Users
+
+**Profile**
+- (Read/GET) Get User
+- (Update/PUT) Update User information
 ### Models
 [Add table of models]
 ### Networking
