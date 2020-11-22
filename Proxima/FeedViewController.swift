@@ -10,13 +10,13 @@ import UIKit
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
-    @IBOutlet weak var locationsTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationsTableView.dataSource = self
-        locationsTableView.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -29,7 +29,13 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as! FeedViewCell
+        
+        cell.distanceLabel.text = "0.2 miles away"
+        
+        cell.nameLabel.text = "Spartan Stadium"
+        
+        return cell
     }
     
     /*
