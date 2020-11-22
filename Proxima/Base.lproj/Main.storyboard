@@ -119,38 +119,47 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="John Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlG-lE-qdi" userLabel="nameLabel">
-                                                    <rect key="frame" x="99" y="36" width="84" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlG-lE-qdi" userLabel="nameLabel">
+                                                    <rect key="frame" x="107" y="36" width="84" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P9B-Gp-MSZ" userLabel="profileImage">
-                                                    <rect key="frame" x="16" y="19" width="75" height="62"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P9B-Gp-MSZ" userLabel="profileImage">
+                                                    <rect key="frame" x="24" y="19" width="75" height="62"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="75" id="NR7-aj-oa8"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJs-7Z-xOc" userLabel="starsLabel">
-                                                    <rect key="frame" x="303" y="39" width="18" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJs-7Z-xOc" userLabel="starsLabel">
+                                                    <rect key="frame" x="315" y="39" width="18" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="je0-Aq-wWm" userLabel="starImage">
-                                                    <rect key="frame" x="329" y="34" width="30" height="30"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="je0-Aq-wWm" userLabel="starImage">
+                                                    <rect key="frame" x="337" y="34" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="edk-Xg-KiO"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="je0-Aq-wWm" secondAttribute="bottom" constant="8" id="0W8-M3-SgL"/>
+                                                <constraint firstItem="je0-Aq-wWm" firstAttribute="centerY" secondItem="IJs-7Z-xOc" secondAttribute="centerY" id="0lf-VC-47q"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="QlG-lE-qdi" secondAttribute="bottom" constant="8" id="78t-SC-pnx"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="IJs-7Z-xOc" secondAttribute="bottom" constant="8" id="8Fi-Mc-5mX"/>
                                                 <constraint firstItem="IJs-7Z-xOc" firstAttribute="top" secondItem="zUU-FC-fyK" secondAttribute="topMargin" constant="28" id="INc-h3-0ac"/>
                                                 <constraint firstItem="QlG-lE-qdi" firstAttribute="top" secondItem="zUU-FC-fyK" secondAttribute="topMargin" constant="25" id="MnL-HN-UYA"/>
                                                 <constraint firstItem="QlG-lE-qdi" firstAttribute="leading" secondItem="P9B-Gp-MSZ" secondAttribute="trailing" constant="8" id="Rur-Do-dvI"/>
+                                                <constraint firstItem="P9B-Gp-MSZ" firstAttribute="centerY" secondItem="zUU-FC-fyK" secondAttribute="centerY" id="a4s-ke-spx"/>
                                                 <constraint firstItem="P9B-Gp-MSZ" firstAttribute="top" secondItem="zUU-FC-fyK" secondAttribute="topMargin" constant="8" id="daO-Ag-5Eo"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="P9B-Gp-MSZ" secondAttribute="bottom" constant="8" id="esk-28-F94"/>
                                                 <constraint firstItem="je0-Aq-wWm" firstAttribute="trailing" secondItem="zUU-FC-fyK" secondAttribute="trailingMargin" constant="8" id="g46-Nr-GmS"/>
                                                 <constraint firstItem="je0-Aq-wWm" firstAttribute="leading" secondItem="IJs-7Z-xOc" secondAttribute="trailing" constant="4" id="gVb-jx-rfd"/>
                                                 <constraint firstItem="P9B-Gp-MSZ" firstAttribute="leading" secondItem="zUU-FC-fyK" secondAttribute="leadingMargin" constant="8" id="naf-gd-QZ4"/>
                                                 <constraint firstItem="IJs-7Z-xOc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QlG-lE-qdi" secondAttribute="trailing" constant="8" id="rkJ-Co-JSy"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="je0-Aq-wWm" secondAttribute="bottom" constant="25" id="sCa-VP-V6c"/>
                                                 <constraint firstItem="je0-Aq-wWm" firstAttribute="top" secondItem="zUU-FC-fyK" secondAttribute="topMargin" constant="23" id="ygU-hc-Ymi"/>
                                             </constraints>
                                         </tableViewCellContentView>
