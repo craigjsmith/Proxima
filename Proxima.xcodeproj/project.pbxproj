@@ -18,6 +18,8 @@
 		B0F24B1887EC6022DB28E059 /* Pods_Proxima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10FBA7F9F4FB9A181F7F54AD /* Pods_Proxima.framework */; };
 		B2985895256AA41D00E87A7E /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2985894256AA41D00E87A7E /* FeedViewCell.swift */; };
 		B29858AC256AB59200E87A7E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29858AB256AB59200E87A7E /* LoginViewController.swift */; };
+		B29858B1256AB64F00E87A7E /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29858B0256AB64F00E87A7E /* LeaderboardViewController.swift */; };
+		B29858B6256AB6EC00E87A7E /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29858B5256AB6EC00E87A7E /* LeaderboardCell.swift */; };
 		B2F227FD2569E69A004F3ADB /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F227FC2569E69A004F3ADB /* FeedViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		44C47FB32565F6D300713672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2985894256AA41D00E87A7E /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
 		B29858AB256AB59200E87A7E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B29858B0256AB64F00E87A7E /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		B29858B5256AB6EC00E87A7E /* LeaderboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCell.swift; sourceTree = "<group>"; };
 		B2F227FC2569E69A004F3ADB /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D3A8088FBAC531FE75288A7D /* Pods-Proxima.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Proxima.debug.xcconfig"; path = "Target Support Files/Pods-Proxima/Pods-Proxima.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +135,8 @@
 				B2F227FC2569E69A004F3ADB /* FeedViewController.swift */,
 				B2985894256AA41D00E87A7E /* FeedViewCell.swift */,
 				B29858AB256AB59200E87A7E /* LoginViewController.swift */,
+				B29858B0256AB64F00E87A7E /* LeaderboardViewController.swift */,
+				B29858B5256AB6EC00E87A7E /* LeaderboardCell.swift */,
 			);
 			path = Proxima;
 			sourceTree = "<group>";
@@ -335,10 +341,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B29858B1256AB64F00E87A7E /* LeaderboardViewController.swift in Sources */,
 				B29858AC256AB59200E87A7E /* LoginViewController.swift in Sources */,
 				44C47F942565F6D200713672 /* ViewController.swift in Sources */,
 				44C47F902565F6D200713672 /* AppDelegate.swift in Sources */,
 				B2985895256AA41D00E87A7E /* FeedViewCell.swift in Sources */,
+				B29858B6256AB6EC00E87A7E /* LeaderboardCell.swift in Sources */,
 				B2F227FD2569E69A004F3ADB /* FeedViewController.swift in Sources */,
 				44C47F922565F6D200713672 /* SceneDelegate.swift in Sources */,
 			);
