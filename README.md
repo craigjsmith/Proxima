@@ -185,4 +185,4 @@ User
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
 ### Sprint 1 Demo
-<img src="deni/demo_1.gif" width=600>
+<img src="demo/demo_1.gif" width=600>
