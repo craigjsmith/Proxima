@@ -10,7 +10,6 @@ import UIKit
 class LeaderboardCell: UITableViewCell {
 
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var starImage: UIImageView!
     @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
 

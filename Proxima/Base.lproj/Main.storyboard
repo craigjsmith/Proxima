@@ -176,7 +176,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Tiv-4m-6Sa">
-                                <rect key="frame" x="156" y="239" width="22" height="20.5"/>
+                                <rect key="frame" x="156" y="240" width="22" height="20.5"/>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbZ-dP-0oM">
@@ -365,42 +365,35 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJs-7Z-xOc" userLabel="starsLabel">
-                                                    <rect key="frame" x="315" y="39" width="18" height="20"/>
+                                                    <rect key="frame" x="319" y="39" width="18" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="je0-Aq-wWm" userLabel="starImage">
-                                                    <rect key="frame" x="337" y="34" width="30" height="30"/>
-                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="edk-Xg-KiO"/>
-                                                    </constraints>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="e3E-wT-wt8">
+                                                    <rect key="frame" x="345" y="38.5" width="22" height="20"/>
+                                                    <color key="tintColor" systemColor="systemYellowColor"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="je0-Aq-wWm" secondAttribute="bottom" constant="8" id="0W8-M3-SgL"/>
-                                                <constraint firstItem="je0-Aq-wWm" firstAttribute="centerY" secondItem="IJs-7Z-xOc" secondAttribute="centerY" id="0lf-VC-47q"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="QlG-lE-qdi" secondAttribute="bottom" constant="8" id="78t-SC-pnx"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="IJs-7Z-xOc" secondAttribute="bottom" constant="8" id="8Fi-Mc-5mX"/>
                                                 <constraint firstItem="IJs-7Z-xOc" firstAttribute="top" secondItem="zUU-FC-fyK" secondAttribute="topMargin" constant="28" id="INc-h3-0ac"/>
                                                 <constraint firstItem="QlG-lE-qdi" firstAttribute="top" secondItem="zUU-FC-fyK" secondAttribute="topMargin" constant="25" id="MnL-HN-UYA"/>
+                                                <constraint firstItem="e3E-wT-wt8" firstAttribute="trailing" secondItem="zUU-FC-fyK" secondAttribute="trailingMargin" constant="8" id="RpJ-ev-gqA"/>
                                                 <constraint firstItem="QlG-lE-qdi" firstAttribute="leading" secondItem="P9B-Gp-MSZ" secondAttribute="trailing" constant="8" id="Rur-Do-dvI"/>
                                                 <constraint firstItem="P9B-Gp-MSZ" firstAttribute="centerY" secondItem="zUU-FC-fyK" secondAttribute="centerY" id="a4s-ke-spx"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="e3E-wT-wt8" secondAttribute="bottom" constant="8" id="dQA-eY-ass"/>
                                                 <constraint firstItem="P9B-Gp-MSZ" firstAttribute="top" secondItem="zUU-FC-fyK" secondAttribute="topMargin" constant="8" id="daO-Ag-5Eo"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="P9B-Gp-MSZ" secondAttribute="bottom" constant="8" id="esk-28-F94"/>
-                                                <constraint firstItem="je0-Aq-wWm" firstAttribute="trailing" secondItem="zUU-FC-fyK" secondAttribute="trailingMargin" constant="8" id="g46-Nr-GmS"/>
-                                                <constraint firstItem="je0-Aq-wWm" firstAttribute="leading" secondItem="IJs-7Z-xOc" secondAttribute="trailing" constant="4" id="gVb-jx-rfd"/>
+                                                <constraint firstItem="e3E-wT-wt8" firstAttribute="leading" secondItem="IJs-7Z-xOc" secondAttribute="trailing" constant="8" id="jhY-3k-UzW"/>
                                                 <constraint firstItem="P9B-Gp-MSZ" firstAttribute="leading" secondItem="zUU-FC-fyK" secondAttribute="leadingMargin" constant="8" id="naf-gd-QZ4"/>
                                                 <constraint firstItem="IJs-7Z-xOc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QlG-lE-qdi" secondAttribute="trailing" constant="8" id="rkJ-Co-JSy"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="je0-Aq-wWm" secondAttribute="bottom" constant="25" id="sCa-VP-V6c"/>
-                                                <constraint firstItem="je0-Aq-wWm" firstAttribute="top" secondItem="zUU-FC-fyK" secondAttribute="topMargin" constant="23" id="ygU-hc-Ymi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="QlG-lE-qdi" id="Dnn-Kd-fxU"/>
                                             <outlet property="profileImage" destination="P9B-Gp-MSZ" id="dvr-BA-qls"/>
-                                            <outlet property="starImage" destination="je0-Aq-wWm" id="Y4L-cO-oPr"/>
                                             <outlet property="starsLabel" destination="IJs-7Z-xOc" id="MU1-aW-hsl"/>
                                         </connections>
                                     </tableViewCell>
