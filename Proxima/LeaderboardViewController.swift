@@ -51,12 +51,7 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        //
-        
-        //let profile = profiles[section]
-        
-        //
-        
+        // number of rows is number of profiles gotten from query
         return profiles.count
         
     }
@@ -69,7 +64,7 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
         let profile = profiles[indexPath.row]
         
         cell.nameLabel.text = profile["name"] as? String
-            
+        
         let score: Int = profile["score"] as! Int
         cell.starsLabel.text = String(score)
         

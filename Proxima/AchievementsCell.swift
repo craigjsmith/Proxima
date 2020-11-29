@@ -1,18 +1,16 @@
 //
-//  LeaderboardCell.swift
+//  AchievementsCell.swift
 //  Proxima
 //
-//  Created by Avni Avdulla on 11/22/20.
+//  Created by Avni Avdulla on 11/29/20.
 //
 
 import UIKit
 
-class LeaderboardCell: UITableViewCell {
+class AchievementsCell: UITableViewCell {
 
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +20,6 @@ class LeaderboardCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-
     }
 
 }

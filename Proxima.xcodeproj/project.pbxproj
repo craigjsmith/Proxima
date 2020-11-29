@@ -16,6 +16,9 @@
 		44C47FA72565F6D300713672 /* ProximaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C47FA62565F6D300713672 /* ProximaTests.swift */; };
 		44C47FB22565F6D300713672 /* ProximaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C47FB12565F6D300713672 /* ProximaUITests.swift */; };
 		B0F24B1887EC6022DB28E059 /* Pods_Proxima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10FBA7F9F4FB9A181F7F54AD /* Pods_Proxima.framework */; };
+		B27F67BF257436F500712650 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27F67BE257436F400712650 /* ProfileViewController.swift */; };
+		B27F67C425744B1800712650 /* AchievementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27F67C325744B1800712650 /* AchievementsCell.swift */; };
+		B27F67D12574592D00712650 /* LocationHorizontalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27F67D02574592D00712650 /* LocationHorizontalCell.swift */; };
 		B2985895256AA41D00E87A7E /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2985894256AA41D00E87A7E /* FeedViewCell.swift */; };
 		B29858AC256AB59200E87A7E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29858AB256AB59200E87A7E /* LoginViewController.swift */; };
 		B29858B1256AB64F00E87A7E /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29858B0256AB64F00E87A7E /* LeaderboardViewController.swift */; };
@@ -57,6 +60,9 @@
 		44C47FAD2565F6D300713672 /* ProximaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProximaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C47FB12565F6D300713672 /* ProximaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximaUITests.swift; sourceTree = "<group>"; };
 		44C47FB32565F6D300713672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B27F67BE257436F400712650 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B27F67C325744B1800712650 /* AchievementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsCell.swift; sourceTree = "<group>"; };
+		B27F67D02574592D00712650 /* LocationHorizontalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHorizontalCell.swift; sourceTree = "<group>"; };
 		B2985894256AA41D00E87A7E /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
 		B29858AB256AB59200E87A7E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B29858B0256AB64F00E87A7E /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +143,9 @@
 				B29858AB256AB59200E87A7E /* LoginViewController.swift */,
 				B29858B0256AB64F00E87A7E /* LeaderboardViewController.swift */,
 				B29858B5256AB6EC00E87A7E /* LeaderboardCell.swift */,
+				B27F67BE257436F400712650 /* ProfileViewController.swift */,
+				B27F67C325744B1800712650 /* AchievementsCell.swift */,
+				B27F67D02574592D00712650 /* LocationHorizontalCell.swift */,
 			);
 			path = Proxima;
 			sourceTree = "<group>";
@@ -347,6 +356,9 @@
 				44C47F902565F6D200713672 /* AppDelegate.swift in Sources */,
 				B2985895256AA41D00E87A7E /* FeedViewCell.swift in Sources */,
 				B29858B6256AB6EC00E87A7E /* LeaderboardCell.swift in Sources */,
+				B27F67BF257436F500712650 /* ProfileViewController.swift in Sources */,
+				B27F67C425744B1800712650 /* AchievementsCell.swift in Sources */,
+				B27F67D12574592D00712650 /* LocationHorizontalCell.swift in Sources */,
 				B2F227FD2569E69A004F3ADB /* FeedViewController.swift in Sources */,
 				44C47F922565F6D200713672 /* SceneDelegate.swift in Sources */,
 			);
