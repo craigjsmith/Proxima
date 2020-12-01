@@ -29,28 +29,28 @@ Discover nearby attractions, sights, and hidden gems around you.
 
 **Required Must-have Stories**
 
-* Interactive Map
+* [ ] Interactive Map
     * Shows locations tagged by other users. Locations can be filtered by type
     * Optional: Have a random button that shows user a random location
-* Location Info
+* [ ] Location Info
     * Shows information, picture(s), description of location
-* Add Location
+* [ ] Add Location
     * User can add location, give it a description, category, photo
-* Account Login
+* [x] Account Login
     * User can login
-* Account Registration
+* [x] Account Registration
     * User can register a new account
 
 
 **Optional Nice-to-have Stories**
 
-* User Profile
+* [ ] User Profile
     * Shows locations created/visited by user, achievements earned
-* User Profile Edit
+* [ ] User Profile Edit
     * User can edit their profile, add photo, 
-* Add Location Comment
+* [ ] Add Location Comment
     * Any user can add comments/pictures to a locationdescription
-* Location Feed
+* [ ] Location Feed
     * Show locations in a feed rather than a map (sorted by nearest!)
 
 ### 2. Screen Archetypes
