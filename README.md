@@ -178,11 +178,17 @@ User
 **Profile**
 - (Read/GET) Get User
 - (Update/PUT) Update User information
+
 ### Models
 [Add table of models]
+
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
 ### Sprint 1 Demo
 <img src="demo/demo_1.gif" width=600>
+
+### Sprint 2 Demo
+<img src="demo/demo_2.gif" width=600>
+
