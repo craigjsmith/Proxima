@@ -6,34 +6,60 @@
 //
 
 import UIKit
+import Parse
 
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
     @IBOutlet weak var tableView: UITableView!
     
+    var locations = [PFObject]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let query = PFQuery(className: "Locations")
+        query.includeKeys(["name", "description"])
+        query.limit = 20
+        
+        query.findObjectsInBackground { (locations, error) in
+            if locations != nil {
+                self.locations = locations!
+                self.tableView.reloadData()
+            }
+        }
         
         tableView.dataSource = self
         tableView.delegate = self
 
         // Do any additional setup after loading the view.
     }
-    
-    
 
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return locations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as! FeedViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedViewCell") as! FeedViewCell
         
-        cell.distanceLabel.text = "0.2 miles away"
+        if indexPath.row < locations.count {
+            
+            let post = locations[indexPath.row] //indexPath.section
+            
+            let location = post["name"] as! String
+            cell.nameLabel.text = location
+            
+            let categories = post["categories"] as? [String] ?? []
+            let categoriesString = categories.joined(separator: ", ")
+
+            cell.categoriesLabel.text = categoriesString
+        }
         
-        cell.nameLabel.text = "Spartan Stadium"
+        //cell.distanceLabel.text = "0.2 miles away"
+        
+        //cell.nameLabel.text = "Spartan Stadium"
         
         return cell
     }
