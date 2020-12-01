@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Parse
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -21,7 +22,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var collectionView: UICollectionView!
     
     
-    
+    var currUser: PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +42,63 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
+    //
+    // Called when the view appears. Gets current users info.
+    //
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+            
+        // Gets the current users information
+        let query = PFQuery(className: "UserTest")
+        
+        query.includeKeys(["name", "score", "created_locations", "visited_locations", "achievements", "user"])
+        query.whereKey("objectId", equalTo: "NtmiPTlYZH")
+        //query.whereKey("user", equalTo: PFUser.current()!)  // should get current user
+        
+        query.getFirstObjectInBackground() { (object: PFObject?, error: Error?) in
+            if object != nil {
+                        
+                self.updateInfo(user: object!)
+                
+                self.currUser = object!
+                self.collectionView.reloadData()
+                self.tableView.reloadData()
+            } else {
+                print("error: \(error?.localizedDescription)")
+            }
+        }
+                
+    }
     
     
+    func updateInfo(user: PFObject){
+        
+        self.nameLabel.text = user["name"] as? String
+        //self.usernameLabel.text = user["user"]!.username as? String
+        let score: Int = user["score"] as! Int
+        self.starsLabel.text = String(score)
+        
+    }
+    
+    //
+    // Controls Shared Locations for this user
+    //
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LocationHorizontalCell", for: indexPath) as! LocationHorizontalCell
+        
+        cell.nameLabel.text = "Sparty Statue"
+        return cell
+    }
+    
+    //
+    // Controls the achievements for this user
+    //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -56,18 +112,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LocationHorizontalCell", for: indexPath) as! LocationHorizontalCell
-        
-        cell.nameLabel.text = "Sparty Statue"
-        return cell
-    }
     
     /*
     // MARK: - Navigation
