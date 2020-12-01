@@ -64,35 +64,38 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                       user.username = usernameTextField.text
                       user.password = passwordTextField.text
                        
-                      user.signUpInBackground {(success, error)   in
-                          if success {
-                              self.performSegue(withIdentifier: "registrationSegue", sender: nil)
-                          } else {
-                              print("Error: \(error?.localizedDescription)")
-                          }
-                      }
         
-        // Creates a new row in Users table
-        let userRow = PFObject(className: "Users")
-        
-        let imageData = profileImageView.image!.pngData()
-        let file = PFFileObject(data: imageData!)
-        
-        userRow["profile_image"] = file  // set profile image element
-        userRow["user"] = PFUser.current() // set user element
-        userRow["full_name"] = fullnameTextField.text // set full name element
-        userRow["score"] = 0 // set initial score to zero
-        
-        
-        userRow.saveInBackground{(success, error) in
+        user.signUpInBackground {(success, error)   in
             if success {
-                self.dismiss(animated: true, completion: nil)
-                print("saved!")
+                // Creates a new row in Users table
+                
+                let imageData = self.profileImageView.image!.pngData()
+                let file = PFFileObject(data: imageData!)
+                
+                user["profile_image"] = file  // set profile image element
+                user["full_name"] = self.fullnameTextField.text // set full name element
+                user["score"] = 0 // set initial score to zero
+                
+                
+                user.saveInBackground{(success, error) in
+                    if success {
+                        self.dismiss(animated: true, completion: nil)
+                        print("saved!")
+                        self.performSegue(withIdentifier: "registrationSegue", sender: nil)
+                    } else {
+                        print("error saving: \(error?.localizedDescription)")
+                    }
+                    
+                    }
+                
             } else {
-                print("error saving: \(error?.localizedDescription)")
+                print("Error: \(error?.localizedDescription)")
             }
-            
-            }
+        }
+        
+        
+        
+        
         
     }
     /*

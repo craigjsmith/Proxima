@@ -30,13 +30,15 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
         
         // Finds 20 users in descending order of their scores
         // only gets score and name
-        let query = PFQuery(className: "UserTest")
+        let query = PFQuery(className: "_User")
         query.limit = 20 // keeps only 20 results
-        query.includeKeys(["name", "score"]) // gets name and score, can add other attributes later
+        query.includeKeys(["score", "full_name", "profile_image"]) // gets name and score, can add other attributes later
+        query.whereKeyExists("score")
         query.addDescendingOrder("score")
         
         query.findObjectsInBackground { (profiles, error) in
             if profiles != nil {
+                print(profiles)
                 // sets profiles to the return of query
                 self.profiles = profiles!
                 self.tableView.reloadData()
@@ -63,10 +65,16 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
         // Gets profile
         let profile = profiles[indexPath.row]
         
-        cell.nameLabel.text = profile["name"] as? String
+        cell.nameLabel.text = profile["full_name"] as? String
         
         let score: Int = profile["score"] as! Int
         cell.starsLabel.text = String(score)
+        
+        let imageFile = profile["profile_image"] as! PFFileObject
+        
+        let imageUrl = URL(string: imageFile.url!)!
+        
+        cell.profileImage.af_setImage(withURL: imageUrl)
         
         return cell
     }

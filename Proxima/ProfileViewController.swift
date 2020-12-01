@@ -8,7 +8,7 @@
 import UIKit
 import Parse
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     
 
@@ -48,44 +48,36 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
             
-        // Gets the current users information
-        let query = PFQuery(className: "UserTest")
-        
-        query.includeKeys(["name", "score", "created_locations", "visited_locations", "achievements", "user"])
-        query.whereKey("objectId", equalTo: "NtmiPTlYZH")
-        //query.whereKey("user", equalTo: PFUser.current()!)  // should get current user
-        
-        query.getFirstObjectInBackground() { (object: PFObject?, error: Error?) in
-            if object != nil {
-                        
-                self.updateInfo(user: object!)
-                
-                self.currUser = object!
-                self.collectionView.reloadData()
-                self.tableView.reloadData()
-            } else {
-                print("error: \(error?.localizedDescription)")
-            }
-        }
-                
+        updateInfo(user: PFUser.current()!)
     }
     
-    
-    // change profile image
-    // should take you to camera or photos
-    @IBAction func changeProfile(_ sender: Any) {
-        // open camera and chose pic 
-    }
-    
-    func updateInfo(user: PFObject){
+
+    func updateInfo(user: PFUser){
         
-        self.nameLabel.text = user["name"] as? String
+        self.nameLabel.text = user["full_name"] as? String
         //self.usernameLabel.text = user["user"]!.username as? String
         let score: Int = user["score"] as! Int
         self.starsLabel.text = String(score)
         
+        let imageFile = user["profile_image"] as! PFFileObject
+        
+        let imageUrl = URL(string: imageFile.url!)!
+        
+        self.profileImage.af_setImage(withURL: imageUrl)
+        
     }
     
+    @IBAction func logOut(_ sender: Any) {
+        PFUser.logOut()
+        
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        
+        let loginViewController = main.instantiateViewController(identifier: "LoginViewController")
+        
+        let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
+        
+        delegate.window?.rootViewController = loginViewController
+    }
     //
     // Controls Shared Locations for this user
     //
@@ -116,6 +108,49 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.nameLabel.text = "Top Contributor"
         
         return cell
+    }
+    
+    @IBAction func updateProfilePicture(_ sender: Any) {
+        
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            picker.sourceType = .photoLibrary
+            
+        } else {
+            picker.sourceType = .camera
+        }
+        
+        present(picker, animated: true, completion: nil)
+        
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.editedImage] as! UIImage
+        let size = CGSize(width: 300, height: 300)
+        let scaledImage = image.af_imageScaled(to: size)
+        
+        self.profileImage.image = scaledImage
+        
+        let user = PFUser.current()!
+        let imageData = self.profileImage.image!.pngData()
+        let file = PFFileObject(data: imageData!)
+        
+        user["profile_image"] = file  // set profile image element
+        
+        user.saveInBackground { (success, error) in
+            if success {
+                print("Image updated")
+            } else {
+                print("error saving: \(error?.localizedDescription)")
+            }
+        }
+        
+        dismiss(animated: true, completion: nil)
+        
     }
     
     
