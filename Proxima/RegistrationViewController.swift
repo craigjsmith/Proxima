@@ -21,6 +21,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     @IBOutlet weak var usernameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
+    
     @IBAction func onCameraButton(_ sender: Any) {
         
         let picker = UIImagePickerController()
@@ -28,30 +29,14 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         picker.allowsEditing = true
         
         if UIImagePickerController.isSourceTypeAvailable(.camera){
-            picker.sourceType = .camera
-        } else {
             picker.sourceType = .photoLibrary
+            
+        } else {
+            picker.sourceType = .camera
         }
         
         present(picker, animated: true, completion: nil)
         
-        let profileImage = PFObject(className: "Profile Image")
-        
-        let imageData = profileImageView.image!.pngData()
-        let file = PFFileObject(data: imageData!)
-        
-        profileImage["image"] = file
-        
-        profileImage.saveInBackground{(success, error) in
-            if success {
-                self.dismiss(animated: true, completion: nil)
-                print("saved!")
-            } else {
-                print("error!")
-            }
-            
-                
-            }
         
     }
     
@@ -64,9 +49,14 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         dismiss(animated: true, completion: nil)
         
-        
     }
     
+    // Removes the keyboard
+    @IBAction func tapOnScreen(_ sender: Any) {
+        fullnameTextField.resignFirstResponder()
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
     
     @IBAction func onSignupButton(_ sender: Any) {
         
@@ -81,7 +71,29 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                               print("Error: \(error?.localizedDescription)")
                           }
                       }
-
+        
+        // Creates a new row in Users table
+        let userRow = PFObject(className: "Users")
+        
+        let imageData = profileImageView.image!.pngData()
+        let file = PFFileObject(data: imageData!)
+        
+        userRow["profile_image"] = file  // set profile image element
+        userRow["user"] = PFUser.current() // set user element
+        userRow["full_name"] = fullnameTextField.text // set full name element
+        userRow["score"] = 0 // set initial score to zero
+        
+        
+        userRow.saveInBackground{(success, error) in
+            if success {
+                self.dismiss(animated: true, completion: nil)
+                print("saved!")
+            } else {
+                print("error saving: \(error?.localizedDescription)")
+            }
+            
+            }
+        
     }
     /*
     // MARK: - Navigation

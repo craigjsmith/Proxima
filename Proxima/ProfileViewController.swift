@@ -71,6 +71,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
+    // change profile image
+    // should take you to camera or photos
+    @IBAction func changeProfile(_ sender: Any) {
+        // open camera and chose pic 
+    }
+    
     func updateInfo(user: PFObject){
         
         self.nameLabel.text = user["name"] as? String
