@@ -51,6 +51,7 @@ class AddLocationViewController: UIViewController {
         }
         
         post["categories"] = categories
+        post["author"] = PFUser.current()
         
         post.saveInBackground { (success, error) in
             if success {
@@ -62,6 +63,10 @@ class AddLocationViewController: UIViewController {
         }
     }
     
+    @IBAction func topOnScreen(_ sender: Any) {
+        locationName.resignFirstResponder()
+        descriptionName.resignFirstResponder()
+    }
     /*
     // MARK: - Navigation
 

@@ -52,17 +52,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
 
+    // Updates the labels and images using User data
     func updateInfo(user: PFUser){
         
+        // update name
         self.nameLabel.text = user["full_name"] as? String
-        //self.usernameLabel.text = user["user"]!.username as? String
+        
+        //update username
+        self.usernameLabel.text = user["username"]! as? String
+        
+        // update score
         let score: Int = user["score"] as! Int
         self.starsLabel.text = String(score)
         
+        // Update profile image
         let imageFile = user["profile_image"] as! PFFileObject
-        
         let imageUrl = URL(string: imageFile.url!)!
-        
         self.profileImage.af_setImage(withURL: imageUrl)
         
     }
