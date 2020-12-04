@@ -56,11 +56,17 @@ class AddLocationViewController: UIViewController {
         post.saveInBackground { (success, error) in
             if success {
                 print("Location saved");
+                // Associate location with user
+                let user = PFUser.current()!
+                user.add(post, forKey: "created_locations")
+                
                 self.dismiss(animated: true, completion: nil)
             } else {
                 print("Error saving location!");
             }
         }
+        
+        
     }
     
     @IBAction func topOnScreen(_ sender: Any) {

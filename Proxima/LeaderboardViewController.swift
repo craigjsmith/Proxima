@@ -80,14 +80,18 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     
-    /*
-    // MARK: - Navigation
+    
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // Send which user was clicked on to profile view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let cell = sender as! UITableViewCell
+        
+        if let indexPath = tableView.indexPath(for: cell) {
+            let profile = profiles[indexPath.row]
+            let profileController = segue.destination as! ProfileViewController
+            profileController.currentUser = profile as! PFUser
+        }
     }
-    */
+    
 
 }

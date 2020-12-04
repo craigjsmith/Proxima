@@ -58,7 +58,9 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         passwordTextField.resignFirstResponder()
     }
     
+    //
     // Signs up user and adds their information to the database
+    //
     @IBAction func onSignupButton(_ sender: Any) {
         
         // Creates a new row in _User table
