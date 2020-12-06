@@ -53,17 +53,20 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if(currentUser != nil) {
-            updateInfo(user: currentUser)
-            self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
-        }else {
-            currentUser = PFUser.current()
-            updateInfo(user: currentUser)
-            self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
-
+        // If passing in from leaderboard
+        if(self.currentUser != nil) {
+            updateInfo(user: self.currentUser)
+        }
+        // Not passing from leaderboard, use current logged in user
+        else {
+            self.currentUser = PFUser.current()!
+            updateInfo(user: self.currentUser)
         }
         
-        
+        self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
+        print(createdLocations)
+        collectionView.reloadData()
+        tableView.reloadData()
     }
     
 
@@ -75,11 +78,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         //update username
         self.usernameLabel.text = user["username"]! as? String
-        
+
         // update score
         let score: Int = user["score"] as! Int
         self.starsLabel.text = String(score)
-        
+
         // Update profile image
         let imageFile = user["profile_image"] as! PFFileObject
         let imageUrl = URL(string: imageFile.url!)!

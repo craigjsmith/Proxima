@@ -40,7 +40,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Query the database
         query.findObjectsInBackground { (locations, error) in
     
-            if locations != nil {
                 // After results are returned, iterate through them and add points
                 for location in locations as! [PFObject] {
                     // Make new pin
@@ -72,8 +71,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     // Add pin to map
                     self.map.addAnnotation(pin)
                 }
-            }
-           
         }
     }
     

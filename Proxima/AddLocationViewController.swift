@@ -34,8 +34,8 @@ class AddLocationViewController: UIViewController {
         
         // Set coordinates of location
         // TODO: Make this GPS location, hard coded for now
-        post["lat"] = 54.726840;
-        post["long"] = -34.497420;
+        post["lat"] = 222.726840;
+        post["long"] = -33.497420;
         
         var categories: [String] = []
         
@@ -58,16 +58,18 @@ class AddLocationViewController: UIViewController {
         post["categories"] = categories
         post["author"] = PFUser.current()
         
+        
         post.saveInBackground { (success, error) in
             if success {
-                print("Location saved");
-                // Associate location with user
-                let user = PFUser.current()!
-                user.add(post, forKey: "created_locations")
+                let user = PFUser.current()
+                user?.add(post, forKey: "created_locations")
                 
+                user?.saveInBackground()
+                
+                print("Location saved");
                 self.dismiss(animated: true, completion: nil)
             } else {
-                print("Error saving location!");
+                print("error saving location: \(error?.localizedDescription)")
             }
         }
         
