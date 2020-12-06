@@ -16,6 +16,10 @@ class LeaderboardCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // Set profile image to circle
+        profileImage.layer.cornerRadius = (profileImage.frame.width / 2) //instead of let radius = CGRectGetWidth(self.frame) / 2
+        profileImage.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
