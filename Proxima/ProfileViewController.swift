@@ -22,7 +22,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var collectionView: UICollectionView!
     
     
-    var currUser: PFObject!
+    var createdLocations: [PFObject] = []
+    var currentUser: PFUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         layout.minimumLineSpacing = 20 // controls space between rows
-        
+
     }
     
     //
@@ -47,50 +48,68 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-            
-        updateInfo(user: PFUser.current()!)
+        
+        if(currentUser != nil) {
+            updateInfo(user: currentUser)
+            self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
+        }else {
+            currentUser = PFUser.current()
+            updateInfo(user: currentUser)
+            self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
+
+        }
+        
+        
     }
     
 
+    // Updates the labels and images using User data
     func updateInfo(user: PFUser){
         
+        // update name
         self.nameLabel.text = user["full_name"] as? String
-        //self.usernameLabel.text = user["user"]!.username as? String
+        
+        //update username
+        self.usernameLabel.text = user["username"]! as? String
+        
+        // update score
         let score: Int = user["score"] as! Int
         self.starsLabel.text = String(score)
         
+        // Update profile image
         let imageFile = user["profile_image"] as! PFFileObject
-        
         let imageUrl = URL(string: imageFile.url!)!
-        
         self.profileImage.af_setImage(withURL: imageUrl)
         
     }
     
-    @IBAction func logOut(_ sender: Any) {
-        PFUser.logOut()
-        
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        
-        let loginViewController = main.instantiateViewController(identifier: "LoginViewController")
-        
-        let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
-        
-        delegate.window?.rootViewController = loginViewController
-    }
+
+    
     //
     // Controls Shared Locations for this user
     //
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return createdLocations.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LocationHorizontalCell", for: indexPath) as! LocationHorizontalCell
         
-        cell.nameLabel.text = "Sparty Statue"
+        let location = self.createdLocations[indexPath.row] as! PFObject
+        
+        // Loads each location associated with this user
+        location.fetchIfNeededInBackground { (location, error) in
+            if location != nil {
+                
+                cell.nameLabel.text = location!["name"] as! String
+                // TO DO:
+                // set picture for each cell
+            } else {
+                print("error loading location: \(error?.localizedDescription)")
+                }
+        }
+        
         return cell
     }
     

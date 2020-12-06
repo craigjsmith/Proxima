@@ -58,8 +58,12 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         passwordTextField.resignFirstResponder()
     }
     
+    //
+    // Signs up user and adds their information to the database
+    //
     @IBAction func onSignupButton(_ sender: Any) {
         
+        // Creates a new row in _User table
         var user = PFUser()
                       user.username = usernameTextField.text
                       user.password = passwordTextField.text
@@ -67,8 +71,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         user.signUpInBackground {(success, error)   in
             if success {
-                // Creates a new row in Users table
-                
+                // only creates table entry if User was succesfuly signed up
                 let imageData = self.profileImageView.image!.pngData()
                 let file = PFFileObject(data: imageData!)
                 
@@ -84,7 +87,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                         self.performSegue(withIdentifier: "registrationSegue", sender: nil)
                     } else {
                         print("error saving: \(error?.localizedDescription)")
-                    }
+                        }
                     
                     }
                 
