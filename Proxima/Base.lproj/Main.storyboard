@@ -308,7 +308,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="FeO-Zl-XL3">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="KvE-Mr-atd">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="8KX-5a-U9e">
-                                <rect key="frame" x="350" y="108" width="51" height="30"/>
+                                <rect key="frame" x="343" y="7" width="51" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                             </button>
@@ -536,7 +536,7 @@
         <!--Proxima-->
         <scene sceneID="YZy-bd-X29">
             <objects>
-                <viewController id="Tdg-vu-fim" sceneMemberID="viewController">
+                <viewController id="Tdg-vu-fim" customClass="MapViewController" customModule="Proxima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9sh-E4-xWC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -561,6 +561,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="map" destination="mcA-4I-0Z3" id="r5v-TT-fZ0"/>
+                        <segue destination="ffC-zv-YOK" kind="presentation" identifier="mapToLocationView" id="dmJ-bT-l39"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5AR-D9-cMy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1140,6 +1144,7 @@ landmarks, definitely a great photo op!</string>
     <inferredMetricsTieBreakers>
         <segue reference="lCo-dl-Keg"/>
         <segue reference="V3E-Fg-0UG"/>
+        <segue reference="dmJ-bT-l39"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="location.fill" catalog="system" width="128" height="121"/>

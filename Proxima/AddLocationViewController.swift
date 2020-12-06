@@ -32,6 +32,11 @@ class AddLocationViewController: UIViewController {
         post["name"] = locationName.text as! String
         post["description"] = descriptionName.text as! String
         
+        // Set coordinates of location
+        // TODO: Make this GPS location, hard coded for now
+        post["lat"] = 42.726840;
+        post["long"] = -84.497420;
+        
         var categories: [String] = []
         
         if(landmarkCheck.isOn) {
