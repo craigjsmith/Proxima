@@ -70,14 +70,17 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPath(for: cell)!
-        let location = locations[indexPath.row]
-        
-        // Pass the selected object to the new view controller.
-        let locationViewController = segue.destination as! LocationViewController
-        
-        locationViewController.location = location
+        if segue.identifier == "feedToLocation" {
+            
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPath(for: cell)!
+            let location = locations[indexPath.row]
+            
+            // Pass the selected object to the new view controller.
+            let locationViewController = segue.destination as! LocationViewController
+            
+            locationViewController.location = location
+        }
  
     }
 

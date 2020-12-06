@@ -32,17 +32,18 @@
                                                     <rect key="frame" x="20" y="19" width="159" height="89"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="89" id="RbO-Lj-2dD"/>
                                                         <constraint firstAttribute="width" constant="159" id="bhA-DH-Q3i"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sparty Statue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEO-Ct-aEe" userLabel="nameLabel">
-                                                    <rect key="frame" x="187" y="19" width="207" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sparty Statue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEO-Ct-aEe" userLabel="nameLabel">
+                                                    <rect key="frame" x="187" y="25.5" width="207" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0.2 miles away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxm-TW-f90" userLabel="distanceLabel">
-                                                    <rect key="frame" x="187" y="44" width="207" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.2 miles away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxm-TW-f90" userLabel="distanceLabel">
+                                                    <rect key="frame" x="187" y="50.5" width="207" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -62,7 +63,6 @@
                                                 <constraint firstItem="poS-l7-Lw4" firstAttribute="top" secondItem="KF3-hi-KIy" secondAttribute="topMargin" constant="8" id="RhX-6w-TCl"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="pxm-TW-f90" secondAttribute="bottom" constant="8" id="VXt-XF-736"/>
                                                 <constraint firstItem="GiR-jw-ec0" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="W3s-Ga-G3Y"/>
-                                                <constraint firstItem="gEO-Ct-aEe" firstAttribute="top" secondItem="KF3-hi-KIy" secondAttribute="topMargin" constant="8" id="YS1-bl-WwF"/>
                                                 <constraint firstItem="GiR-jw-ec0" firstAttribute="top" secondItem="pxm-TW-f90" secondAttribute="bottom" constant="8" symbolic="YES" id="b2j-Af-oyu"/>
                                                 <constraint firstItem="pxm-TW-f90" firstAttribute="trailing" secondItem="KF3-hi-KIy" secondAttribute="trailingMargin" id="cE8-j4-sIw"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="GiR-jw-ec0" secondAttribute="bottom" constant="30" id="cHL-lJ-HAq"/>
@@ -78,7 +78,7 @@
                                             <outlet property="distanceLabel" destination="pxm-TW-f90" id="YUg-po-9Qo"/>
                                             <outlet property="locationImage" destination="poS-l7-Lw4" id="7GE-Un-cVd"/>
                                             <outlet property="nameLabel" destination="gEO-Ct-aEe" id="LTN-As-zh6"/>
-                                            <segue destination="ffC-zv-YOK" kind="presentation" id="YvJ-70-cEu"/>
+                                            <segue destination="ffC-zv-YOK" kind="presentation" identifier="feedToLocation" id="YvJ-70-cEu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -96,7 +96,7 @@
                     <navigationItem key="navigationItem" title="Feed" id="t4V-b6-e8O">
                         <barButtonItem key="rightBarButtonItem" title="+" systemItem="add" id="z7A-ug-GYP">
                             <connections>
-                                <segue destination="rer-nP-Rmp" kind="presentation" id="lCo-dl-Keg"/>
+                                <segue destination="rer-nP-Rmp" kind="presentation" identifier="feedToAddLocation" id="2Oc-jn-csK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -343,12 +343,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gx-j0-Hnz">
-                                <rect key="frame" x="137" y="251.5" width="140" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZJX-s4-UIw">
                                 <rect key="frame" x="130.5" y="94" width="151.5" height="149.5"/>
                                 <color key="tintColor" red="0.31161309129999998" green="0.31328934590000002" blue="0.30901774119999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -361,7 +355,7 @@
                                     <outletCollection property="gestureRecognizers" destination="llm-IU-2em" appends="YES" id="aAF-sB-5Cc"/>
                                 </connections>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gff-hv-f6X">
+                            <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gff-hv-f6X">
                                 <rect key="frame" x="67" y="425.5" width="280" height="34"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" keyboardKey="YES"/>
@@ -370,22 +364,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vux-ZO-jLm">
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vux-ZO-jLm">
                                 <rect key="frame" x="67" y="317.5" width="280" height="34"/>
                                 <color key="textColor" red="0.42684491089999999" green="0.42914102980000002" blue="0.42328982269999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aZw-nh-FLS">
+                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aZw-nh-FLS">
                                 <rect key="frame" x="67" y="371.5" width="280" height="34"/>
                                 <color key="textColor" red="0.42684491089999999" green="0.42914102980000002" blue="0.42328982269999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="username"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="username"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qoa-5D-aNq">
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qoa-5D-aNq">
                                 <rect key="frame" x="134" y="513.5" width="146" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Continue"/>
+                                <state key="normal" title="Signup"/>
                                 <connections>
                                     <action selector="onSignupButton:" destination="R8J-r0-9DN" eventType="touchUpInside" id="Jg9-ng-QSL"/>
                                     <segue destination="Gba-JZ-aAc" kind="presentation" identifier="registrationSegue" id="V3E-Fg-0UG"/>
@@ -397,15 +391,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gx-j0-Hnz">
+                                <rect key="frame" x="107" y="251.5" width="200" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="NxH-OX-dGj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4ND-v6-QuH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="vux-ZO-jLm" firstAttribute="top" secondItem="8gx-j0-Hnz" secondAttribute="bottom" constant="45" id="0tM-Xq-BPs"/>
+                            <constraint firstItem="8gx-j0-Hnz" firstAttribute="leading" secondItem="4ND-v6-QuH" secondAttribute="leading" constant="107" id="2fR-Ho-BNr"/>
                             <constraint firstItem="aZw-nh-FLS" firstAttribute="leading" secondItem="4ND-v6-QuH" secondAttribute="leading" constant="67" id="2gW-Q1-CJr"/>
                             <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="Gff-hv-f6X" secondAttribute="trailing" constant="67" id="5Sx-ia-Nat"/>
-                            <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="8gx-j0-Hnz" secondAttribute="trailing" constant="137" id="C3q-UN-Sv6"/>
                             <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="ZbN-8L-CbO" secondAttribute="trailing" constant="135" id="C7h-vF-lIZ"/>
                             <constraint firstItem="vux-ZO-jLm" firstAttribute="leading" secondItem="4ND-v6-QuH" secondAttribute="leading" constant="67" id="KPQ-WY-C3f"/>
                             <constraint firstItem="ZbN-8L-CbO" firstAttribute="top" secondItem="4ND-v6-QuH" secondAttribute="top" constant="50" id="OYZ-1Z-oiS"/>
@@ -413,7 +416,6 @@
                             <constraint firstItem="ZJX-s4-UIw" firstAttribute="top" secondItem="ZbN-8L-CbO" secondAttribute="bottom" constant="14" id="Ova-4Y-r4E"/>
                             <constraint firstItem="8gx-j0-Hnz" firstAttribute="top" secondItem="ZJX-s4-UIw" secondAttribute="bottom" constant="7.5" id="P3K-Iq-blK"/>
                             <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="aZw-nh-FLS" secondAttribute="trailing" constant="67" id="PUP-r7-9bb"/>
-                            <constraint firstItem="8gx-j0-Hnz" firstAttribute="leading" secondItem="4ND-v6-QuH" secondAttribute="leading" constant="137" id="TxU-a4-BBz"/>
                             <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="ZJX-s4-UIw" secondAttribute="trailing" constant="132" id="U23-L1-dSG"/>
                             <constraint firstItem="aZw-nh-FLS" firstAttribute="top" secondItem="vux-ZO-jLm" secondAttribute="bottom" constant="20" id="YDf-2e-2F2"/>
                             <constraint firstItem="ZJX-s4-UIw" firstAttribute="top" secondItem="ZbN-8L-CbO" secondAttribute="bottom" constant="8" symbolic="YES" id="dgN-N3-gu5"/>
@@ -422,6 +424,7 @@
                             <constraint firstItem="Gff-hv-f6X" firstAttribute="top" secondItem="aZw-nh-FLS" secondAttribute="bottom" constant="20" id="qQC-0W-RSI"/>
                             <constraint firstItem="qoa-5D-aNq" firstAttribute="leading" secondItem="4ND-v6-QuH" secondAttribute="leading" constant="134" id="rNM-Ga-zz1"/>
                             <constraint firstItem="ZJX-s4-UIw" firstAttribute="leading" secondItem="4ND-v6-QuH" secondAttribute="leading" constant="132" id="sOq-vl-rC4"/>
+                            <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="8gx-j0-Hnz" secondAttribute="trailing" constant="107" id="uoH-aw-qee"/>
                             <constraint firstItem="qoa-5D-aNq" firstAttribute="top" secondItem="Gff-hv-f6X" secondAttribute="bottom" constant="54" id="viG-Qd-gO7"/>
                             <constraint firstItem="ZbN-8L-CbO" firstAttribute="top" secondItem="4ND-v6-QuH" secondAttribute="top" constant="50" id="wVJ-B6-GwD"/>
                             <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="vux-ZO-jLm" secondAttribute="trailing" constant="67" id="x7q-5N-9lD"/>
@@ -788,7 +791,7 @@ landmarks, definitely a great photo op!</string>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lZE-c2-zK0">
                                 <rect key="frame" x="30" y="102" width="354" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4q-hE-4fA">
                                 <rect key="frame" x="33" y="241.5" width="52" height="24"/>
@@ -804,7 +807,7 @@ landmarks, definitely a great photo op!</string>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g43-7Z-vSs">
                                 <rect key="frame" x="88" y="349" width="69" height="30"/>
                                 <state key="normal" title="Landmark">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m6d-fl-lmn">
@@ -813,7 +816,7 @@ landmarks, definitely a great photo op!</string>
                                     <constraint firstAttribute="height" constant="34" id="K3Q-8H-LQy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltY-7y-x3P">
                                 <rect key="frame" x="33" y="317" width="41.5" height="24"/>
@@ -827,7 +830,7 @@ landmarks, definitely a great photo op!</string>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGZ-pN-PVH">
                                 <rect key="frame" x="88" y="387" width="47" height="30"/>
                                 <state key="normal" title="Nature">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Du6-Jc-DqI">
@@ -836,7 +839,7 @@ landmarks, definitely a great photo op!</string>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rou-pg-vZ1">
                                 <rect key="frame" x="88" y="425" width="42" height="30"/>
                                 <state key="normal" title="Urban">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gFs-h9-X1O">
@@ -845,7 +848,7 @@ landmarks, definitely a great photo op!</string>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnK-mO-gfE">
                                 <rect key="frame" x="88" y="464" width="65" height="30"/>
                                 <state key="normal" title="Historical">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1oH-Wq-wLW">
@@ -854,7 +857,7 @@ landmarks, definitely a great photo op!</string>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9u-4x-Hsf">
                                 <rect key="frame" x="88" y="502" width="65" height="30"/>
                                 <state key="normal" title="Photo Op">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LIf-G6-tNW">
@@ -932,7 +935,7 @@ landmarks, definitely a great photo op!</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUE-ll-4ma" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="h7y-4V-x2Y">
                     <connections>
-                        <action selector="topOnScreen:" destination="NYQ-if-j4q" id="XbY-V8-z4C"/>
+                        <action selector="tapOnScreen:" destination="NYQ-if-j4q" id="XbY-V8-z4C"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -955,12 +958,12 @@ landmarks, definitely a great photo op!</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ohO-0f-OHw" userLabel="passwordField">
+                            <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ohO-0f-OHw" userLabel="passwordField">
                                 <rect key="frame" x="74" y="281" width="266" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyu-bA-6Dd">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyu-bA-6Dd">
                                 <rect key="frame" x="168" y="332" width="77" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
@@ -968,10 +971,10 @@ landmarks, definitely a great photo op!</string>
                                     <action selector="onLoginButton:" destination="Lef-eW-meC" eventType="touchUpInside" id="54X-F4-ley"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y9v-gc-XLN" userLabel="usernameField">
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y9v-gc-XLN" userLabel="usernameField">
                                 <rect key="frame" x="74" y="231" width="266" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New user?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdh-YB-MlO">
                                 <rect key="frame" x="147" y="402" width="120" height="21"/>
@@ -995,6 +998,7 @@ landmarks, definitely a great photo op!</string>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pOx-lv-456"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Zea-M1-wlO" firstAttribute="top" secondItem="bdh-YB-MlO" secondAttribute="bottom" constant="1" id="59y-ru-1FJ"/>
                             <constraint firstItem="zyu-bA-6Dd" firstAttribute="top" secondItem="ohO-0f-OHw" secondAttribute="bottom" constant="17" id="EMl-9e-Ndq"/>
@@ -1020,6 +1024,9 @@ landmarks, definitely a great photo op!</string>
                             <constraint firstItem="iIS-df-b8b" firstAttribute="leading" secondItem="pOx-lv-456" secondAttribute="leading" constant="102" id="uYT-8Z-Il5"/>
                             <constraint firstItem="pOx-lv-456" firstAttribute="trailing" secondItem="jCj-ye-y5x" secondAttribute="trailing" constant="111" id="yAe-Z1-br2"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="jfl-Sg-EO4" appends="YES" id="kZc-Wz-U8e"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Aw1-VZ-m0B"/>
                     <connections>
@@ -1030,6 +1037,11 @@ landmarks, definitely a great photo op!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="efZ-My-qCW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Lef-eW-meC" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="jfl-Sg-EO4">
+                    <connections>
+                        <action selector="onTapScreen:" destination="HLY-z5-RNi" id="xWi-qD-ODT"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1727.536231884058" y="-2327.0089285714284"/>
         </scene>
@@ -1150,9 +1162,9 @@ landmarks, definitely a great photo op!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lCo-dl-Keg"/>
+        <segue reference="2Oc-jn-csK"/>
         <segue reference="V3E-Fg-0UG"/>
-        <segue reference="dmJ-bT-l39"/>
+        <segue reference="YvJ-70-cEu"/>
         <segue reference="JoR-sh-xDS"/>
     </inferredMetricsTieBreakers>
     <resources>

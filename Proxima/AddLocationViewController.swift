@@ -8,12 +8,10 @@
 import UIKit
 import Parse
 
-class AddLocationViewController: UIViewController {
+class AddLocationViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var locationName: UITextField!
-    
     @IBOutlet weak var descriptionName: UITextField!
-    
     @IBOutlet weak var landmarkCheck: UISwitch!
     @IBOutlet weak var natureCheck: UISwitch!
     @IBOutlet weak var urbanCheck: UISwitch!
@@ -23,7 +21,8 @@ class AddLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        locationName.delegate = self
+        descriptionName.delegate = self
     }
     
     @IBAction func onSubmit(_ sender: Any) {
@@ -76,9 +75,24 @@ class AddLocationViewController: UIViewController {
         
     }
     
-    @IBAction func topOnScreen(_ sender: Any) {
+    @IBAction func tapOnScreen(_ sender: Any) {
         locationName.resignFirstResponder()
         descriptionName.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+            case locationName:
+                locationName.resignFirstResponder()
+                descriptionName.becomeFirstResponder()
+            case descriptionName:
+                descriptionName.resignFirstResponder()
+                locationName.becomeFirstResponder()
+            default:
+                locationName.resignFirstResponder()
+                descriptionName.becomeFirstResponder()
+        }
+        return false
     }
     /*
     // MARK: - Navigation

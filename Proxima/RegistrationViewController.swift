@@ -9,18 +9,20 @@ import UIKit
 import Parse
 import AlamofireImage
 
-class RegistrationViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class RegistrationViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var fullnameTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        fullnameTextField.delegate = self
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+    }
     
     @IBAction func onCameraButton(_ sender: Any) {
         
@@ -95,11 +97,24 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                 print("Error: \(error?.localizedDescription)")
             }
         }
+    
         
-        
-        
-        
-        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+            case fullnameTextField:
+                fullnameTextField.resignFirstResponder()
+                usernameTextField.becomeFirstResponder()
+            case usernameTextField:
+                usernameTextField.resignFirstResponder()
+                passwordTextField.becomeFirstResponder()
+            default:
+                fullnameTextField.resignFirstResponder()
+                usernameTextField.resignFirstResponder()
+                passwordTextField.resignFirstResponder()
+        }
+        return false
     }
     /*
     // MARK: - Navigation

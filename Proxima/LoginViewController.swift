@@ -8,16 +8,18 @@
 import UIKit
 import Parse
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-   
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        usernameField.delegate = self
+        passwordField.delegate = self
+    }
+    
     @IBAction func onLoginButton(_ sender: Any) {
         
         let username = usernameField.text!
@@ -35,6 +37,23 @@ class LoginViewController: UIViewController {
                            
                        }
 
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+            case usernameField:
+                usernameField.resignFirstResponder()
+                passwordField.becomeFirstResponder()
+            default:
+                usernameField.resignFirstResponder()
+                passwordField.resignFirstResponder()
+        }
+        return false
+    }
+    
+    @IBAction func onTapScreen(_ sender: Any) {
+        usernameField.resignFirstResponder()
+        passwordField.resignFirstResponder()
     }
     /*
     // MARK: - Navigation
