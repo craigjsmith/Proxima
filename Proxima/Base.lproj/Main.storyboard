@@ -684,11 +684,12 @@ landmarks, definitely a great photo op!</string>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI5-wH-JoR" userLabel="Add Comment Button">
-                                <rect key="frame" x="113" y="435" width="18" height="20"/>
+                                <rect key="frame" x="113" y="435" width="20" height="20"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="0KF-oE-QKn"/>
-                                    <constraint firstAttribute="height" constant="20" id="lRg-7w-Rdo"/>
+                                    <constraint firstAttribute="width" constant="20" id="6H4-tq-Dnp"/>
+                                    <constraint firstAttribute="width" secondItem="RI5-wH-JoR" secondAttribute="height" multiplier="1:1" id="lA5-n5-YMX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
