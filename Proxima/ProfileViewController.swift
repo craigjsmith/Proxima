@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Do any additional setup after loading the view.
         
         // Set profile image to circle
-        profileImage.layer.cornerRadius = (profileImage.frame.width / 2) //instead of let radius = CGRectGetWidth(self.frame) / 2
+        profileImage.layer.cornerRadius = (profileImage.frame.width / 2)
         profileImage.layer.masksToBounds = true
         
         tableView.delegate = self
@@ -87,6 +87,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let imageFile = user["profile_image"] as! PFFileObject
         let imageUrl = URL(string: imageFile.url!)!
         self.profileImage.af_setImage(withURL: imageUrl)
+        
 
     }
     

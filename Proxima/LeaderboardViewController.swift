@@ -12,7 +12,6 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
 
     @IBOutlet weak var tableView: UITableView!
     
-    
     var profiles = [PFObject]()
     var selectedProfile: PFObject!
 

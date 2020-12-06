@@ -18,7 +18,7 @@ class LeaderboardCell: UITableViewCell {
         // Initialization code
         
         // Set profile image to circle
-        profileImage.layer.cornerRadius = (profileImage.frame.width / 2) //instead of let radius = CGRectGetWidth(self.frame) / 2
+        profileImage.layer.cornerRadius = (profileImage.frame.width / 2)
         profileImage.layer.masksToBounds = true
     }
 

@@ -42,6 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
                 // After results are returned, iterate through them and add points
                 for location in locations as! [PFObject] {
+                    
                     // Make new pin
                     let pin = ProximaPointAnnotation()
                     
