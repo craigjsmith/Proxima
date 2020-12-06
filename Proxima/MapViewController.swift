@@ -30,6 +30,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         map.delegate = self
         
+        map.mapType = .satellite
+        
         // Query to get locations from database
         let query = PFQuery(className: "Locations")
         query.includeKeys(["name", "description", "author", "lat", "long", "categories"])
