@@ -19,7 +19,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         
         let query = PFQuery(className: "Locations")
-        query.includeKeys(["name", "description"])
+        query.includeKeys(["name", "description", "author"])
         query.limit = 20
         
         query.findObjectsInBackground { (locations, error) in
@@ -64,14 +64,19 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let location = locations[indexPath.row]
+        
         // Pass the selected object to the new view controller.
+        let locationViewController = segue.destination as! LocationViewController
+        
+        locationViewController.location = location
     }
-    */
 
 }
