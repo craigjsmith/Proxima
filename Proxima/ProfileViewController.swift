@@ -72,7 +72,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         // update name
         self.nameLabel.text = user["full_name"] as? String
-        
+
         //update username
         self.usernameLabel.text = user["username"]! as? String
         
@@ -84,7 +84,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let imageFile = user["profile_image"] as! PFFileObject
         let imageUrl = URL(string: imageFile.url!)!
         self.profileImage.af_setImage(withURL: imageUrl)
-        
+
     }
     
 
@@ -174,6 +174,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         dismiss(animated: true, completion: nil)
         
+    }
+    
+    
+    @IBAction func onLogOut(_ sender: Any) {
+        PFUser.logOut()
+        
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        
+        let loginViewController = main.instantiateViewController(identifier: "LoginViewController")
+        
+        let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
+        
+        delegate.window?.rootViewController = loginViewController
     }
     
     

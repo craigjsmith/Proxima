@@ -40,37 +40,40 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Query the database
         query.findObjectsInBackground { (locations, error) in
     
-            // After results are returned, iterate through them and add points
-            for location in locations as! [PFObject] {
-                // Make new pin
-                let pin = ProximaPointAnnotation()
-                
-                pin.location = location
-                
-                // Set coords of pin
-                pin.coordinate = CLLocationCoordinate2D(latitude: location["lat"] as! Double, longitude: location["long"] as! Double)
-                
-                pin.title = location["name"] as! String
-                
-                // Set color of pin based on category
-                
-                    // Unwrap category array
-                    let categories = location["categories"] as! [String]
+            if locations != nil {
+                // After results are returned, iterate through them and add points
+                for location in locations as! [PFObject] {
+                    // Make new pin
+                    let pin = ProximaPointAnnotation()
                     
-                    // Set color
-                    if (categories.contains("Landmark")) {
-                        pin.pinTintColor = blue
-                    }
-                    else if (categories.contains("Nature")) {
-                        pin.pinTintColor = green
-                    }
-                    else {
-                        pin.pinTintColor = red
-                    }
-                
-                // Add pin to map
-                self.map.addAnnotation(pin)
+                    pin.location = location
+                    
+                    // Set coords of pin
+                    pin.coordinate = CLLocationCoordinate2D(latitude: location["lat"] as! Double, longitude: location["long"] as! Double)
+                    
+                    pin.title = location["name"] as! String
+                    
+                    // Set color of pin based on category
+                    
+                        // Unwrap category array
+                        let categories = location["categories"] as! [String]
+                        
+                        // Set color
+                        if (categories.contains("Landmark")) {
+                            pin.pinTintColor = blue
+                        }
+                        else if (categories.contains("Nature")) {
+                            pin.pinTintColor = green
+                        }
+                        else {
+                            pin.pinTintColor = red
+                        }
+                    
+                    // Add pin to map
+                    self.map.addAnnotation(pin)
+                }
             }
+           
         }
     }
     

@@ -34,8 +34,8 @@ class AddLocationViewController: UIViewController {
         
         // Set coordinates of location
         // TODO: Make this GPS location, hard coded for now
-        post["lat"] = 42.726840;
-        post["long"] = -84.497420;
+        post["lat"] = 54.726840;
+        post["long"] = -34.497420;
         
         var categories: [String] = []
         
