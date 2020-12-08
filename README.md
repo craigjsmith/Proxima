@@ -32,9 +32,9 @@ Discover nearby attractions, sights, and hidden gems around you.
 * [ ] Interactive Map
     * Shows locations tagged by other users. Locations can be filtered by type
     * Optional: Have a random button that shows user a random location
-* [ ] Location Info
+* [x] Location Info
     * Shows information, picture(s), description of location
-* [ ] Add Location
+* [x] Add Location
     * User can add location, give it a description, category, photo
 * [x] Account Login
     * User can login
@@ -46,7 +46,7 @@ Discover nearby attractions, sights, and hidden gems around you.
 
 * [ ] User Profile
     * Shows locations created/visited by user, achievements earned
-* [ ] User Profile Edit
+* [x] User Profile Edit
     * User can edit their profile, add photo, 
 * [ ] Add Location Comment
     * Any user can add comments/pictures to a locationdescription
