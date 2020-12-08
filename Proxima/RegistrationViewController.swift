@@ -16,6 +16,8 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var errorLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,38 +67,52 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     //
     @IBAction func onSignupButton(_ sender: Any) {
         
-        // Creates a new row in _User table
-        var user = PFUser()
-                      user.username = usernameTextField.text
-                      user.password = passwordTextField.text
-                       
-        
-        user.signUpInBackground {(success, error)   in
-            if success {
-                // only creates table entry if User was succesfuly signed up
-                let imageData = self.profileImageView.image!.pngData()
-                let file = PFFileObject(data: imageData!)
-                
-                user["profile_image"] = file  // set profile image element
-                user["full_name"] = self.fullnameTextField.text // set full name element
-                user["score"] = 0 // set initial score to zero
-                
-                
-                user.saveInBackground{(success, error) in
-                    if success {
-                        self.dismiss(animated: true, completion: nil)
-                        print("saved!")
-                        self.performSegue(withIdentifier: "registrationSegue", sender: nil)
-                    } else {
-                        print("error saving: \(error?.localizedDescription)")
+        // User has not filled all fields
+        if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty || fullnameTextField.text!.isEmpty {
+            
+            // show something on screen that tells user they need to fill text fields
+            errorLabel.text = "Please fill in all fields to register"
+        }
+        // All fields have been filled in so you can try to register the user
+        else {
+            // Creates a new row in _User table
+            var user = PFUser()
+                          user.username = usernameTextField.text
+                          user.password = passwordTextField.text
+                           
+            
+            user.signUpInBackground {(success, error)   in
+                if success {
+                    // only creates table entry if User was succesfuly signed up
+                    let imageData = self.profileImageView.image!.pngData()
+                    let file = PFFileObject(data: imageData!)
+                    
+                    user["profile_image"] = file  // set profile image element
+                    user["full_name"] = self.fullnameTextField.text // set full name element
+                    user["score"] = 0 // set initial score to zero
+                    
+                    
+                    user.saveInBackground{(success, error) in
+                        if success {
+                            self.dismiss(animated: true, completion: nil)
+                            print("saved!")
+                            self.performSegue(withIdentifier: "registrationSegue", sender: nil)
+
+                        } else {
+                            print("error saving: \(error?.localizedDescription)")
+                            self.errorLabel.text = error?.localizedDescription
+                            }
+                        
                         }
                     
-                    }
-                
-            } else {
-                print("Error: \(error?.localizedDescription)")
+                } else {
+                    print("Error: \(error?.localizedDescription)")
+                    self.errorLabel.text = error?.localizedDescription
+                }
             }
+        
         }
+        
     
         
     }
