@@ -192,3 +192,5 @@ User
 ### Sprint 2 Demo
 <img src="demo/demo_2.gif" width=600>
 
+### Sprint 3 Demo
+<img src="demo/demo3.gif" width=600>
