@@ -94,18 +94,17 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                     
                     user.saveInBackground{(success, error) in
                         if success {
-                            self.dismiss(animated: true, completion: nil)
                             print("saved!")
                             self.performSegue(withIdentifier: "registrationSegue", sender: nil)
 
-                        } else {
+                        } else { // Could not 
                             print("error saving: \(error?.localizedDescription)")
                             self.errorLabel.text = error?.localizedDescription
                             }
                         
                         }
                     
-                } else {
+                } else { // Could not sign up user
                     print("Error: \(error?.localizedDescription)")
                     self.errorLabel.text = error?.localizedDescription
                 }
