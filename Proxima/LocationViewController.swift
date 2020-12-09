@@ -19,14 +19,30 @@ class LocationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = location!["name"] as! String
-        descriptionLabel.text = location!["description"] as! String
         
-        let user = location?["author"] as! PFUser
-        userLabel.text = user.username
+        if location != nil {
+            nameLabel.text = location!["name"] as! String
+            descriptionLabel.text = location!["description"] as! String
+            
+            let user = location?["author"] as! PFUser
+            // Loads the user if needed
+            user.fetchIfNeededInBackground { (user, error) in
+                if user != nil {
+                    let userPF = user as! PFUser
+                    self.userLabel.text = userPF.username
+                } else {
+                    print("Error: \(error?.localizedDescription)")
+                }
+                
+            }
+            
+            let categories = location!["categories"] as? [String] ?? []
+            categoryLabel.text = categories.joined(separator: ", ")
+        }
         
-        let categories = location!["categories"] as? [String] ?? []
-        categoryLabel.text = categories.joined(separator: ", ")
+        else {
+            self.dismiss(animated: true, completion: nil)
+        }
         
         // Do any additional setup after loading the view.
     }

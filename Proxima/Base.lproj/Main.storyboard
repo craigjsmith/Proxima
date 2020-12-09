@@ -249,6 +249,7 @@
                                         <connections>
                                             <outlet property="imageView" destination="r3M-oO-AP0" id="XtK-I1-WKs"/>
                                             <outlet property="nameLabel" destination="4pX-9Y-un7" id="kJc-1H-aF6"/>
+                                            <segue destination="ffC-zv-YOK" kind="presentation" identifier="profileToLocation" id="3Av-IU-tGF"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
