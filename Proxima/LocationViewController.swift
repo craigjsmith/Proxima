@@ -16,6 +16,7 @@ class LocationViewController: UIViewController {
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var pictureView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,7 @@ class LocationViewController: UIViewController {
             
             let categories = location!["categories"] as? [String] ?? []
             categoryLabel.text = categories.joined(separator: ", ")
+            
         }
         
         else {

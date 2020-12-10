@@ -9,14 +9,17 @@ import UIKit
 import MapKit
 import Parse
 
-let red = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1.0)
-let green = UIColor(red: 22/255, green: 171/255, blue: 47/255, alpha: 1.0)
-let blue = UIColor(red: 0/255, green: 0/255, blue: 255/255, alpha: 1.0)
-
+let landmarkColor = UIColor(red: 61/255, green: 183/255, blue: 224/255, alpha: 1.0)
+let natureColor = UIColor(red: 22/255, green: 171/255, blue: 47/255, alpha: 1.0)
+let urbanColor = UIColor(red: 232/255, green: 89/255, blue: 70/255, alpha: 1.0)
+let historicColor = UIColor(red: 242/255, green: 251/255, blue: 157/255, alpha: 1.0)
+let photoopColor = UIColor(red: 141/255, green: 108/255, blue: 224/255, alpha: 1.0)
+let unknownColor = UIColor(red: 179/255, green: 179/255, blue: 179/255, alpha: 1.0)
 
 class ProximaPointAnnotation : MKPointAnnotation {
     var pinTintColor: UIColor?;
     var location : PFObject?;
+    var emoji : String = "";
 }
 
 class MapViewController: UIViewController, MKMapViewDelegate {
@@ -59,14 +62,29 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         let categories = location["categories"] as! [String]
                         
                         // Set color
-                        if (categories.contains("Landmark")) {
-                            pin.pinTintColor = blue
+                        if (categories.contains("Photo Op")) {
+                            pin.pinTintColor = photoopColor
+                            pin.emoji = "📸"
                         }
                         else if (categories.contains("Nature")) {
-                            pin.pinTintColor = green
+                            pin.pinTintColor = natureColor
+                            pin.emoji = "🌳"
+                        }
+                        else if (categories.contains("Urban")) {
+                            pin.pinTintColor = urbanColor
+                            pin.emoji = "🏬"
+                        }
+                        else if (categories.contains("Historical")) {
+                            pin.pinTintColor = historicColor
+                            pin.emoji = "📜"
+                        }
+                        else if (categories.contains("Landmark")) {
+                            pin.pinTintColor = landmarkColor
+                            pin.emoji = "📍"
                         }
                         else {
-                            pin.pinTintColor = red
+                            pin.pinTintColor = unknownColor
+                            pin.emoji = "❓"
                         }
                     
                     // Add pin to map
@@ -92,11 +110,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
 
         if let annotation = annotation as? ProximaPointAnnotation {
+            // Color of marker
             annotationView?.markerTintColor = annotation.pinTintColor
             
             // Color of inner icon of marker
             annotationView?.glyphTintColor = .white
-        
+            
+            // Icon of marker
+            annotationView?.glyphText = annotation.emoji
         }
         
         return annotationView

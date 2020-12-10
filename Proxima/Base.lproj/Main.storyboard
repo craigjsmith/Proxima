@@ -776,6 +776,7 @@ landmarks, definitely a great photo op!</string>
                         <outlet property="categoryLabel" destination="1Aw-iI-unc" id="Pwx-uI-wru"/>
                         <outlet property="descriptionLabel" destination="DlT-dT-mHV" id="mnb-pU-WK4"/>
                         <outlet property="nameLabel" destination="37d-De-O6q" id="ChM-Xy-Bw0"/>
+                        <outlet property="pictureView" destination="Czb-3H-96J" id="jDW-Wj-7WX"/>
                         <outlet property="userLabel" destination="xnE-r5-y7r" id="0dY-ai-sbz"/>
                     </connections>
                 </viewController>
