@@ -9,7 +9,6 @@ import Parse
 import AlamofireImage
 import MapKit
 
-
 class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var locationName: UITextField!
@@ -21,6 +20,9 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
     @IBOutlet weak var photoCheck: UISwitch!
    
     var locationManager: CLLocationManager?
+    
+    var lat = 0.0
+    var lon = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +47,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         
         // Set coordinates of location
         // TODO: Make this GPS location, hard coded for now
-        post["lat"] = 222.726840;
-        post["long"] = -33.497420;
+        post["lat"] = lat;
+        post["long"] = lon;
         
         var categories: [String] = []
         
@@ -137,6 +139,12 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
                 print("error!")
             }
         }*/
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation :CLLocation = locations[0] as CLLocation
+        lat = userLocation.coordinate.latitude
+        lon = userLocation.coordinate.longitude
     }
     
     

@@ -37,7 +37,7 @@ class LocationViewController: UIViewController {
             user.fetchIfNeededInBackground { (user, error) in
                 if user != nil {
                     let userPF = user as! PFUser
-                    self.userLabel.text = userPF.username
+                    self.userLabel.text = String("Shared by ") + (userPF.username as! String)
                 } else {
                     print("Error: \(error?.localizedDescription)")
                 }
