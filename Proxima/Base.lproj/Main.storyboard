@@ -113,11 +113,11 @@
             <objects>
                 <viewController id="yIz-gW-cuB" customClass="ProfileViewController" customModule="Proxima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ayj-BJ-Msv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eo2-Lo-OGK">
-                                <rect key="frame" x="120" y="174" width="175" height="24"/>
+                                <rect key="frame" x="120" y="262" width="175" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="175" id="QxU-sL-vFC"/>
                                 </constraints>
@@ -126,7 +126,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDI-pK-meo">
-                                <rect key="frame" x="112" y="206" width="190" height="16"/>
+                                <rect key="frame" x="112" y="294" width="190" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="190" id="qTo-uI-yq7"/>
                                 </constraints>
@@ -142,7 +142,7 @@
                                 <color key="highlightedColor" systemColor="labelColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shared Locatons" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cvg-xW-jiY">
-                                <rect key="frame" x="10" y="256" width="191" height="23"/>
+                                <rect key="frame" x="10" y="344" width="191" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="5ax-a8-4mm"/>
                                     <constraint firstAttribute="height" constant="23" id="qaW-B2-5cM"/>
@@ -152,7 +152,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Achievements" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8h-TO-E7v">
-                                <rect key="frame" x="16" y="455" width="173" height="24"/>
+                                <rect key="frame" x="16" y="543" width="173" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="QeA-w1-DCs"/>
                                 </constraints>
@@ -161,10 +161,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5PM-8l-kwV">
-                                <rect key="frame" x="0.0" y="487" width="414" height="321"/>
+                                <rect key="frame" x="0.0" y="575" width="414" height="238"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AchievementsCell" rowHeight="67" id="ATC-h1-Txl" customClass="AchievementsCell" customModule="Proxima" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AchievementsCell" rowHeight="67" id="ATC-h1-Txl" customClass="AchievementsCell" customModule="Proxima" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ATC-h1-Txl" id="jKw-EV-s9W">
@@ -202,7 +202,7 @@
                                 </prototypes>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eu8-XF-NJs">
-                                <rect key="frame" x="0.0" y="287" width="414" height="160"/>
+                                <rect key="frame" x="0.0" y="375" width="414" height="160"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="Oaz-aN-e9v"/>
@@ -255,7 +255,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbZ-dP-0oM">
-                                <rect key="frame" x="180" y="230" width="54" height="21"/>
+                                <rect key="frame" x="180" y="318" width="54" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="Xgk-9O-WoH"/>
                                 </constraints>
@@ -264,7 +264,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="P0e-6Q-0yj">
-                                <rect key="frame" x="132" y="16.5" width="150" height="149"/>
+                                <rect key="frame" x="132" y="104.5" width="150" height="149"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -312,7 +312,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="FeO-Zl-XL3">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="KvE-Mr-atd">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="8KX-5a-U9e">
-                                <rect key="frame" x="343" y="13" width="51" height="30"/>
+                                <rect key="frame" x="343" y="7" width="51" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
@@ -634,7 +634,7 @@ landmarks, definitely a great photo op!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j8T-9c-45u" userLabel="Comments Table View">
-                                <rect key="frame" x="0.0" y="492" width="414" height="350"/>
+                                <rect key="frame" x="0.0" y="492.5" width="414" height="349.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="68" id="3XI-Bl-Nyh" userLabel="Comment Cell">
@@ -1190,8 +1190,8 @@ landmarks, definitely a great photo op!</string>
     <inferredMetricsTieBreakers>
         <segue reference="mRf-AD-Ecn"/>
         <segue reference="AX4-Lg-Rs1"/>
-        <segue reference="dmJ-bT-l39"/>
-        <segue reference="JoR-sh-xDS"/>
+        <segue reference="3Av-IU-tGF"/>
+        <segue reference="ont-d8-TBs"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="location.fill" catalog="system" width="128" height="121"/>
