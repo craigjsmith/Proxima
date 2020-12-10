@@ -620,7 +620,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlT-dT-mHV" userLabel="Description Label">
-                                <rect key="frame" x="20" y="351" width="350.5" height="29"/>
+                                <rect key="frame" x="20" y="380" width="350.5" height="29"/>
                                 <string key="text">This statue of Sparty is one of my favorite East Lansing
 landmarks, definitely a great photo op!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -628,19 +628,13 @@ landmarks, definitely a great photo op!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvS-el-aFS" userLabel="Categories Label">
-                                <rect key="frame" x="20" y="390" width="64.5" height="15"/>
+                                <rect key="frame" x="20" y="419" width="64.5" height="15"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhn-Tj-CcD" userLabel="Comments Label">
-                                <rect key="frame" x="16" y="434.5" width="89" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j8T-9c-45u" userLabel="Comments Table View">
-                                <rect key="frame" x="0.0" y="463.5" width="414" height="378.5"/>
+                                <rect key="frame" x="0.0" y="492" width="414" height="350"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="68" id="3XI-Bl-Nyh" userLabel="Comment Cell">
@@ -694,23 +688,6 @@ landmarks, definitely a great photo op!</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI5-wH-JoR" userLabel="Add Comment Button">
-                                <rect key="frame" x="113" y="435" width="20" height="20"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="0KF-oE-QKn"/>
-                                    <constraint firstAttribute="width" constant="20" id="6H4-tq-Dnp"/>
-                                    <constraint firstAttribute="width" secondItem="RI5-wH-JoR" secondAttribute="height" multiplier="1:1" id="lA5-n5-YMX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="plus" catalog="system"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdP-XY-iny" userLabel="I'm Here Button">
                                 <rect key="frame" x="100" y="311" width="214" height="30"/>
                                 <color key="backgroundColor" red="0.1124017462" green="0.60781538489999998" blue="0.94285541770000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -726,7 +703,7 @@ landmarks, definitely a great photo op!</string>
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category, Category, Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Aw-iI-unc" userLabel="categoriesLabel">
-                                <rect key="frame" x="20" y="413" width="374" height="13.5"/>
+                                <rect key="frame" x="20" y="442" width="374" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -737,6 +714,35 @@ landmarks, definitely a great photo op!</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RI7-47-V7C">
+                                <rect key="frame" x="155" y="349" width="104" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhn-Tj-CcD" userLabel="Comments Label">
+                                <rect key="frame" x="20" y="463" width="89" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RI5-wH-JoR" userLabel="Add Comment Button">
+                                <rect key="frame" x="117" y="463" width="20" height="20"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="0KF-oE-QKn"/>
+                                    <constraint firstAttribute="width" constant="20" id="6H4-tq-Dnp"/>
+                                    <constraint firstAttribute="width" secondItem="RI5-wH-JoR" secondAttribute="height" multiplier="1:1" id="lA5-n5-YMX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="plus" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KTn-Yc-G1l"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -746,19 +752,22 @@ landmarks, definitely a great photo op!</string>
                             <constraint firstItem="uhn-Tj-CcD" firstAttribute="top" secondItem="1Aw-iI-unc" secondAttribute="bottom" constant="8" symbolic="YES" id="8z2-GN-vKe"/>
                             <constraint firstItem="fdP-XY-iny" firstAttribute="leading" secondItem="KTn-Yc-G1l" secondAttribute="leading" constant="100" id="9vB-3b-IF6"/>
                             <constraint firstItem="RI5-wH-JoR" firstAttribute="leading" secondItem="uhn-Tj-CcD" secondAttribute="trailing" constant="8" symbolic="YES" id="DYU-YU-AVb"/>
+                            <constraint firstItem="RI7-47-V7C" firstAttribute="top" secondItem="fdP-XY-iny" secondAttribute="bottom" constant="8" symbolic="YES" id="Hm8-gR-a25"/>
+                            <constraint firstItem="RI7-47-V7C" firstAttribute="leading" secondItem="KTn-Yc-G1l" secondAttribute="leading" constant="155" id="JBv-bq-77q"/>
                             <constraint firstItem="37d-De-O6q" firstAttribute="leading" secondItem="KTn-Yc-G1l" secondAttribute="leading" constant="20" id="JGB-jv-IZq"/>
                             <constraint firstItem="RI5-wH-JoR" firstAttribute="top" secondItem="1Aw-iI-unc" secondAttribute="bottom" constant="8.5" id="K95-Mx-qv0"/>
                             <constraint firstItem="j8T-9c-45u" firstAttribute="top" secondItem="uhn-Tj-CcD" secondAttribute="bottom" constant="8" id="KBb-U1-6uU"/>
                             <constraint firstItem="1Aw-iI-unc" firstAttribute="top" secondItem="nvS-el-aFS" secondAttribute="bottom" constant="8" symbolic="YES" id="LWT-Xo-RjL"/>
                             <constraint firstItem="KTn-Yc-G1l" firstAttribute="trailing" secondItem="fdP-XY-iny" secondAttribute="trailing" constant="100" id="LqV-qw-DW6"/>
                             <constraint firstItem="KTn-Yc-G1l" firstAttribute="trailing" secondItem="1Aw-iI-unc" secondAttribute="trailing" constant="20" id="N2s-C2-Mxb"/>
+                            <constraint firstItem="KTn-Yc-G1l" firstAttribute="trailing" secondItem="RI7-47-V7C" secondAttribute="trailing" constant="155" id="PDW-hv-Env"/>
                             <constraint firstAttribute="bottom" secondItem="j8T-9c-45u" secondAttribute="bottom" id="Q5B-Sk-AC3"/>
                             <constraint firstItem="uhn-Tj-CcD" firstAttribute="leading" secondItem="KTn-Yc-G1l" secondAttribute="leading" constant="16" id="QNB-QA-aPs"/>
-                            <constraint firstItem="DlT-dT-mHV" firstAttribute="top" secondItem="fdP-XY-iny" secondAttribute="bottom" constant="10" id="RUl-hw-seB"/>
                             <constraint firstItem="nvS-el-aFS" firstAttribute="leading" secondItem="KTn-Yc-G1l" secondAttribute="leading" constant="20" id="RV9-Qd-htM"/>
                             <constraint firstItem="DlT-dT-mHV" firstAttribute="leading" secondItem="KTn-Yc-G1l" secondAttribute="leading" constant="20" id="UFD-SO-jHq"/>
                             <constraint firstItem="KTn-Yc-G1l" firstAttribute="trailing" secondItem="37d-De-O6q" secondAttribute="trailing" constant="20" id="WQz-tC-Cuj"/>
                             <constraint firstItem="Czb-3H-96J" firstAttribute="leading" secondItem="KTn-Yc-G1l" secondAttribute="leading" constant="20" id="XMQ-MM-sdb"/>
+                            <constraint firstItem="DlT-dT-mHV" firstAttribute="top" secondItem="RI7-47-V7C" secondAttribute="bottom" constant="10" id="e9V-eV-WkF"/>
                             <constraint firstItem="KTn-Yc-G1l" firstAttribute="trailing" secondItem="xnE-r5-y7r" secondAttribute="trailing" constant="100" id="eCo-tw-dqv"/>
                             <constraint firstItem="37d-De-O6q" firstAttribute="top" secondItem="Czb-3H-96J" secondAttribute="bottom" constant="10" id="hCY-aV-fFj"/>
                             <constraint firstItem="1Aw-iI-unc" firstAttribute="leading" secondItem="KTn-Yc-G1l" secondAttribute="leading" constant="20" id="kCf-Vw-lge"/>
@@ -778,11 +787,12 @@ landmarks, definitely a great photo op!</string>
                         <outlet property="nameLabel" destination="37d-De-O6q" id="ChM-Xy-Bw0"/>
                         <outlet property="pictureView" destination="Czb-3H-96J" id="jDW-Wj-7WX"/>
                         <outlet property="userLabel" destination="xnE-r5-y7r" id="0dY-ai-sbz"/>
+                        <outlet property="weatherLabel" destination="RI7-47-V7C" id="Jsf-6d-S1e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zeg-a9-7dF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1728" y="550"/>
+            <point key="canvasLocation" x="1727.536231884058" y="549.77678571428567"/>
         </scene>
         <!--Add Location-->
         <scene sceneID="E9W-7z-HQP">
@@ -1178,9 +1188,9 @@ landmarks, definitely a great photo op!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2Oc-jn-csK"/>
+        <segue reference="mRf-AD-Ecn"/>
         <segue reference="AX4-Lg-Rs1"/>
-        <segue reference="YvJ-70-cEu"/>
+        <segue reference="dmJ-bT-l39"/>
         <segue reference="JoR-sh-xDS"/>
     </inferredMetricsTieBreakers>
     <resources>
