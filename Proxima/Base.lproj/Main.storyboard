@@ -827,8 +827,12 @@ landmarks, definitely a great photo op!</string>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8d2-2A-X40">
                                 <rect key="frame" x="33" y="273" width="80" height="36"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Browse..."/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="dnc-wY-xI4" appends="YES" id="LFt-ZA-7ms"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g43-7Z-vSs">
                                 <rect key="frame" x="88" y="349" width="69" height="30"/>
@@ -962,6 +966,11 @@ landmarks, definitely a great photo op!</string>
                 <tapGestureRecognizer id="h7y-4V-x2Y">
                     <connections>
                         <action selector="tapOnScreen:" destination="NYQ-if-j4q" id="XbY-V8-z4C"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="dnc-wY-xI4" userLabel="Tap Gesture  for Image Browsing Recognizer">
+                    <connections>
+                        <action selector="onImageButton:" destination="NYQ-if-j4q" id="Nkq-xE-fe4"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1189,7 +1198,7 @@ landmarks, definitely a great photo op!</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="mRf-AD-Ecn"/>
-        <segue reference="AX4-Lg-Rs1"/>
+        <segue reference="nB8-xr-rOk"/>
         <segue reference="3Av-IU-tGF"/>
         <segue reference="ont-d8-TBs"/>
     </inferredMetricsTieBreakers>
