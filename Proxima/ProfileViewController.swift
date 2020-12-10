@@ -25,6 +25,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var createdLocations: [PFObject] = []
     var currentUser: PFUser!
     
+    var achievements: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +46,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         layout.minimumLineSpacing = 20 // controls space between rows
+        
 
     }
     
@@ -64,13 +67,55 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
-        print(createdLocations)
+//        print(createdLocations)
+        self.achievements = getAchievements(user: self.currentUser)
         collectionView.reloadData()
         tableView.reloadData()
     }
     
 
+    //
+    // Does calculation to find achievements for this user
+    //
+    func getAchievements(user: PFUser) -> [String] {
+        
+        var achieve: [String] = []
+        
+        user.fetchIfNeededInBackground { (user, error) in
+            let userPF = user as! PFUser
+            
+            if userPF != nil {
+                let score = userPF["score"] as! Int
+                
+                if score == 0 {
+                    return 
+                }
+                for i in 0...score {
+                    if score >= 1 && i == 1{
+                        achieve.append("First Timer")
+                    }
+                    else if score >= 5 && i == 5 {
+                        achieve.append("Five Posts")
+                    }
+                    else if score >= 10 && i == 10 {
+                        achieve.append("Experienced Explorer")
+                    }
+                    else if score >= 20 && i == 20 {
+                        achieve.append("Top Contributor")
+                    }
+                }
+                
+            }
+
+        }
+        
+        
+        return achieve
+    }
+    
+    //
     // Updates the labels and images using User data
+    //
     func updateInfo(user: PFUser){
         
         // update name
@@ -91,7 +136,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     }
     
-
     
     //
     // Controls Shared Locations for this user
@@ -121,22 +165,28 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
+    
     //
     // Controls the achievements for this user
     //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+
+        return achievements.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AchievementsCell") as! AchievementsCell
         
-        cell.nameLabel.text = "Top Contributor"
+        cell.nameLabel.text = achievements[indexPath.row] as! String
         
         return cell
     }
     
+    
+    ///
+    // allows user to chose new profile picture from imaagePicker
+    ///
     @IBAction func updateProfilePicture(_ sender: Any) {
         
         let picker = UIImagePickerController()
@@ -151,10 +201,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         present(picker, animated: true, completion: nil)
-        
-        
     }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.editedImage] as! UIImage
         let size = CGSize(width: 300, height: 300)
@@ -181,6 +228,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
+    //
+    // Logs user out
+    //
     @IBAction func onLogOut(_ sender: Any) {
         PFUser.logOut()
         
@@ -193,11 +243,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         delegate.window?.rootViewController = loginViewController
     }
     
-    
 
+    //
+    // Prepare when a segue happens
+    //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        
+        // Prepares profile to location segue
+        // Loads location then passes it to locationViewController
         if segue.identifier == "profileToLocation" {
             let cell = sender as! UICollectionViewCell
             let indexPath = collectionView.indexPath(for: cell)!

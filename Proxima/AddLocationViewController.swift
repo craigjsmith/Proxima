@@ -61,9 +61,9 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         post.saveInBackground { (success, error) in
             if success {
                 let user = PFUser.current()
-                user?.add(post, forKey: "created_locations")
-                
-                user?.saveInBackground()
+                user?.add(post, forKey: "created_locations") // Add this location to the ones created by the current user
+                user?.incrementKey("score") // Increase score every time they add location
+                user?.saveInBackground() // Save user with new info
                 
                 print("Location saved");
                 self.dismiss(animated: true, completion: nil)
