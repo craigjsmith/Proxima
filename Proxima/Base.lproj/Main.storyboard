@@ -336,7 +336,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZJX-s4-UIw">
-                                <rect key="frame" x="132" y="94" width="150" height="150"/>
+                                <rect key="frame" x="132" y="94.5" width="150" height="149"/>
                                 <color key="tintColor" red="0.31161309129999998" green="0.31328934590000002" blue="0.30901774119999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -972,22 +972,30 @@ landmarks, definitely a great photo op!</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pin-Square.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Y6-8y-DPa">
+                                <rect key="frame" x="107" y="79" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="89f-gt-yaQ"/>
+                                    <constraint firstAttribute="width" secondItem="2Y6-8y-DPa" secondAttribute="height" multiplier="1:1" id="Fy3-Vl-pef"/>
+                                    <constraint firstAttribute="height" constant="200" id="xP2-xt-w97"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proxima" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIS-df-b8b" userLabel="nameLabel">
-                                <rect key="frame" x="102" y="118" width="210" height="54"/>
+                                <rect key="frame" x="102" y="287" width="210" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="pPJ-68-DWw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ohO-0f-OHw" userLabel="passwordField">
-                                <rect key="frame" x="74" y="281" width="266" height="34"/>
+                                <rect key="frame" x="74" y="450" width="266" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyu-bA-6Dd">
-                                <rect key="frame" x="168" y="332" width="77" height="30"/>
+                                <rect key="frame" x="168" y="501" width="77" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="onLoginButton:" destination="HLY-z5-RNi" eventType="touchUpInside" id="3Pv-W6-8dm"/>
@@ -995,26 +1003,26 @@ landmarks, definitely a great photo op!</string>
                                 </connections>
                             </button>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y9v-gc-XLN" userLabel="usernameField">
-                                <rect key="frame" x="74" y="231" width="266" height="34"/>
+                                <rect key="frame" x="74" y="400" width="266" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New user?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdh-YB-MlO">
-                                <rect key="frame" x="147" y="402" width="120" height="21"/>
+                                <rect key="frame" x="147" y="571" width="120" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zea-M1-wlO">
-                                <rect key="frame" x="159" y="424" width="96" height="30"/>
+                                <rect key="frame" x="159" y="593" width="96" height="30"/>
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <segue destination="R8J-r0-9DN" kind="presentation" identifier="" id="yvb-XP-pQt"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover your world" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCj-ye-y5x" userLabel="descriptionLabel">
-                                <rect key="frame" x="111" y="180" width="192" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="111" y="349" width="192" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1023,28 +1031,36 @@ landmarks, definitely a great photo op!</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="zyu-bA-6Dd" firstAttribute="top" secondItem="ohO-0f-OHw" secondAttribute="bottom" constant="17" id="0RC-Jf-G8Z"/>
                             <constraint firstItem="Zea-M1-wlO" firstAttribute="top" secondItem="bdh-YB-MlO" secondAttribute="bottom" constant="1" id="59y-ru-1FJ"/>
+                            <constraint firstItem="Y9v-gc-XLN" firstAttribute="top" secondItem="jCj-ye-y5x" secondAttribute="bottom" constant="30" id="86P-5Z-GR1"/>
                             <constraint firstItem="zyu-bA-6Dd" firstAttribute="top" secondItem="ohO-0f-OHw" secondAttribute="bottom" constant="17" id="EMl-9e-Ndq"/>
                             <constraint firstItem="bdh-YB-MlO" firstAttribute="top" secondItem="zyu-bA-6Dd" secondAttribute="bottom" constant="40" id="FEf-qJ-oZQ"/>
                             <constraint firstItem="pOx-lv-456" firstAttribute="trailing" secondItem="ohO-0f-OHw" secondAttribute="trailing" constant="74" id="Ggq-pr-4fR"/>
                             <constraint firstItem="Zea-M1-wlO" firstAttribute="leading" secondItem="pOx-lv-456" secondAttribute="leading" constant="159" id="GjG-yR-QIl"/>
+                            <constraint firstItem="iIS-df-b8b" firstAttribute="top" secondItem="2Y6-8y-DPa" secondAttribute="bottom" constant="8" symbolic="YES" id="IGa-BV-h3N"/>
+                            <constraint firstItem="2Y6-8y-DPa" firstAttribute="top" secondItem="pOx-lv-456" secondAttribute="top" constant="35" id="Lb6-K2-VpW"/>
                             <constraint firstItem="ohO-0f-OHw" firstAttribute="top" secondItem="Y9v-gc-XLN" secondAttribute="bottom" constant="16" id="NyS-wT-Vnu"/>
                             <constraint firstItem="Y9v-gc-XLN" firstAttribute="trailing" secondItem="ohO-0f-OHw" secondAttribute="trailing" id="OJf-CB-Z4Q"/>
+                            <constraint firstItem="2Y6-8y-DPa" firstAttribute="centerX" secondItem="pOx-lv-456" secondAttribute="centerX" id="ORp-i6-t99"/>
                             <constraint firstItem="Y9v-gc-XLN" firstAttribute="leading" secondItem="ohO-0f-OHw" secondAttribute="leading" id="Pgj-DR-kpb"/>
                             <constraint firstItem="pOx-lv-456" firstAttribute="trailing" secondItem="iIS-df-b8b" secondAttribute="trailing" constant="102" id="SLG-0h-ad6"/>
+                            <constraint firstItem="jCj-ye-y5x" firstAttribute="top" secondItem="iIS-df-b8b" secondAttribute="bottom" constant="8" symbolic="YES" id="TLM-st-C6r"/>
                             <constraint firstItem="Y9v-gc-XLN" firstAttribute="top" secondItem="jCj-ye-y5x" secondAttribute="bottom" constant="30" id="Uey-yj-klK"/>
                             <constraint firstItem="bdh-YB-MlO" firstAttribute="leading" secondItem="pOx-lv-456" secondAttribute="leading" constant="147" id="X8m-Ao-gKt"/>
                             <constraint firstItem="jCj-ye-y5x" firstAttribute="leading" secondItem="pOx-lv-456" secondAttribute="leading" constant="111" id="d2v-cB-4h5"/>
                             <constraint firstItem="zyu-bA-6Dd" firstAttribute="leading" secondItem="pOx-lv-456" secondAttribute="leading" constant="168" id="doL-nw-Jd3"/>
-                            <constraint firstItem="iIS-df-b8b" firstAttribute="top" secondItem="pOx-lv-456" secondAttribute="top" constant="74" id="iar-HJ-MVl"/>
                             <constraint firstItem="ohO-0f-OHw" firstAttribute="leading" secondItem="pOx-lv-456" secondAttribute="leading" constant="74" id="jvV-Yy-Tnv"/>
                             <constraint firstItem="pOx-lv-456" firstAttribute="trailing" secondItem="Zea-M1-wlO" secondAttribute="trailing" constant="159" id="l99-Qv-Qdj"/>
                             <constraint firstItem="Y9v-gc-XLN" firstAttribute="leading" secondItem="pOx-lv-456" secondAttribute="leading" constant="74" id="nqw-nH-LbF"/>
+                            <constraint firstItem="bdh-YB-MlO" firstAttribute="top" secondItem="zyu-bA-6Dd" secondAttribute="bottom" constant="40" id="ouw-Tq-A5y"/>
                             <constraint firstItem="pOx-lv-456" firstAttribute="trailing" secondItem="zyu-bA-6Dd" secondAttribute="trailing" constant="169" id="rKq-S6-Xnf"/>
                             <constraint firstItem="pOx-lv-456" firstAttribute="trailing" secondItem="Y9v-gc-XLN" secondAttribute="trailing" constant="74" id="sgE-MI-UiI"/>
                             <constraint firstItem="jCj-ye-y5x" firstAttribute="top" secondItem="iIS-df-b8b" secondAttribute="bottom" constant="8" symbolic="YES" id="tVq-Sd-gPb"/>
+                            <constraint firstItem="Zea-M1-wlO" firstAttribute="top" secondItem="bdh-YB-MlO" secondAttribute="bottom" constant="1" id="uLT-t0-Vq5"/>
                             <constraint firstItem="pOx-lv-456" firstAttribute="trailing" secondItem="bdh-YB-MlO" secondAttribute="trailing" constant="147" id="uRX-fo-c1N"/>
                             <constraint firstItem="iIS-df-b8b" firstAttribute="leading" secondItem="pOx-lv-456" secondAttribute="leading" constant="102" id="uYT-8Z-Il5"/>
+                            <constraint firstItem="ohO-0f-OHw" firstAttribute="top" secondItem="Y9v-gc-XLN" secondAttribute="bottom" constant="16" id="uvF-c4-yZG"/>
                             <constraint firstItem="pOx-lv-456" firstAttribute="trailing" secondItem="jCj-ye-y5x" secondAttribute="trailing" constant="111" id="yAe-Z1-br2"/>
                         </constraints>
                         <connections>
@@ -1186,11 +1202,12 @@ landmarks, definitely a great photo op!</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="2Oc-jn-csK"/>
-        <segue reference="AX4-Lg-Rs1"/>
+        <segue reference="nB8-xr-rOk"/>
         <segue reference="YvJ-70-cEu"/>
         <segue reference="JoR-sh-xDS"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Pin-Square.png" width="240" height="240"/>
         <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
