@@ -102,7 +102,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotationView?.canShowCallout = true
             
             let annotationViewButton = UIButton(frame: CGRect(x:0, y:0, width:50, height:50))
-            annotationViewButton.setImage(UIImage(named: "camera"), for: .normal)
+            annotationViewButton.setImage(UIImage(named: "Pin-Square.png"), for: .normal)
             
             annotationView?.leftCalloutAccessoryView = annotationViewButton
         } else {

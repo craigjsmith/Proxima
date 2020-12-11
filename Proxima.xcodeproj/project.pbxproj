@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		41525664257595E2001077F7 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41525663257595E2001077F7 /* RegistrationViewController.swift */; };
 		4437AA56257CA15400A85F6A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4437AA55257CA15400A85F6A /* MapViewController.swift */; };
+		44414C0D2583183F00799783 /* Pin-Square.png in Resources */ = {isa = PBXBuildFile; fileRef = 44414C0C2583183F00799783 /* Pin-Square.png */; };
 		444EA77A257D894400C31CDB /* Proxima-Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 444EA779257D894400C31CDB /* Proxima-Icon.png */; };
 		444EA77F257D8AC100C31CDB /* Pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 444EA77E257D8AC100C31CDB /* Pin.png */; };
 		4473A491257C508F00C1BB96 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473A490257C508F00C1BB96 /* LocationViewController.swift */; };
@@ -55,6 +56,7 @@
 		10FBA7F9F4FB9A181F7F54AD /* Pods_Proxima.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Proxima.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41525663257595E2001077F7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		4437AA55257CA15400A85F6A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		44414C0C2583183F00799783 /* Pin-Square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pin-Square.png"; path = "assets/Pin-Square.png"; sourceTree = SOURCE_ROOT; };
 		444EA779257D894400C31CDB /* Proxima-Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Proxima-Icon.png"; path = "assets/Proxima-Icon.png"; sourceTree = SOURCE_ROOT; };
 		444EA77E257D8AC100C31CDB /* Pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pin.png; path = assets/Pin.png; sourceTree = SOURCE_ROOT; };
 		4473A490257C508F00C1BB96 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				41525663257595E2001077F7 /* RegistrationViewController.swift */,
 				4473A490257C508F00C1BB96 /* LocationViewController.swift */,
 				4437AA55257CA15400A85F6A /* MapViewController.swift */,
+				44414C0C2583183F00799783 /* Pin-Square.png */,
 			);
 			path = Proxima;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			files = (
 				44C47F9C2565F6D300713672 /* LaunchScreen.storyboard in Resources */,
 				444EA77F257D8AC100C31CDB /* Pin.png in Resources */,
+				44414C0D2583183F00799783 /* Pin-Square.png in Resources */,
 				444EA77A257D894400C31CDB /* Proxima-Icon.png in Resources */,
 				44C47F992565F6D300713672 /* Assets.xcassets in Resources */,
 				44C47F972565F6D200713672 /* Main.storyboard in Resources */,
@@ -566,13 +570,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9Z5BWH646A;
+				DEVELOPMENT_TEAM = S96SLWHZ5C;
 				INFOPLIST_FILE = Proxima/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = avni.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = craigsmith.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -586,13 +590,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9Z5BWH646A;
+				DEVELOPMENT_TEAM = S96SLWHZ5C;
 				INFOPLIST_FILE = Proxima/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = avni.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = craigsmith.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

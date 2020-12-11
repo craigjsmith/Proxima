@@ -29,53 +29,40 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="poS-l7-Lw4" userLabel="locationImage">
-                                                    <rect key="frame" x="20" y="19" width="160" height="89"/>
+                                                    <rect key="frame" x="30" y="19" width="160" height="89"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="90" id="RbO-Lj-2dD"/>
-                                                        <constraint firstAttribute="width" constant="160" id="bhA-DH-Q3i"/>
+                                                        <constraint firstAttribute="width" secondItem="poS-l7-Lw4" secondAttribute="height" multiplier="160:89" id="4ZU-T4-fxv"/>
+                                                        <constraint firstAttribute="height" constant="89" id="LO6-um-Wqm"/>
+                                                        <constraint firstAttribute="width" constant="160" id="Vjt-Nn-puK"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sparty Statue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEO-Ct-aEe" userLabel="nameLabel">
-                                                    <rect key="frame" x="188" y="25.5" width="206" height="21"/>
+                                                    <rect key="frame" x="198" y="26" width="104.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.2 miles away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxm-TW-f90" userLabel="distanceLabel">
-                                                    <rect key="frame" x="188" y="50.5" width="206" height="14"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Category, Category, Category" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiR-jw-ec0" userLabel="categoriesLabel">
-                                                    <rect key="frame" x="188" y="72.5" width="206" height="13.5"/>
+                                                    <rect key="frame" x="198" y="55" width="155.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="poS-l7-Lw4" secondAttribute="bottom" constant="8" id="21u-Ch-b5t"/>
-                                                <constraint firstItem="poS-l7-Lw4" firstAttribute="centerY" secondItem="KF3-hi-KIy" secondAttribute="centerY" id="IAE-P5-vk6"/>
-                                                <constraint firstItem="gEO-Ct-aEe" firstAttribute="trailing" secondItem="KF3-hi-KIy" secondAttribute="trailingMargin" id="JSJ-hC-LSG"/>
-                                                <constraint firstItem="pxm-TW-f90" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="KGn-Jq-Yh2"/>
-                                                <constraint firstItem="poS-l7-Lw4" firstAttribute="top" secondItem="KF3-hi-KIy" secondAttribute="topMargin" constant="8" id="RhX-6w-TCl"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="pxm-TW-f90" secondAttribute="bottom" constant="8" id="VXt-XF-736"/>
-                                                <constraint firstItem="GiR-jw-ec0" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="W3s-Ga-G3Y"/>
-                                                <constraint firstItem="GiR-jw-ec0" firstAttribute="top" secondItem="pxm-TW-f90" secondAttribute="bottom" constant="8" symbolic="YES" id="b2j-Af-oyu"/>
-                                                <constraint firstItem="pxm-TW-f90" firstAttribute="trailing" secondItem="KF3-hi-KIy" secondAttribute="trailingMargin" id="cE8-j4-sIw"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="GiR-jw-ec0" secondAttribute="bottom" constant="30" id="cHL-lJ-HAq"/>
-                                                <constraint firstItem="GiR-jw-ec0" firstAttribute="trailing" secondItem="KF3-hi-KIy" secondAttribute="trailingMargin" id="hMM-B4-D9F"/>
-                                                <constraint firstItem="poS-l7-Lw4" firstAttribute="leading" secondItem="KF3-hi-KIy" secondAttribute="leadingMargin" id="iLw-yg-gLi"/>
-                                                <constraint firstItem="pxm-TW-f90" firstAttribute="top" secondItem="gEO-Ct-aEe" secondAttribute="bottom" constant="4" id="uFf-dA-8CS"/>
-                                                <constraint firstItem="gEO-Ct-aEe" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="ud6-Pb-rgz"/>
-                                                <constraint firstItem="GiR-jw-ec0" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="xJt-uD-GcG"/>
+                                                <constraint firstItem="GiR-jw-ec0" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="7ng-nb-kui"/>
+                                                <constraint firstItem="gEO-Ct-aEe" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="MPH-81-A89"/>
+                                                <constraint firstItem="GiR-jw-ec0" firstAttribute="top" secondItem="gEO-Ct-aEe" secondAttribute="bottom" constant="8" symbolic="YES" id="avf-GC-aCa"/>
+                                                <constraint firstItem="poS-l7-Lw4" firstAttribute="leading" secondItem="KF3-hi-KIy" secondAttribute="leadingMargin" constant="10" id="jEP-Ja-U7K"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="poS-l7-Lw4" secondAttribute="bottom" constant="8" id="khk-Lq-sCo"/>
+                                                <constraint firstItem="poS-l7-Lw4" firstAttribute="top" secondItem="KF3-hi-KIy" secondAttribute="topMargin" constant="8" id="knG-Qw-A9G"/>
+                                                <constraint firstItem="gEO-Ct-aEe" firstAttribute="top" secondItem="KF3-hi-KIy" secondAttribute="topMargin" constant="15" id="ngL-na-V3w"/>
+                                                <constraint firstItem="poS-l7-Lw4" firstAttribute="centerY" secondItem="KF3-hi-KIy" secondAttribute="centerY" id="yZi-JT-97N"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="categoriesLabel" destination="GiR-jw-ec0" id="frh-9J-JgH"/>
-                                            <outlet property="distanceLabel" destination="pxm-TW-f90" id="YUg-po-9Qo"/>
                                             <outlet property="locationImage" destination="poS-l7-Lw4" id="7GE-Un-cVd"/>
                                             <outlet property="nameLabel" destination="gEO-Ct-aEe" id="LTN-As-zh6"/>
                                             <segue destination="ffC-zv-YOK" kind="presentation" identifier="feedToLocation" id="YvJ-70-cEu"/>
@@ -349,7 +336,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZJX-s4-UIw">
-                                <rect key="frame" x="132" y="94.5" width="150" height="149"/>
+                                <rect key="frame" x="132" y="94" width="150" height="150"/>
                                 <color key="tintColor" red="0.31161309129999998" green="0.31328934590000002" blue="0.30901774119999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <gestureRecognizers/>
                                 <constraints>

@@ -32,6 +32,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        self.tableView.reloadData()
 
         // Do any additional setup after loading the view.
     }
@@ -55,16 +57,25 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         cell.categoriesLabel.text = categoriesString
         
+        
+        let imageFile = post["image"] as! PFFileObject
+        let imageUrl = URL(string: imageFile.url!)!
+        cell.imageView!.af.setImage(withURL: imageUrl)
+        
+        /*
         if post["image"] != nil {
             // Update location image
             let imageFile = post["image"] as! PFFileObject
             let imageUrl = URL(string: imageFile.url!)!
-            cell.imageView?.af_setImage(withURL: imageUrl)
+            cell.imageView!.af.setImage(withURL: imageUrl)
         }
+ */
         //cell.distanceLabel.text = "0.2 miles away"
         
         //cell.nameLabel.text = "Spartan Stadium"
         
+        cell.setNeedsLayout() //invalidate current layout
+        cell.layoutIfNeeded() //update immediately
         
         return cell
     }
