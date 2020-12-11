@@ -34,6 +34,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.delegate = self
         
         self.tableView.reloadData()
+        
+        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(refresh), userInfo: nil, repeats: true)
 
         // Do any additional setup after loading the view.
     }
@@ -98,6 +100,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             locationViewController.location = location
         }
  
+    }
+    
+    @objc func refresh(){
+        self.tableView.reloadData()
     }
 
 }

@@ -123,7 +123,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.nameLabel.text = user["full_name"] as? String
 
         //update username
-        self.usernameLabel.text = user["username"]! as? String
+        let username = user["username"]! as? String
+        self.usernameLabel.text = "@" + username!
 
         // update score
         let score: Int = user["score"] as! Int
