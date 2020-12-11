@@ -22,18 +22,32 @@ class ProximaPointAnnotation : MKPointAnnotation {
     var emoji : String = "";
 }
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var map: MKMapView!
     var annotationView: MKAnnotationView!
     var locations = [PFObject]()
     var selectedAnnotation: ProximaPointAnnotation?
     
+    var locationManager: CLLocationManager?
+
+    var lat = 50.0
+    var lon = 50.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
         
         map.mapType = .satellite
+        map.showsUserLocation = true
+        
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.requestWhenInUseAuthorization()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.distanceFilter = kCLDistanceFilterNone
+        locationManager?.startUpdatingLocation()
         
         // Query to get locations from database
         let query = PFQuery(className: "Locations")
@@ -95,6 +109,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        // Gets the user current location and zooms the map into it
+        var currLocation = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        let regionSize = 1000.0 // radius for map region
+        // Create the region to be displayed
+        var userRegion = MKCoordinateRegion(center: currLocation, latitudinalMeters: regionSize, longitudinalMeters: regionSize)
+        map.setRegion(userRegion, animated: false) // Set the region
+        
+        
+        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -151,4 +174,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
 
      }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation :CLLocation = locations[0] as CLLocation
+        lat = userLocation.coordinate.latitude
+        lon = userLocation.coordinate.longitude
+    }
+    
 }
