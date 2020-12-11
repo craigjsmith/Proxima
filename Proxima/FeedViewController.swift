@@ -62,7 +62,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let imageFile = post["image"] as! PFFileObject
         let imageUrl = URL(string: imageFile.url!)!
-        cell.imageView!.af.setImage(withURL: imageUrl)
+        cell.locationImage?.af.setImage(withURL: imageUrl)
         
         /*
         if post["image"] != nil {

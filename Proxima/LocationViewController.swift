@@ -88,7 +88,7 @@ class LocationViewController: UIViewController {
             
                 print(condition)
             
-                var emoji = ""
+                var emoji = "🌥"
                 if(condition == "Thunderstorm") {
                     emoji = "⚡️"
                 }

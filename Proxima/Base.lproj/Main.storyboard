@@ -36,6 +36,11 @@
                                                         <constraint firstAttribute="height" constant="89" id="LO6-um-Wqm"/>
                                                         <constraint firstAttribute="width" constant="160" id="Vjt-Nn-puK"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sparty Statue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEO-Ct-aEe" userLabel="nameLabel">
                                                     <rect key="frame" x="198" y="26" width="104.5" height="21"/>
@@ -625,7 +630,7 @@ landmarks, definitely a great photo op!</string>
                                 <rect key="frame" x="0.0" y="492.5" width="414" height="349.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="68" id="3XI-Bl-Nyh" userLabel="Comment Cell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="68" id="3XI-Bl-Nyh" userLabel="Comment Cell" customClass="CommentCell" customModule="Proxima" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3XI-Bl-Nyh" id="hkU-Xo-EcS">
@@ -1207,7 +1212,7 @@ landmarks, definitely a great photo op!</string>
         <segue reference="JoR-sh-xDS"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Pin-Square.png" width="240" height="240"/>
+        <image name="Pin-Square.png" width="120" height="120"/>
         <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>

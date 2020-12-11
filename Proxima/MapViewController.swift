@@ -93,6 +93,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "myAnnotation") as? MKMarkerAnnotationView
         

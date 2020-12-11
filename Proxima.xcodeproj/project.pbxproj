@@ -10,6 +10,7 @@
 		41525664257595E2001077F7 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41525663257595E2001077F7 /* RegistrationViewController.swift */; };
 		4437AA56257CA15400A85F6A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4437AA55257CA15400A85F6A /* MapViewController.swift */; };
 		44414C0D2583183F00799783 /* Pin-Square.png in Resources */ = {isa = PBXBuildFile; fileRef = 44414C0C2583183F00799783 /* Pin-Square.png */; };
+		44414C2A2583E48E00799783 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44414C292583E48E00799783 /* CommentCell.swift */; };
 		444EA77A257D894400C31CDB /* Proxima-Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 444EA779257D894400C31CDB /* Proxima-Icon.png */; };
 		444EA77F257D8AC100C31CDB /* Pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 444EA77E257D8AC100C31CDB /* Pin.png */; };
 		4473A491257C508F00C1BB96 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473A490257C508F00C1BB96 /* LocationViewController.swift */; };
@@ -57,6 +58,7 @@
 		41525663257595E2001077F7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		4437AA55257CA15400A85F6A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		44414C0C2583183F00799783 /* Pin-Square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pin-Square.png"; path = "assets/Pin-Square.png"; sourceTree = SOURCE_ROOT; };
+		44414C292583E48E00799783 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		444EA779257D894400C31CDB /* Proxima-Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Proxima-Icon.png"; path = "assets/Proxima-Icon.png"; sourceTree = SOURCE_ROOT; };
 		444EA77E257D8AC100C31CDB /* Pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pin.png; path = assets/Pin.png; sourceTree = SOURCE_ROOT; };
 		4473A490257C508F00C1BB96 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				4473A490257C508F00C1BB96 /* LocationViewController.swift */,
 				4437AA55257CA15400A85F6A /* MapViewController.swift */,
 				44414C0C2583183F00799783 /* Pin-Square.png */,
+				44414C292583E48E00799783 /* CommentCell.swift */,
 			);
 			path = Proxima;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				B29858B6256AB6EC00E87A7E /* LeaderboardCell.swift in Sources */,
 				44D783042575DA6E00BFBEA5 /* CategoryViewCell.swift in Sources */,
 				41525664257595E2001077F7 /* RegistrationViewController.swift in Sources */,
+				44414C2A2583E48E00799783 /* CommentCell.swift in Sources */,
 				B27F67BF257436F500712650 /* ProfileViewController.swift in Sources */,
 				44D782EF2575B5A700BFBEA5 /* AddLocationViewController.swift in Sources */,
 				B27F67C425744B1800712650 /* AchievementsCell.swift in Sources */,
