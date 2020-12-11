@@ -157,10 +157,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 cell.nameLabel.text = location!["name"] as! String
                 // Update location image
-                let imageFile = location?["image"] as! PFFileObject
-                let imageUrl = URL(string: imageFile.url!)!
-                cell.imageView.af_setImage(withURL: imageUrl)
-                
+                if location?["image"] != nil {
+                    let imageFile = location?["image"] as! PFFileObject
+                    let imageUrl = URL(string: imageFile.url!)!
+                    cell.imageView.af_setImage(withURL: imageUrl)
+                }
                 
             } else {
                 print("error loading location: \(error?.localizedDescription)")

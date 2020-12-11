@@ -44,29 +44,27 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedViewCell") as! FeedViewCell
+                
+        let post = locations[indexPath.row] //indexPath.section
         
-        if indexPath.row < locations.count {
-            
-            let post = locations[indexPath.row] //indexPath.section
-            
-            let location = post["name"] as! String
-            cell.nameLabel.text = location
-            
-            let categories = post["categories"] as? [String] ?? []
-            let categoriesString = categories.joined(separator: ", ")
-            
-            
-//            // Update profile image
-//            let imageFile = post["image"] as! PFFileObject
-//            let imageUrl = URL(string: imageFile.url!)!
-//            cell.imageView?.af_setImage(withURL: imageUrl)
-            
-            cell.categoriesLabel.text = categoriesString
+        let location = post["name"] as! String
+        cell.nameLabel.text = location
+        
+        let categories = post["categories"] as? [String] ?? []
+        let categoriesString = categories.joined(separator: ", ")
+        
+        cell.categoriesLabel.text = categoriesString
+        
+        if post["image"] != nil {
+            // Update location image
+            let imageFile = post["image"] as! PFFileObject
+            let imageUrl = URL(string: imageFile.url!)!
+            cell.imageView?.af_setImage(withURL: imageUrl)
         }
-        
         //cell.distanceLabel.text = "0.2 miles away"
         
         //cell.nameLabel.text = "Spartan Stadium"
+        
         
         return cell
     }

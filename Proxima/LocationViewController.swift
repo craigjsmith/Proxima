@@ -52,6 +52,11 @@ class LocationViewController: UIViewController {
             let lat = location?["lat"] as! Double
             let long = location?["long"] as! Double
             
+            if location?["image"] != nil {
+                let imageFile = location?["image"] as! PFFileObject
+                let imageUrl = URL(string: imageFile.url!)!
+                self.pictureView.af_setImage(withURL: imageUrl)
+            }
             getWeather(lat:lat, long:long)
             
         }
