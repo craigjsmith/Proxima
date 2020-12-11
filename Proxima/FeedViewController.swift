@@ -7,6 +7,7 @@
 
 import UIKit
 import Parse
+import AlamofireImage
 
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -19,7 +20,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         
         let query = PFQuery(className: "Locations")
-        query.includeKeys(["name", "description", "author"])
+        query.includeKeys(["name", "description", "author", "image"])
         query.limit = 50
         
         query.findObjectsInBackground { (locations, error) in
@@ -53,7 +54,13 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             let categories = post["categories"] as? [String] ?? []
             let categoriesString = categories.joined(separator: ", ")
-
+            
+            
+//            // Update profile image
+//            let imageFile = post["image"] as! PFFileObject
+//            let imageUrl = URL(string: imageFile.url!)!
+//            cell.imageView?.af_setImage(withURL: imageUrl)
+            
             cell.categoriesLabel.text = categoriesString
         }
         

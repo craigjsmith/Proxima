@@ -33,8 +33,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Do any additional setup after loading the view.
         
         // Set profile image to circle
-        //profileImage.layer.cornerRadius = (profileImage.frame.width / 2)
-        //profileImage.layer.masksToBounds = true
+        profileImage.layer.masksToBounds = true
+        profileImage.layer.cornerRadius = (profileImage.frame.width / 2)
+        
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -155,8 +156,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             if location != nil {
                 
                 cell.nameLabel.text = location!["name"] as! String
-                // TO DO:
-                // set picture for each cell
+                // Update location image
+                let imageFile = location?["image"] as! PFFileObject
+                let imageUrl = URL(string: imageFile.url!)!
+                cell.imageView.af_setImage(withURL: imageUrl)
+                
+                
             } else {
                 print("error loading location: \(error?.localizedDescription)")
                 }

@@ -28,7 +28,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="127"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="poS-l7-Lw4" userLabel="locationImage">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="poS-l7-Lw4" userLabel="locationImage">
                                                     <rect key="frame" x="20" y="19" width="159" height="89"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -216,7 +216,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="204" height="161"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r3M-oO-AP0">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r3M-oO-AP0">
                                                     <rect key="frame" x="0.0" y="0.0" width="204" height="130"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -258,14 +258,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="P0e-6Q-0yj">
-                                <rect key="frame" x="132" y="16.5" width="150" height="149"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P0e-6Q-0yj">
+                                <rect key="frame" x="132" y="16" width="150" height="150"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="Eja-oF-hDO"/>
-                                    <constraint firstAttribute="width" constant="150" id="GNJ-2Z-vy2"/>
+                                    <constraint firstAttribute="width" constant="150" id="WcY-gs-HNk"/>
                                     <constraint firstAttribute="width" secondItem="P0e-6Q-0yj" secondAttribute="height" multiplier="1:1" id="iyT-fs-kyC"/>
+                                    <constraint firstAttribute="height" constant="150" id="syu-Fo-U28"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Ys7-fl-rNK" appends="YES" id="3nh-kD-c26"/>
@@ -292,9 +292,7 @@
                             <constraint firstItem="eu8-XF-NJs" firstAttribute="leading" secondItem="5Xu-V3-Vav" secondAttribute="leading" id="Bd6-cc-cuR"/>
                             <constraint firstItem="jDI-pK-meo" firstAttribute="leading" secondItem="5Xu-V3-Vav" secondAttribute="leading" constant="112" id="FDM-Qx-ak5"/>
                             <constraint firstItem="5PM-8l-kwV" firstAttribute="top" secondItem="c8h-TO-E7v" secondAttribute="bottom" constant="8" symbolic="YES" id="G9T-en-sPj"/>
-                            <constraint firstItem="P0e-6Q-0yj" firstAttribute="leading" secondItem="5Xu-V3-Vav" secondAttribute="leading" constant="132" id="Ghz-JI-iZr"/>
                             <constraint firstItem="Cvg-xW-jiY" firstAttribute="top" secondItem="qZf-Fd-2Aq" secondAttribute="bottom" constant="7" id="IO3-bO-26R"/>
-                            <constraint firstItem="5Xu-V3-Vav" firstAttribute="trailing" secondItem="P0e-6Q-0yj" secondAttribute="trailing" constant="132" id="Jv7-TK-faJ"/>
                             <constraint firstItem="5Xu-V3-Vav" firstAttribute="trailing" secondItem="c8h-TO-E7v" secondAttribute="trailing" constant="225" id="KOu-vo-GD4"/>
                             <constraint firstItem="IbZ-dP-0oM" firstAttribute="leading" secondItem="qZf-Fd-2Aq" secondAttribute="trailing" constant="8" id="SbF-DR-0ep"/>
                             <constraint firstItem="5Xu-V3-Vav" firstAttribute="trailing" secondItem="Cvg-xW-jiY" secondAttribute="trailing" constant="213" id="UEr-Na-OnY"/>
@@ -308,6 +306,7 @@
                             <constraint firstItem="5PM-8l-kwV" firstAttribute="trailing" secondItem="5Xu-V3-Vav" secondAttribute="trailing" id="jkL-Yh-Fmq"/>
                             <constraint firstItem="P0e-6Q-0yj" firstAttribute="top" secondItem="5Xu-V3-Vav" secondAttribute="top" constant="16" id="mJN-pE-ZZh"/>
                             <constraint firstItem="5Xu-V3-Vav" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IbZ-dP-0oM" secondAttribute="trailing" constant="16" id="tMi-ZZ-fo8"/>
+                            <constraint firstItem="P0e-6Q-0yj" firstAttribute="centerX" secondItem="5Xu-V3-Vav" secondAttribute="centerX" id="ufA-tG-COU"/>
                             <constraint firstItem="Eo2-Lo-OGK" firstAttribute="top" secondItem="P0e-6Q-0yj" secondAttribute="bottom" constant="8" symbolic="YES" id="yje-0I-LG3"/>
                         </constraints>
                     </view>
@@ -495,7 +494,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P9B-Gp-MSZ" userLabel="profileImage">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P9B-Gp-MSZ" userLabel="profileImage">
                                                     <rect key="frame" x="16" y="10" width="80" height="80"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -1199,9 +1198,9 @@ landmarks, definitely a great photo op!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="mRf-AD-Ecn"/>
+        <segue reference="2Oc-jn-csK"/>
         <segue reference="nB8-xr-rOk"/>
-        <segue reference="3Av-IU-tGF"/>
+        <segue reference="YvJ-70-cEu"/>
         <segue reference="JoR-sh-xDS"/>
     </inferredMetricsTieBreakers>
     <resources>

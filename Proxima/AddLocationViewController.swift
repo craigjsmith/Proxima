@@ -21,6 +21,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
    
     var locationManager: CLLocationManager?
     
+    var locationImageFile: PFFileObject?
+    
     var lat = 0.0
     var lon = 0.0
     
@@ -71,6 +73,9 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         post["categories"] = categories
         post["author"] = PFUser.current()
         
+        if locationImageFile != nil {
+            post["image"] = locationImageFile
+        } 
         
         post.saveInBackground { (success, error) in
             if success {
@@ -123,22 +128,19 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         }
         
         present(picker, animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.editedImage] as! UIImage
+        let size = CGSize(width: 1920, height: 1080)
+        let scaledImage = image.af_imageScaled(to: size)
         
-        let image = PFObject(className: "Image")
-    
-       /* let imageData = photoCheck.image!.pngData()
+        let imageData = scaledImage.pngData()
         let file = PFFileObject(data: imageData!)
         
-        image["Image"] = file
+        self.locationImageFile = file
         
-        image.saveInBackground {(success, error) in
-            if success {
-                self.dismiss(animated: true, completion: nil)
-                print("saved!")
-            } else {
-                print("error!")
-            }
-        }*/
+        dismiss(animated: true, completion: nil)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
