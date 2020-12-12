@@ -8,12 +8,32 @@
 import UIKit
 import Parse
 
-class LocationViewController: UIViewController {
+class LocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = commentTableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
+            cell.commentLabel.text = "Cool!"
+            cell.usernameLabel.text = "Squidward"
+        
+            // Set profile image to circle
+            cell.profilePic.layer.masksToBounds = true
+            cell.profilePic.layer.cornerRadius = (cell.profilePic.frame.width / 2);
+            return cell
+    }
+    
     
     var location: PFObject?
     
     let openWeatherAPI = "1aaa65db3029bc25e901f1b3db518f2c"
-
+    @IBOutlet weak var commentTableView: UITableView!
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -23,6 +43,9 @@ class LocationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        commentTableView.delegate = self
+        commentTableView.dataSource = self
         
         if location != nil {
             

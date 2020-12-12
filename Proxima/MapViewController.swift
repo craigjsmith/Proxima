@@ -49,6 +49,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager?.distanceFilter = kCLDistanceFilterNone
         locationManager?.startUpdatingLocation()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Gets the user current location and zooms the map into it
+        var currLocation = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        let regionSize = 2000.0 // radius for map region
+        // Create the region to be displayed
+        var userRegion = MKCoordinateRegion(center: currLocation, latitudinalMeters: regionSize, longitudinalMeters: regionSize)
+        map.setRegion(userRegion, animated: false) // Set the region
+        map.showsUserLocation = false;
+        
+        populateMap()
+    }
+    
+    func populateMap() {
         // Query to get locations from database
         let query = PFQuery(className: "Locations")
         query.includeKeys(["name", "description", "author", "lat", "long", "categories"])
@@ -56,7 +71,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // Query the database
         query.findObjectsInBackground { (locations, error) in
-    
+
                 // After results are returned, iterate through them and add points
                 for location in locations as! [PFObject] {
                     
@@ -104,20 +119,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     // Add pin to map
                     self.map.addAnnotation(pin)
                 }
+ 
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        // Gets the user current location and zooms the map into it
-        var currLocation = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-        let regionSize = 1000.0 // radius for map region
-        // Create the region to be displayed
-        var userRegion = MKCoordinateRegion(center: currLocation, latitudinalMeters: regionSize, longitudinalMeters: regionSize)
-        map.setRegion(userRegion, animated: false) // Set the region
-        
-        
-        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -172,7 +175,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // Set location of LocationViewController to that of the selected pin
             locationViewController.location = self.selectedAnnotation?.location as! PFObject
         }
-
+        
      }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

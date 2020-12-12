@@ -637,17 +637,14 @@ landmarks, definitely a great photo op!</string>
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xgj-Wg-l7h" userLabel="Comment User Photo">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squidward.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Xgj-Wg-l7h" userLabel="Comment User Photo">
                                                     <rect key="frame" x="16" y="9" width="50" height="50"/>
-                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Xgj-Wg-l7h" secondAttribute="height" multiplier="1:1" id="65J-Aw-row"/>
+                                                        <constraint firstAttribute="width" constant="50" id="aS5-ty-4Cy"/>
+                                                        <constraint firstAttribute="height" constant="50" id="dcK-9b-zsL"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="50"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wow, awesome place!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jR8-Mg-RBX" userLabel="Comment Content">
                                                     <rect key="frame" x="71" y="24" width="303" height="30"/>
@@ -678,6 +675,11 @@ landmarks, definitely a great photo op!</string>
                                                 <constraint firstItem="Xgj-Wg-l7h" firstAttribute="top" secondItem="hkU-Xo-EcS" secondAttribute="top" constant="9" id="qfe-fO-eCf"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="commentLabel" destination="jR8-Mg-RBX" id="cHj-Hd-ePH"/>
+                                            <outlet property="profilePic" destination="Xgj-Wg-l7h" id="GL2-ke-nrl"/>
+                                            <outlet property="usernameLabel" destination="5E0-E2-yGD" id="Bsu-eP-ym0"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -776,6 +778,7 @@ landmarks, definitely a great photo op!</string>
                     </view>
                     <connections>
                         <outlet property="categoryLabel" destination="1Aw-iI-unc" id="Pwx-uI-wru"/>
+                        <outlet property="commentTableView" destination="j8T-9c-45u" id="oLr-8r-Knm"/>
                         <outlet property="descriptionLabel" destination="DlT-dT-mHV" id="mnb-pU-WK4"/>
                         <outlet property="nameLabel" destination="37d-De-O6q" id="ChM-Xy-Bw0"/>
                         <outlet property="pictureView" destination="Czb-3H-96J" id="jDW-Wj-7WX"/>
@@ -1217,6 +1220,7 @@ landmarks, definitely a great photo op!</string>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="rectangle.stack.fill" catalog="system" width="128" height="122"/>
+        <image name="squidward.jpg" width="225" height="225"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
