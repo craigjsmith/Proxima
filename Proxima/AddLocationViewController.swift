@@ -44,6 +44,13 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
     @IBAction func onSubmit(_ sender: Any) {
         let post = PFObject(className: "Locations")
         
+        // Set write access to this user only
+        let acl = PFACL()
+        acl.setWriteAccess(true, for: PFUser.current()!)
+        acl.hasPublicWriteAccess = false
+        acl.hasPublicReadAccess = true
+        post.acl = acl
+        
         post["name"] = locationName.text as! String
         post["description"] = descriptionName.text as! String
         

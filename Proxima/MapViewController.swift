@@ -163,7 +163,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.selectedAnnotation = view.annotation as? ProximaPointAnnotation
     }
     
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
