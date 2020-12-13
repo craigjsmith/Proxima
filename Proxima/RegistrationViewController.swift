@@ -46,7 +46,12 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         let size = CGSize(width: 300, height: 300)
         let scaledImage = image.af_imageScaled(to: size)
         
+        // Set image preview to newly uploaded image
         profileImageView.image = scaledImage
+        
+        // Set profile image to circle
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.cornerRadius = (profileImageView.frame.width / 2)
         
         imageSet = true
         
