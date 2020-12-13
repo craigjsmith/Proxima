@@ -1215,7 +1215,7 @@ landmarks, definitely a great photo op!</string>
         <segue reference="JoR-sh-xDS"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Pin-Square.png" width="120" height="120"/>
+        <image name="Pin-Square.png" width="1000" height="1000"/>
         <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
