@@ -16,8 +16,6 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var errorLabel: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,12 +25,11 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     }
     
     @IBAction func onCameraButton(_ sender: Any) {
-        
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
         
-        if UIImagePickerController.isSourceTypeAvailable(.camera){
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             picker.sourceType = .photoLibrary
             
         } else {
@@ -40,8 +37,6 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         }
         
         present(picker, animated: true, completion: nil)
-        
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -52,7 +47,6 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
        profileImageView.image = scaledImage
         
         dismiss(animated: true, completion: nil)
-        
     }
     
     // Removes the keyboard
@@ -67,53 +61,35 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     //
     @IBAction func onSignupButton(_ sender: Any) {
         
-        // User has not filled all fields
-        if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty || fullnameTextField.text!.isEmpty {
-            
-            // show something on screen that tells user they need to fill text fields
-            errorLabel.text = "Please fill in all fields to register"
-        }
-        // All fields have been filled in so you can try to register the user
-        else {
-            // Creates a new row in _User table
-            var user = PFUser()
-                          user.username = usernameTextField.text
-                          user.password = passwordTextField.text
-                           
-            
+        let user = PFUser()
+        user.username = usernameTextField.text
+        user.password = passwordTextField.text
+        
+        if(user.username != nil && user.password != nil) {
             user.signUpInBackground {(success, error)   in
                 if success {
-                    // only creates table entry if User was succesfuly signed up
                     let imageData = self.profileImageView.image!.pngData()
                     let file = PFFileObject(data: imageData!)
                     
-                    user["profile_image"] = file  // set profile image element
-                    user["full_name"] = self.fullnameTextField.text // set full name element
-                    user["score"] = 0 // set initial score to zero
-                    
+                    user["profile_image"] = file
+                    user["full_name"] = self.fullnameTextField.text
+                    user["score"] = 0
                     
                     user.saveInBackground{(success, error) in
                         if success {
-                            print("saved!")
                             self.performSegue(withIdentifier: "registrationSegue", sender: nil)
-
-                        } else { // Could not 
-                            print("error saving: \(error?.localizedDescription)")
-                            self.errorLabel.text = error?.localizedDescription
-                            }
-                        
                         }
-                    
-                } else { // Could not sign up user
-                    print("Error: \(error?.localizedDescription)")
-                    self.errorLabel.text = error?.localizedDescription
+                    }
+                } else {
+                    // Could not register, display error
+                    let alert = UIAlertController(title: "Registration Error", message: error?.localizedDescription.localizedCapitalized, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
-        
         }
-        
-    
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -131,6 +107,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         }
         return false
     }
+    
     /*
     // MARK: - Navigation
 
@@ -140,5 +117,4 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         // Pass the selected object to the new view controller.
     }
     */
-
 }

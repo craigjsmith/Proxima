@@ -83,10 +83,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         var achieve: [String] = []
         
         user.fetchIfNeededInBackground { (user, error) in
-            let userPF = user as! PFUser
+            let userPF = user as? PFUser
             
             if userPF != nil {
-                let score = userPF["score"] as! Int
+                let score = userPF?["score"] as? Int ?? 0
                 
                 if score == 0 {
                     return 
@@ -127,13 +127,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.usernameLabel.text = "@" + username!
 
         // update score
-        let score: Int = user["score"] as! Int
+        let score = user["score"] as? Int ?? 0
         self.starsLabel.text = String(score)
 
         // Update profile image
-        let imageFile = user["profile_image"] as! PFFileObject
-        let imageUrl = URL(string: imageFile.url!)!
-        self.profileImage.af_setImage(withURL: imageUrl)
+        if user["profile_image"] != nil {
+            let imageFile = user["profile_image"] as! PFFileObject
+            let imageUrl = URL(string: imageFile.url!)!
+            self.profileImage.af.setImage(withURL: imageUrl)
+        }
         
 
     }

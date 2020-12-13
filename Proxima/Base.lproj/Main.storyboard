@@ -396,12 +396,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GA6-P2-FBS">
-                                <rect key="frame" x="207" y="21" width="0.0" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemRedColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4ND-v6-QuH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -411,16 +405,13 @@
                             <constraint firstItem="8gx-j0-Hnz" firstAttribute="leading" secondItem="4ND-v6-QuH" secondAttribute="leading" constant="107" id="2fR-Ho-BNr"/>
                             <constraint firstItem="aZw-nh-FLS" firstAttribute="leading" secondItem="4ND-v6-QuH" secondAttribute="leading" constant="67" id="2gW-Q1-CJr"/>
                             <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="Gff-hv-f6X" secondAttribute="trailing" constant="67" id="5Sx-ia-Nat"/>
-                            <constraint firstItem="GA6-P2-FBS" firstAttribute="top" secondItem="4ND-v6-QuH" secondAttribute="top" constant="21" id="8VG-wb-WWF"/>
                             <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="ZbN-8L-CbO" secondAttribute="trailing" constant="135" id="C7h-vF-lIZ"/>
                             <constraint firstItem="vux-ZO-jLm" firstAttribute="leading" secondItem="4ND-v6-QuH" secondAttribute="leading" constant="67" id="KPQ-WY-C3f"/>
-                            <constraint firstItem="GA6-P2-FBS" firstAttribute="centerX" secondItem="4ND-v6-QuH" secondAttribute="centerX" id="Kl8-Hl-7B9"/>
                             <constraint firstItem="ZbN-8L-CbO" firstAttribute="top" secondItem="4ND-v6-QuH" secondAttribute="top" constant="50" id="OYZ-1Z-oiS"/>
                             <constraint firstItem="Gff-hv-f6X" firstAttribute="leading" secondItem="4ND-v6-QuH" secondAttribute="leading" constant="67" id="Omn-8S-sOT"/>
                             <constraint firstItem="ZJX-s4-UIw" firstAttribute="top" secondItem="ZbN-8L-CbO" secondAttribute="bottom" constant="14" id="Ova-4Y-r4E"/>
                             <constraint firstItem="8gx-j0-Hnz" firstAttribute="top" secondItem="ZJX-s4-UIw" secondAttribute="bottom" constant="7.5" id="P3K-Iq-blK"/>
                             <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="aZw-nh-FLS" secondAttribute="trailing" constant="67" id="PUP-r7-9bb"/>
-                            <constraint firstItem="ZbN-8L-CbO" firstAttribute="top" secondItem="GA6-P2-FBS" secondAttribute="bottom" constant="8" symbolic="YES" id="QZC-P4-X0r"/>
                             <constraint firstItem="4ND-v6-QuH" firstAttribute="trailing" secondItem="ZJX-s4-UIw" secondAttribute="trailing" constant="132" id="U23-L1-dSG"/>
                             <constraint firstItem="aZw-nh-FLS" firstAttribute="top" secondItem="vux-ZO-jLm" secondAttribute="bottom" constant="20" id="YDf-2e-2F2"/>
                             <constraint firstItem="ZJX-s4-UIw" firstAttribute="top" secondItem="ZbN-8L-CbO" secondAttribute="bottom" constant="8" symbolic="YES" id="dgN-N3-gu5"/>
@@ -439,7 +430,6 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="errorLabel" destination="GA6-P2-FBS" id="bbZ-WB-RjX"/>
                         <outlet property="fullnameTextField" destination="vux-ZO-jLm" id="uDD-s9-Dtd"/>
                         <outlet property="passwordTextField" destination="Gff-hv-f6X" id="MM5-jG-evl"/>
                         <outlet property="profileImageView" destination="ZJX-s4-UIw" id="8U7-Ep-0fU"/>
@@ -1210,7 +1200,7 @@ landmarks, definitely a great photo op!</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="2Oc-jn-csK"/>
-        <segue reference="nB8-xr-rOk"/>
+        <segue reference="AX4-Lg-Rs1"/>
         <segue reference="YvJ-70-cEu"/>
         <segue reference="JoR-sh-xDS"/>
     </inferredMetricsTieBreakers>
@@ -1227,9 +1217,6 @@ landmarks, definitely a great photo op!</string>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

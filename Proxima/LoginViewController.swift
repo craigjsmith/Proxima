@@ -23,20 +23,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func onLoginButton(_ sender: Any) {
         
         let username = usernameField.text!
-                let password = passwordField.text!
+        let password = passwordField.text!
                        
-                PFUser.logInWithUsername(inBackground: username, password: password)
-                       {
-                           (user, error) in
-                           if user != nil {
-                               self.performSegue(withIdentifier: "loginSegue", sender: nil)
-                           } else {
-                                print("Error: \(error?.localizedDescription)")
-                                
-                            }
-                           
-                       }
-
+        PFUser.logInWithUsername(inBackground: username, password: password)
+        {
+            (user, error) in
+            if user != nil {
+               self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
+            else {
+                let alert = UIAlertController(title: "Invalid Credentials", message: error?.localizedDescription.localizedCapitalized, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
