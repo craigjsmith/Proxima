@@ -22,8 +22,6 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>The app uses the camera to set a profile picture and location pictures. </string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location</string>
 	<key>UIApplicationSceneManifest</key>

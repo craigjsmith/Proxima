@@ -37,18 +37,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
-        
-        map.mapType = .satellite
-        map.showsUserLocation = true
-        
+
         locationManager = CLLocationManager()
         locationManager?.delegate = self
-        locationManager?.requestAlwaysAuthorization()
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.distanceFilter = kCLDistanceFilterNone
         locationManager?.startUpdatingLocation()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,7 +53,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Create the region to be displayed
         var userRegion = MKCoordinateRegion(center: currLocation, latitudinalMeters: regionSize, longitudinalMeters: regionSize)
         map.setRegion(userRegion, animated: false) // Set the region
-        map.showsUserLocation = false;
         
         populateMap()
     }
@@ -74,7 +68,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
                 // After results are returned, iterate through them and add points
                 for location in locations as! [PFObject] {
-                    
                     // Make new pin
                     let pin = ProximaPointAnnotation()
                     
@@ -142,6 +135,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotationView?.annotation = annotation
         }
 
+        // Draw user location with default view rather than with ProximaPointAnnotation
+        if (annotation.isKind(of: MKUserLocation.self)){
+            return nil
+        }
+        
         if let annotation = annotation as? ProximaPointAnnotation {
             // Color of marker
             annotationView?.markerTintColor = annotation.pinTintColor
