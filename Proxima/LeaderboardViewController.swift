@@ -69,11 +69,14 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
         let score: Int = profile["score"] as! Int
         cell.starsLabel.text = String(score)
         
-        let imageFile = profile["profile_image"] as! PFFileObject
-        
-        let imageUrl = URL(string: imageFile.url!)!
-        
-        cell.profileImage.af_setImage(withURL: imageUrl)
+        if profile["profile_image"] != nil {
+            let imageFile = profile["profile_image"] as! PFFileObject
+            let imageUrl = URL(string: imageFile.url!)
+            cell.profileImage.af.setImage(withURL: imageUrl!)
+        } else {
+            cell.profileImage.image = UIImage(systemName: "person.circle.fill")
+            cell.profileImage.tintColor = UIColor.darkGray
+        }
         
         return cell
     }

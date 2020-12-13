@@ -11,6 +11,8 @@ import AlamofireImage
 
 class RegistrationViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
 
+    var imageSet = false
+    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var fullnameTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -44,7 +46,9 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         let size = CGSize(width: 300, height: 300)
         let scaledImage = image.af_imageScaled(to: size)
         
-       profileImageView.image = scaledImage
+        profileImageView.image = scaledImage
+        
+        imageSet = true
         
         dismiss(animated: true, completion: nil)
     }
@@ -68,10 +72,13 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         if(user.username != nil && user.password != nil) {
             user.signUpInBackground {(success, error)   in
                 if success {
-                    let imageData = self.profileImageView.image!.pngData()
-                    let file = PFFileObject(data: imageData!)
                     
-                    user["profile_image"] = file
+                    if self.imageSet {
+                        let imageData = self.profileImageView.image!.pngData()
+                        let file = PFFileObject(data: imageData!)
+                        user["profile_image"] = file
+                    }
+                    
                     user["full_name"] = self.fullnameTextField.text
                     user["score"] = 0
                     
@@ -80,13 +87,16 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                             self.performSegue(withIdentifier: "registrationSegue", sender: nil)
                         }
                     }
+                    
                 } else {
+                    
                     // Could not register, display error
                     let alert = UIAlertController(title: "Registration Error", message: error?.localizedDescription.localizedCapitalized, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
                     NSLog("The \"OK\" alert occured.")
                     }))
                     self.present(alert, animated: true, completion: nil)
+                    
                 }
             }
         }
