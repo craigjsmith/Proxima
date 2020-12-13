@@ -31,8 +31,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var locationManager: CLLocationManager?
 
-    var lat = 50.0
-    var lon = 50.0
+    var lat : Double
+    var lon : Double
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,16 +44,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.distanceFilter = kCLDistanceFilterNone
         locationManager?.startUpdatingLocation()
+        
+        // Adds user tracking mode toggle button to nav bar
+        let buttonItem = MKUserTrackingBarButtonItem(mapView: map)
+        self.navigationItem.leftBarButtonItem = buttonItem
+        
+        // Set default user tracking mode
+        map.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // Gets the user current location and zooms the map into it
-        var currLocation = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-        let regionSize = 2000.0 // radius for map region
-        // Create the region to be displayed
-        var userRegion = MKCoordinateRegion(center: currLocation, latitudinalMeters: regionSize, longitudinalMeters: regionSize)
-        map.setRegion(userRegion, animated: false) // Set the region
-        
         populateMap()
     }
     
