@@ -29,7 +29,7 @@ Discover nearby attractions, sights, and hidden gems around you.
 
 **Required Must-have Stories**
 
-* [ ] Interactive Map
+* [x] Interactive Map
     * Shows locations tagged by other users. Locations can be filtered by type
     * Optional: Have a random button that shows user a random location
 * [x] Location Info
@@ -44,13 +44,13 @@ Discover nearby attractions, sights, and hidden gems around you.
 
 **Optional Nice-to-have Stories**
 
-* [ ] User Profile
+* [x] User Profile
     * Shows locations created/visited by user, achievements earned
 * [x] User Profile Edit
     * User can edit their profile, add photo, 
 * [ ] Add Location Comment
     * Any user can add comments/pictures to a locationdescription
-* [ ] Location Feed
+* [x] Location Feed
     * Show locations in a feed rather than a map (sorted by nearest!)
 
 ### 2. Screen Archetypes
@@ -193,4 +193,7 @@ User
 <img src="demo/demo_2.gif" width=600>
 
 ### Sprint 3 Demo
-<img src="demo/demo3.gif" width=600>
+<img src="demo/demo_3.gif" width=600>
+
+### Sprint 4 Demo
+<img src="demo/demo_4.gif" width=600>

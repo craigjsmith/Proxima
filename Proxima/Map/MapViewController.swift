@@ -30,9 +30,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var selectedAnnotation: ProximaPointAnnotation?
     
     var locationManager: CLLocationManager?
-
-    var lat : Double
-    var lon : Double
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,11 +196,5 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
      }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation :CLLocation = locations[0] as CLLocation
-        lat = userLocation.coordinate.latitude
-        lon = userLocation.coordinate.longitude
-    }
     
 }
