@@ -155,14 +155,13 @@
 				44DEB2752585EB2A004B7486 /* Leaderboard */,
 				44DEB2742585EAF6004B7486 /* Feed */,
 				44DEB2732585EAEC004B7486 /* Map */,
-				44DEB27D2585EBFC004B7486 /* Images */,
-				44C47F8F2565F6D200713672 /* AppDelegate.swift */,
 				44C47F912565F6D200713672 /* SceneDelegate.swift */,
 				44C47F932565F6D200713672 /* ViewController.swift */,
 				44C47F952565F6D200713672 /* Main.storyboard */,
-				44C47F982565F6D300713672 /* Assets.xcassets */,
 				44C47F9A2565F6D300713672 /* LaunchScreen.storyboard */,
 				44C47F9D2565F6D300713672 /* Info.plist */,
+				44DEB27D2585EBFC004B7486 /* Images */,
+				44C47F982565F6D300713672 /* Assets.xcassets */,
 			);
 			path = Proxima;
 			sourceTree = "<group>";
@@ -243,6 +242,7 @@
 		44DEB27D2585EBFC004B7486 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				44C47F8F2565F6D200713672 /* AppDelegate.swift */,
 				444EA779257D894400C31CDB /* Proxima-Icon.png */,
 				44A1DF10258479850091A78B /* squidward.jpg */,
 				44414C0C2583183F00799783 /* Pin-Square.png */,

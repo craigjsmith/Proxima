@@ -131,10 +131,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             annotationView?.canShowCallout = true
             
-            let annotationViewButton = UIButton(frame: CGRect(x:0, y:0, width:50, height:50))
-            annotationViewButton.setImage(UIImage(named: "Pin-Square.png"), for: .normal)
+            //let annotationViewButton = UIButton(frame: CGRect(x:0, y:0, width:50, height:50))
+            //annotationViewButton.setImage(UIImage(named: "Pin-Square.png"), for: .normal)
             
-            annotationView?.leftCalloutAccessoryView = annotationViewButton
+            //annotationView?.leftCalloutAccessoryView = annotationViewButton
+            
+            let rightButton = UIButton(type: .detailDisclosure)
+            annotationView?.rightCalloutAccessoryView = rightButton
         } else {
             annotationView?.annotation = annotation
         }
@@ -157,6 +160,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         self.performSegue(withIdentifier: "mapToLocationView", sender: nil)
     }
+    
+    /*
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        // This illustrates how to detect which annotation type was tapped on for its callout.
+        if let annotation = view.annotation, annotation.isKind(of: BridgeAnnotation.self) {
+            print("Tapped Golden Gate Bridge annotation accessory view")
+            
+            if let detailNavController = storyboard?.instantiateViewController(withIdentifier: "DetailNavController") {
+                detailNavController.modalPresentationStyle = .popover
+                let presentationController = detailNavController.popoverPresentationController
+                presentationController?.permittedArrowDirections = .any
+                
+                // Anchor the popover to the button that triggered the popover.
+                presentationController?.sourceRect = control.frame
+                presentationController?.sourceView = control
+                
+                present(detailNavController, animated: true, completion: nil)
+            }
+        }
+    }
+    */
 
     // Sets selectedAnnotation to the currently selected pin
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
