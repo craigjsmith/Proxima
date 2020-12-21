@@ -9,7 +9,19 @@ import Parse
 import AlamofireImage
 import MapKit
 
-class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
+class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
     
     @IBOutlet weak var locationName: UITextField!
     @IBOutlet weak var descriptionName: UITextField!
@@ -17,8 +29,12 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
     @IBOutlet weak var natureCheck: UISwitch!
     @IBOutlet weak var urbanCheck: UISwitch!
     @IBOutlet weak var historicalCheck: UISwitch!
+    
+    @IBOutlet weak var categoryChecker: UIPickerView!
+    
     @IBOutlet weak var photoCheck: UISwitch!
-   
+    @IBOutlet weak var map: MKMapView!
+    
     var locationManager: CLLocationManager?
     
     var locationImageFile: PFFileObject?
@@ -26,8 +42,16 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
     var lat = 0.0
     var lon = 0.0
     
+    var pinSet = false
+    
+    let dragPin = MKPointAnnotation()
+    
+    var pickerData: [String] = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        map.delegate = self;
 
         locationName.delegate = self
         descriptionName.delegate = self
@@ -39,6 +63,26 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.distanceFilter = kCLDistanceFilterNone
         locationManager?.startUpdatingLocation()
+        
+        pickerData = ["Landmark", "Nature", "Art", "Urban", "Rustic", "Historical"]
+        self.categoryChecker.delegate = self
+        self.categoryChecker.dataSource = self
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "myAnnotation") as? MKMarkerAnnotationView
+        
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "myAnnotation")
+        }
+    
+        annotationView?.canShowCallout = false
+        annotationView?.isDraggable = true
+        annotationView?.setDragState(MKAnnotationView.DragState.dragging, animated: true)
+        annotationView?.glyphTintColor = .white
+        annotationView?.setSelected(true, animated: true)
+
+        return annotationView
     }
     
     @IBAction func onSubmit(_ sender: Any) {
@@ -55,29 +99,13 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         post["description"] = descriptionName.text as! String
         
         // Set coordinates of location
-        // TODO: Make this GPS location, hard coded for now
-        post["lat"] = lat;
-        post["long"] = lon;
+        let point = PFGeoPoint(latitude:dragPin.coordinate.latitude, longitude:dragPin.coordinate.longitude)
+        post["geopoint"] = point
+
         
-        var categories: [String] = []
+        var category = pickerData[categoryChecker.selectedRow(inComponent: 0)] as! String
+        post["category"] = category
         
-        if(landmarkCheck.isOn) {
-            categories.append("Landmark")
-        }
-        if(natureCheck.isOn) {
-            categories.append("Nature")
-        }
-        if(urbanCheck.isOn) {
-            categories.append("Urban")
-        }
-        if(historicalCheck.isOn) {
-            categories.append("Historical")
-        }
-        if(photoCheck.isOn) {
-            categories.append("Photo Op")
-        }
-        
-        post["categories"] = categories
         post["author"] = PFUser.current()
         
         if locationImageFile != nil {
@@ -136,6 +164,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         
         present(picker, animated: true, completion: nil)
     }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.editedImage] as! UIImage
         let size = CGSize(width: 1920, height: 1080)
@@ -154,17 +183,32 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         let userLocation :CLLocation = locations[0] as CLLocation
         lat = userLocation.coordinate.latitude
         lon = userLocation.coordinate.longitude
+        
+        if(!pinSet) {
+            addPinToLocation()
+            pinSet = true
+        }
+    }
+    
+    func addPinToLocation() {
+        dragPin.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+
+        let region = self.map.regionThatFits(MKCoordinateRegion(center: dragPin.coordinate, latitudinalMeters: 200, longitudinalMeters: 200))
+        self.map.setRegion(region, animated: false)
+        
+        self.map.addAnnotation(dragPin)
     }
     
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        pinSet = false;
     }
-    */
+    
 
 }

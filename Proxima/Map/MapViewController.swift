@@ -22,6 +22,14 @@ class ProximaPointAnnotation : MKPointAnnotation {
     var emoji : String = "";
 }
 
+/*
+class DropPin : MKPointAnnotation {
+    //var pinTintColor: UIColor?;
+    //var location : PFObject?;
+    //var emoji : String = "";
+}
+ */
+
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var map: MKMapView!
@@ -56,13 +64,38 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func populateMap() {
         // Query to get locations from database
-        let query = PFQuery(className: "Locations")
-        query.includeKeys(["name", "description", "author", "lat", "long", "categories"])
-        query.limit = 50
+        //let query = PFQuery(className: "Locations")
+        //query.includeKeys(["name", "description", "author", "lat", "long", "category"])
+        //query.limit = 50
+        
+        // User's location
+        let ne = MKMapPoint(x: map.visibleMapRect.maxX, y: map.visibleMapRect.origin.y)
+        let sw = MKMapPoint(x: map.visibleMapRect.origin.x, y: map.visibleMapRect.maxY)
+        
+        let ne_coord = PFGeoPoint(latitude: ne.coordinate.latitude, longitude: ne.coordinate.longitude)
+        let sw_coord = PFGeoPoint(latitude: sw.coordinate.latitude, longitude: sw.coordinate.longitude)
+        
+        let userGeoPoint = PFGeoPoint(latitude: locationManager?.location?.coordinate.latitude as! Double, longitude: locationManager?.location?.coordinate.longitude as! Double)
+        // Create a query for places
+        var query = PFQuery(className:"Locations")
+        // Interested in locations near user.
+        query.whereKey("geopoint", withinGeoBoxFromSouthwest:sw_coord, toNortheast:ne_coord)
+        // Limit what could be a lot of points.
+        // Final list of objects
+        //query.includeKeys(["name", "description", "author", "lat", "long", "category"])
+        
+        //locations = query.findObjects()
+
+        
+        /*
+        let dragPin = DropPin()
+        dragPin.coordinate = CLLocationCoordinate2D(latitude: 42.725202 as! Double, longitude: -84.47999 as! Double)
+        dragPin.title = "TEST"
+        self.map.addAnnotation(dragPin)
+        */
         
         // Query the database
         query.findObjectsInBackground { (locations, error) in
-
                 // After results are returned, iterate through them and add points
                 for location in locations as! [PFObject] {
                     // Make new pin
@@ -71,33 +104,38 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     pin.location = location
                     
                     // Set coords of pin
-                    pin.coordinate = CLLocationCoordinate2D(latitude: location["lat"] as! Double, longitude: location["long"] as! Double)
+                    let geopoint = location["geopoint"] as! PFGeoPoint
+                    
+                    pin.coordinate = CLLocationCoordinate2D(latitude: geopoint.latitude as! Double, longitude: geopoint.longitude as! Double)
                     
                     pin.title = location["name"] as! String
                     
                     // Set color of pin based on category
                     
                         // Unwrap category array
-                        let categories = location["categories"] as! [String]
-                        
+                        let category = location["category"] as! String
                         // Set color
-                        if (categories.contains("Photo Op")) {
+                        if (category == "Art") {
                             pin.pinTintColor = photoopColor
-                            pin.emoji = "📸"
+                            pin.emoji = "🎨"
                         }
-                        else if (categories.contains("Nature")) {
+                        else if (category == "Nature") {
                             pin.pinTintColor = natureColor
                             pin.emoji = "🌳"
                         }
-                        else if (categories.contains("Urban")) {
+                        else if (category == "Urban") {
                             pin.pinTintColor = urbanColor
                             pin.emoji = "🏬"
                         }
-                        else if (categories.contains("Historical")) {
+                        else if (category == "Rustic") {
+                            pin.pinTintColor = urbanColor
+                            pin.emoji = "🏚"
+                        }
+                        else if (category == "Historical") {
                             pin.pinTintColor = historicColor
                             pin.emoji = "📜"
                         }
-                        else if (categories.contains("Landmark")) {
+                        else if (category == "Landmark") {
                             pin.pinTintColor = landmarkColor
                             pin.emoji = "📍"
                         }
@@ -118,9 +156,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         if annotationView == nil {
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "myAnnotation")
-            
-            annotationView?.canShowCallout = true
-            
+        
             //let annotationViewButton = UIButton(frame: CGRect(x:0, y:0, width:50, height:50))
             //annotationViewButton.setImage(UIImage(named: "Pin-Square.png"), for: .normal)
             
@@ -137,9 +173,32 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return nil
         }
         
+        /*
+        if let annotation = annotation as? DropPin {
+            // Color of marker
+            //annotationView?.markerTintColor = annotation.pinTintColor
+    
+            annotationView?.canShowCallout = false
+            annotationView?.isDraggable = true
+            annotationView?.setDragState(MKAnnotationView.DragState.dragging, animated: true)
+            
+            // Color of inner icon of marker
+            annotationView?.glyphTintColor = .white
+            
+            annotationView?.setSelected(true, animated: true)
+            
+            // Icon of marker
+        }
+        */
+        
         if let annotation = annotation as? ProximaPointAnnotation {
+            
+            annotationView?.canShowCallout = true
             // Color of marker
             annotationView?.markerTintColor = annotation.pinTintColor
+    
+            //annotationView?.isDraggable = true
+            //annotationView?.setDragState(MKAnnotationView.DragState.dragging, animated: true)
             
             // Color of inner icon of marker
             annotationView?.glyphTintColor = .white
@@ -155,6 +214,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         self.performSegue(withIdentifier: "mapToLocationView", sender: nil)
     }
+    
+    // Runs every time user moves map
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        populateMap()
+    }
+
     
     /*
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {

@@ -54,10 +54,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let location = post["name"] as! String
         cell.nameLabel.text = location
         
-        let categories = post["categories"] as? [String] ?? []
-        let categoriesString = categories.joined(separator: ", ")
-        
-        cell.categoriesLabel.text = categoriesString
+        cell.categoriesLabel.text = post["category"] as? String ?? ""
         
         
         let imageFile = post["image"] as! PFFileObject

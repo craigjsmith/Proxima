@@ -8,31 +8,11 @@
 import UIKit
 import Parse
 
-class LocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = commentTableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
-            cell.commentLabel.text = "Cool!"
-            cell.usernameLabel.text = "Squidward"
-        
-            // Set profile image to circle
-            cell.profilePic.layer.masksToBounds = true
-            cell.profilePic.layer.cornerRadius = (cell.profilePic.frame.width / 2);
-            return cell
-    }
-    
+class LocationViewController: UIViewController {
     
     var location: PFObject?
     
     let openWeatherAPI = "1aaa65db3029bc25e901f1b3db518f2c"
-    @IBOutlet weak var commentTableView: UITableView!
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userLabel: UILabel!
@@ -43,9 +23,6 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        commentTableView.delegate = self
-        commentTableView.dataSource = self
         
         if location != nil {
             
@@ -68,19 +45,17 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
             // Set categories
-            let categories = location!["categories"] as? [String] ?? []
-            categoryLabel.text = categories.joined(separator: ", ")
+            categoryLabel.text = location!["category"] as! String
             
             // Set weather
-            let lat = location?["lat"] as! Double
-            let long = location?["long"] as! Double
+            let coord = location?["geopoint"] as! PFGeoPoint
             
             if location?["image"] != nil {
                 let imageFile = location?["image"] as! PFFileObject
                 let imageUrl = URL(string: imageFile.url!)!
                 self.pictureView.af_setImage(withURL: imageUrl)
             }
-            getWeather(lat:lat, long:long)
+            getWeather(lat:coord.latitude, long:coord.longitude)
             
         }
         
