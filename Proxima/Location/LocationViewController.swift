@@ -11,9 +11,7 @@ import Parse
 class LocationViewController: UIViewController {
     
     var location: PFObject?
-    
-    let openWeatherAPI = "1aaa65db3029bc25e901f1b3db518f2c"
-    
+        
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -67,6 +65,10 @@ class LocationViewController: UIViewController {
     }
     
     func getWeather(lat: Double, long: Double) {
+        let filePath = Bundle.main.path(forResource: "keys", ofType: "plist")
+        let plist = NSDictionary(contentsOfFile: filePath!)
+        let openWeatherAPI = plist?.object(forKey: "OPENWEATHER_KEY") as! String
+        
         let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=" + String(lat) + "&lon=" + String(long) + "&units=imperial" + "&appid=" + openWeatherAPI)!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)

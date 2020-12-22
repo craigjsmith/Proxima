@@ -55,20 +55,29 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bc1-DE-hiU">
+                                                    <rect key="frame" x="194" y="72.5" width="43" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="GiR-jw-ec0" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="7ng-nb-kui"/>
+                                                <constraint firstItem="bc1-DE-hiU" firstAttribute="top" secondItem="GiR-jw-ec0" secondAttribute="bottom" constant="4" id="DRw-Ys-Z4V"/>
                                                 <constraint firstItem="gEO-Ct-aEe" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="MPH-81-A89"/>
                                                 <constraint firstItem="GiR-jw-ec0" firstAttribute="top" secondItem="gEO-Ct-aEe" secondAttribute="bottom" constant="8" symbolic="YES" id="avf-GC-aCa"/>
                                                 <constraint firstItem="poS-l7-Lw4" firstAttribute="leading" secondItem="KF3-hi-KIy" secondAttribute="leadingMargin" constant="10" id="jEP-Ja-U7K"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="poS-l7-Lw4" secondAttribute="bottom" constant="8" id="khk-Lq-sCo"/>
                                                 <constraint firstItem="poS-l7-Lw4" firstAttribute="top" secondItem="KF3-hi-KIy" secondAttribute="topMargin" constant="8" id="knG-Qw-A9G"/>
+                                                <constraint firstItem="bc1-DE-hiU" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="ln9-1i-yGk"/>
                                                 <constraint firstItem="gEO-Ct-aEe" firstAttribute="top" secondItem="KF3-hi-KIy" secondAttribute="topMargin" constant="15" id="ngL-na-V3w"/>
                                                 <constraint firstItem="poS-l7-Lw4" firstAttribute="centerY" secondItem="KF3-hi-KIy" secondAttribute="centerY" id="yZi-JT-97N"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="categoriesLabel" destination="GiR-jw-ec0" id="frh-9J-JgH"/>
+                                            <outlet property="distanceLabel" destination="bc1-DE-hiU" id="tTr-8V-9yT"/>
                                             <outlet property="locationImage" destination="poS-l7-Lw4" id="7GE-Un-cVd"/>
                                             <outlet property="nameLabel" destination="gEO-Ct-aEe" id="LTN-As-zh6"/>
                                             <segue destination="ffC-zv-YOK" kind="presentation" identifier="feedToLocation" id="YvJ-70-cEu"/>
@@ -87,6 +96,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Feed" id="t4V-b6-e8O">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="1W1-4M-uE7">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="B0n-2i-mxT">
+                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <connections>
+                                <action selector="go:" destination="D1z-Bz-psB" id="FcS-pL-gFz"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+" systemItem="add" id="z7A-ug-GYP">
                             <connections>
                                 <segue destination="rer-nP-Rmp" kind="presentation" identifier="feedToAddLocation" id="2Oc-jn-csK"/>

@@ -9,19 +9,48 @@ import UIKit
 import Parse
 import AlamofireImage
 
-class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+
+    var locationManager: CLLocationManager?
     
     var locations = [PFObject]()
+    var userGeoPoint = PFGeoPoint()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.requestWhenInUseAuthorization()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.distanceFilter = kCLDistanceFilterNone
+        locationManager?.startUpdatingLocation()
         
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        populate()
+    }
+    
+    @IBAction func go(_ sender: Any) {
+        populate()
+    }
+    
+    func populate() {
+        // User's location
+        userGeoPoint = PFGeoPoint(latitude: locationManager?.location?.coordinate.latitude as! Double, longitude: locationManager?.location?.coordinate.longitude as! Double)
+
         let query = PFQuery(className: "Locations")
-        query.includeKeys(["name", "description", "author", "image"])
-        query.limit = 50
+        query.whereKey("geopoint", nearGeoPoint:userGeoPoint)
+        
+        //query.includeKeys(["name", "description", "author", "image"])
+        query.limit = 10
         
         query.findObjectsInBackground { (locations, error) in
             if locations != nil {
@@ -30,14 +59,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        
         self.tableView.reloadData()
         
         let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(refresh), userInfo: nil, repeats: true)
-
-        // Do any additional setup after loading the view.
     }
 
     
@@ -55,6 +79,17 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.nameLabel.text = location
         
         cell.categoriesLabel.text = post["category"] as? String ?? ""
+        
+        let dist = userGeoPoint.distanceInMiles(to: post["geopoint"] as? PFGeoPoint)
+        
+        print(userGeoPoint.latitude)
+        
+        if(dist < 5) {
+            cell.distanceLabel.text = String(format: "%.1f", dist) + " miles away"
+        } else {
+            cell.distanceLabel.text = String(format: "%.0f", dist) + " miles away"
+        }
+        
         
         
         let imageFile = post["image"] as! PFFileObject

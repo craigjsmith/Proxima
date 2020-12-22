@@ -15,11 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let filePath = Bundle.main.path(forResource: "keys", ofType: "plist")
+        let plist = NSDictionary(contentsOfFile: filePath!)
         // Connect to parse database
         let parseConfig = ParseClientConfiguration {
-                    $0.applicationId = "O3qD3l4ri7Lnco5vfGtSY2cHwrkLLOOIYPHn6dtm"
-                    $0.clientKey = "vK0WPtG9j9prAjpH0aJv4BfF30cBYaJyaWskLd11"
-                    $0.server = "https://parseapi.back4app.com"
+                    $0.applicationId = plist?.object(forKey: "PARSE_ID") as! String
+                    $0.clientKey = plist?.object(forKey: "PARSE_CLIENT") as! String
+                    $0.server = plist?.object(forKey: "PARSE_SERVER") as! String
             }
             Parse.initialize(with: parseConfig)
             
