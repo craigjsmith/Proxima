@@ -531,6 +531,29 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="satellite" showsUserLocation="YES" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcA-4I-0Z3">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             </mapView>
+                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XBl-86-HcX">
+                                <rect key="frame" x="37.5" y="57" width="300" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom in to load new locations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOx-tg-2IA">
+                                        <rect key="frame" x="36.5" y="9.5" width="227" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="sOx-tg-2IA" firstAttribute="centerY" secondItem="XBl-86-HcX" secondAttribute="centerY" id="Fmn-Fe-Hhz"/>
+                                    <constraint firstItem="sOx-tg-2IA" firstAttribute="centerX" secondItem="XBl-86-HcX" secondAttribute="centerX" id="Qfx-Fg-zrW"/>
+                                    <constraint firstAttribute="width" constant="300" id="p0c-Vy-pVE"/>
+                                    <constraint firstAttribute="height" constant="40" id="tCF-oT-SbL"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZZ6-9w-bhM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -538,6 +561,8 @@
                             <constraint firstItem="mcA-4I-0Z3" firstAttribute="top" secondItem="ZZ6-9w-bhM" secondAttribute="top" id="4Mf-DY-PeW"/>
                             <constraint firstItem="mcA-4I-0Z3" firstAttribute="trailing" secondItem="ZZ6-9w-bhM" secondAttribute="trailing" id="DzP-oi-wEZ"/>
                             <constraint firstItem="mcA-4I-0Z3" firstAttribute="leading" secondItem="ZZ6-9w-bhM" secondAttribute="leading" id="UUf-Ij-cev"/>
+                            <constraint firstItem="XBl-86-HcX" firstAttribute="centerX" secondItem="ZZ6-9w-bhM" secondAttribute="centerX" id="W79-p7-2vR"/>
+                            <constraint firstItem="XBl-86-HcX" firstAttribute="top" secondItem="ZZ6-9w-bhM" secondAttribute="top" constant="13" id="ZB4-uu-qJ1"/>
                             <constraint firstAttribute="bottom" secondItem="mcA-4I-0Z3" secondAttribute="bottom" id="jo2-OI-Ign"/>
                         </constraints>
                     </view>
@@ -550,12 +575,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="map" destination="mcA-4I-0Z3" id="r5v-TT-fZ0"/>
+                        <outlet property="warningBox" destination="XBl-86-HcX" id="E3v-Mr-bhw"/>
                         <segue destination="ffC-zv-YOK" kind="presentation" identifier="mapToLocationView" id="dmJ-bT-l39"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5AR-D9-cMy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="983" y="-143"/>
+            <point key="canvasLocation" x="981.60000000000002" y="-143.47826086956522"/>
         </scene>
         <!--Location View Controller-->
         <scene sceneID="W0Y-bM-3F1">

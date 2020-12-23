@@ -33,6 +33,7 @@ class DropPin : MKPointAnnotation {
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var warningBox: UIView!
     var annotationView: MKAnnotationView!
     var locations = [PFObject]()
     var selectedAnnotation: ProximaPointAnnotation?
@@ -41,7 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var locationManager: CLLocationManager?
     
-    var set = false;
+    var mapDidLoad = false;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +100,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         query.whereKey("geopoint", withinGeoBoxFromSouthwest:sw_coord, toNortheast:ne_coord)
         // Limit what could be a lot of points.
         // Final list of objects
-        //query.includeKeys(["name", "description", "author", "lat", "long", "category"])
+        query.includeKeys(["name", "description", "author", "lat", "long", "category"])
         //locations = query.findObjects()
         
         /*
@@ -234,14 +235,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // Runs every time map is moved
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
-        if(!loadRectangle.contains(map.visibleMapRect)) {
-            populateMap()
-            print("populated")
-            
-            increaseLoadRectangle(rect: loadRectangle)
+        // If map view is of radius smaller than 200 miles
+        if(map.currentRadius() < 321869) {
+            // If previously loaded view fully contains new view
+            if(!loadRectangle.contains(map.visibleMapRect)) {
+                populateMap()
+                print("populated")
+                
+                increaseLoadRectangle(rect: loadRectangle)
+                warningBox.isHidden = true
+            }
+        } else {
+            if(mapDidLoad) {
+                warningBox.isHidden = false
+            }
         }
     
-
     }
     
     // Runs when map tiles load
@@ -249,12 +258,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // Runs the first time map tiles load with non-null location
         // (first time GPS becomes available)
-        if(!set && locationManager?.location?.coordinate.latitude != 0) {
+        if(!mapDidLoad && locationManager?.location?.coordinate.latitude != 0) {
             //Calculate new rectangle (double previous size) to load points from
 
             increaseLoadRectangle(rect: map.visibleMapRect)
 
-            set = true
+            mapDidLoad = true
             populateMap()
         }
  
@@ -302,4 +311,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
      }
     
+    
+}
+
+extension MKMapView {
+
+    // Get current radius of map view
+    func currentRadius() -> Double {
+        let centerLocation = CLLocation(latitude: self.centerCoordinate.latitude, longitude: self.centerCoordinate.longitude)
+        let topCenterCoordinate = self.topCenterCoordinate()
+        let topCenterLocation = CLLocation(latitude: topCenterCoordinate.latitude, longitude: topCenterCoordinate.longitude)
+        return centerLocation.distance(from: topCenterLocation)
+    }
+    
+    //Get coordinate of top midpoint of map view
+    func topCenterCoordinate() -> CLLocationCoordinate2D {
+        return self.convert(CGPoint(x: self.frame.size.width / 2.0, y: 0), toCoordinateFrom: self)
+    }
+
 }
