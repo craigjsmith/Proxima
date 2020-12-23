@@ -14,14 +14,14 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     var imageSet = false
     
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var fullnameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fullnameTextField.delegate = self
+        emailTextField.delegate = self
         usernameTextField.delegate = self
         passwordTextField.delegate = self
     }
@@ -60,7 +60,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     
     // Removes the keyboard
     @IBAction func tapOnScreen(_ sender: Any) {
-        fullnameTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
@@ -73,6 +73,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         let user = PFUser()
         user.username = usernameTextField.text
         user.password = passwordTextField.text
+        user.email = emailTextField.text
         
         if(user.username != nil && user.password != nil) {
             user.signUpInBackground {(success, error)   in
@@ -83,8 +84,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                         let file = PFFileObject(data: imageData!)
                         user["profile_image"] = file
                     }
-                    
-                    user["full_name"] = self.fullnameTextField.text
+    
                     user["score"] = 0
                     
                     user.saveInBackground{(success, error) in
@@ -109,14 +109,14 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-            case fullnameTextField:
-                fullnameTextField.resignFirstResponder()
+            case emailTextField:
+                emailTextField.resignFirstResponder()
                 usernameTextField.becomeFirstResponder()
             case usernameTextField:
                 usernameTextField.resignFirstResponder()
                 passwordTextField.becomeFirstResponder()
             default:
-                fullnameTextField.resignFirstResponder()
+                emailTextField.resignFirstResponder()
                 usernameTextField.resignFirstResponder()
                 passwordTextField.resignFirstResponder()
         }

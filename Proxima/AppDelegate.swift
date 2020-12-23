@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let plist = NSDictionary(contentsOfFile: filePath!)
         // Connect to parse database
         let parseConfig = ParseClientConfiguration {
-                    $0.applicationId = plist?.object(forKey: "PARSE_ID") as! String
-                    $0.clientKey = plist?.object(forKey: "PARSE_CLIENT") as! String
+                    $0.applicationId = plist?.object(forKey: "PARSE_APPID") as! String
+                    $0.clientKey = plist?.object(forKey: "PARSE_CLIENTKEY") as! String
                     $0.server = plist?.object(forKey: "PARSE_SERVER") as! String
             }
             Parse.initialize(with: parseConfig)

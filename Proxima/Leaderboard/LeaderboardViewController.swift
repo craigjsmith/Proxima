@@ -31,7 +31,6 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
         // only gets score and name
         let query = PFQuery(className: "_User")
         query.limit = 20 // keeps only 20 results
-        query.includeKeys(["score", "full_name", "profile_image"]) // gets name and score, can add other attributes later
         query.whereKeyExists("score")
         query.addDescendingOrder("score")
         
@@ -64,10 +63,10 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
         // Gets profile
         let profile = profiles[indexPath.row]
         
-        cell.nameLabel.text = profile["full_name"] as? String
+        cell.nameLabel.text = profile["username"] as? String
         
         let score: Int = profile["score"] as! Int
-        cell.starsLabel.text = String(score)
+        cell.starsLabel.text = String(score) + " ⭐️"
         
         if profile["profile_image"] != nil {
             let imageFile = profile["profile_image"] as! PFFileObject

@@ -38,10 +38,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         populate()
     }
     
-    @IBAction func go(_ sender: Any) {
-        populate()
-    }
-    
     func populate() {
         // User's location
         userGeoPoint = PFGeoPoint(latitude: locationManager?.location?.coordinate.latitude as! Double, longitude: locationManager?.location?.coordinate.longitude as! Double)
@@ -92,9 +88,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         
         
-        let imageFile = post["image"] as! PFFileObject
-        let imageUrl = URL(string: imageFile.url!)!
-        cell.locationImage?.af.setImage(withURL: imageUrl)
+        let imageFile = post["image"] as? PFFileObject ?? nil
+        
+        if(imageFile != nil) {
+            let imageUrl = URL(string: (imageFile?.url!)!)
+            cell.locationImage?.af.setImage(withURL: imageUrl!)
+        }
         
         /*
         if post["image"] != nil {

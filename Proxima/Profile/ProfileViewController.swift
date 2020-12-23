@@ -14,7 +14,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
@@ -120,15 +119,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func updateInfo(user: PFUser){
         
         // update name
-        self.nameLabel.text = user["full_name"] as? String
-
-        //update username
-        let username = user["username"]! as? String
-        self.usernameLabel.text = "@" + username!
+        self.nameLabel.text = user["username"] as? String
 
         // update score
         let score = user["score"] as? Int ?? 0
-        self.starsLabel.text = String(score)
+        self.starsLabel.text = "⭐️ " + String(score)
 
         // Update profile image
         if user["profile_image"] != nil {
