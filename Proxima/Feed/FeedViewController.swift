@@ -9,7 +9,7 @@ import UIKit
 import Parse
 import AlamofireImage
 
-class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
+class FeedViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -27,9 +27,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.distanceFilter = kCLDistanceFilterNone
         locationManager?.startUpdatingLocation()
-        
-        tableView.dataSource = self
-        tableView.delegate = self
+    
+    
         
         // Do any additional setup after loading the view.
     }
@@ -46,7 +45,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         query.whereKey("geopoint", nearGeoPoint:userGeoPoint)
         
         //query.includeKeys(["name", "description", "author", "image"])
-        query.limit = 10
+        query.limit = 5
         
         query.findObjectsInBackground { (locations, error) in
             if locations != nil {
@@ -74,7 +73,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let location = post["name"] as! String
         cell.nameLabel.text = location
         
-        cell.categoriesLabel.text = post["category"] as? String ?? ""
+        cell.categoryLabel.text = post["category"] as? String ?? ""
         
         let dist = userGeoPoint.distanceInMiles(to: post["geopoint"] as? PFGeoPoint)
         
@@ -91,8 +90,15 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let imageFile = post["image"] as? PFFileObject ?? nil
         
         if(imageFile != nil) {
-            let imageUrl = URL(string: (imageFile?.url!)!)
+            //let imageUrl = URL(string: (imageFile?.url!)!)
+            let imageUrl = URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1920px-Grosser_Panda.JPG")
+        
             cell.locationImage?.af.setImage(withURL: imageUrl!)
+        } else {
+            let imageUrl = URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1920px-Grosser_Panda.JPG")
+            
+            cell.locationImage?.af.setImage(withURL: imageUrl!)
+            
         }
         
         /*

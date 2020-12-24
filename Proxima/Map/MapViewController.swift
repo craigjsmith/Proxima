@@ -22,14 +22,6 @@ class ProximaPointAnnotation : MKPointAnnotation {
     var emoji : String = "";
 }
 
-/*
-class DropPin : MKPointAnnotation {
-    //var pinTintColor: UIColor?;
-    //var location : PFObject?;
-    //var emoji : String = "";
-}
- */
-
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var map: MKMapView!
@@ -114,7 +106,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         query.findObjectsInBackground { (locations, error) in
                 // After results are returned, iterate through them and add points
                 for location in locations ?? [PFObject]() {
-                    
                     // Make new pin
                     let pin = ProximaPointAnnotation()
                     
@@ -235,19 +226,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // Runs every time map is moved
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
-        // If map view is of radius smaller than 200 miles
-        if(map.currentRadius() < 321869) {
+        // If map view is of radius smaller than 600 miles
+        if(Double(map.visibleMapRect.width) < (160934 * 100)) {
+            warningBox.isHidden = true
+            
             // If previously loaded view fully contains new view
             if(!loadRectangle.contains(map.visibleMapRect)) {
+                
+                // If loadRectangle was reset after going out of bounds,
+                // set it back to the visible map view
+                if(loadRectangle.width == 0) {
+                    loadRectangle = map.visibleMapRect
+                }
+                
                 populateMap()
                 print("populated")
                 
-                increaseLoadRectangle(rect: loadRectangle)
-                warningBox.isHidden = true
+                increaseLoadRectangle(rect: map.visibleMapRect)
             }
         } else {
             if(mapDidLoad) {
                 warningBox.isHidden = false
+                
+                // Reset load rectangle when out of range, forcing map to repopulate
+                // when back in range
+                loadRectangle = MKMapRect(x: 0, y: 0, width: 0, height: 0)
             }
         }
     
@@ -312,21 +315,4 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
      }
     
     
-}
-
-extension MKMapView {
-
-    // Get current radius of map view
-    func currentRadius() -> Double {
-        let centerLocation = CLLocation(latitude: self.centerCoordinate.latitude, longitude: self.centerCoordinate.longitude)
-        let topCenterCoordinate = self.topCenterCoordinate()
-        let topCenterLocation = CLLocation(latitude: topCenterCoordinate.latitude, longitude: topCenterCoordinate.longitude)
-        return centerLocation.distance(from: topCenterLocation)
-    }
-    
-    //Get coordinate of top midpoint of map view
-    func topCenterCoordinate() -> CLLocationCoordinate2D {
-        return self.convert(CGPoint(x: self.frame.size.width / 2.0, y: 0), toCoordinateFrom: self)
-    }
-
 }
