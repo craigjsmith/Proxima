@@ -1,130 +1,138 @@
 //
-//  FeedViewController.swift
+//  LocationTableViewController.swift
 //  Proxima
 //
-//  Created by Avni Avdulla on 11/21/20.
+//  Created by Craig Smith on 12/24/20.
 //
 
 import UIKit
 import Parse
 import AlamofireImage
 
-class FeedViewController: UIViewController, CLLocationManagerDelegate {
-
-    @IBOutlet weak var tableView: UITableView!
+class FeedViewController: UITableViewController, CLLocationManagerDelegate {
 
     var locationManager: CLLocationManager?
+    let tableRefreshControl = UIRefreshControl()
     
     var locations = [PFObject]()
     var userGeoPoint = PFGeoPoint()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.distanceFilter = kCLDistanceFilterNone
         locationManager?.startUpdatingLocation()
-    
-    
         
-        // Do any additional setup after loading the view.
+        // Important for loading in new locations with correct scroll bar size
+        tableView.estimatedRowHeight = 127
+        
+        tableRefreshControl.addTarget(self, action: #selector(reset), for: .valueChanged)
+        tableView.refreshControl = tableRefreshControl
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        populate()
+        super.viewDidAppear(animated)
+        populate(limit: 10, skip: 0)
+        
     }
     
-    func populate() {
+    @objc func reset() {
+        locations = [PFObject]()
+        populate(limit: 10, skip: 0)
+        self.tableView.reloadData()
+    }
+
+    func populate(limit: Int, skip: Int) {
         // User's location
         userGeoPoint = PFGeoPoint(latitude: locationManager?.location?.coordinate.latitude as! Double, longitude: locationManager?.location?.coordinate.longitude as! Double)
 
         let query = PFQuery(className: "Locations")
         query.whereKey("geopoint", nearGeoPoint:userGeoPoint)
         
-        //query.includeKeys(["name", "description", "author", "image"])
-        query.limit = 5
+        query.limit = limit
+        query.skip = skip
         
-        query.findObjectsInBackground { (locations, error) in
-            if locations != nil {
-                self.locations = locations!
+        query.findObjectsInBackground { (newLocations, error) in
+            if newLocations != nil {
+                self.locations.append(contentsOf: newLocations!)
                 self.tableView.reloadData()
+                self.tableRefreshControl.endRefreshing()
             }
         }
-        
-        self.tableView.reloadData()
-        
-        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(refresh), userInfo: nil, repeats: true)
+    }
+    
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
 
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return locations.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedViewCell") as! FeedViewCell
-                
-        let post = locations[indexPath.row] //indexPath.section
-        
-        let location = post["name"] as! String
-        cell.nameLabel.text = location
-        
-        cell.categoryLabel.text = post["category"] as? String ?? ""
-        
-        let dist = userGeoPoint.distanceInMiles(to: post["geopoint"] as? PFGeoPoint)
-        
-        print(userGeoPoint.latitude)
+        if indexPath.row + 1 == locations.count {
+            
+            let query = PFQuery(className:"Locations")
+            query.countObjectsInBackground { (count: Int32, error: Error?) in
+                if let error = error {
+                    // The request failed
+                    print(error.localizedDescription)
+                } else {
+                    if(count > self.locations.count) {
+                        // Load 10 more, skip for rows already created
+                        self.populate(limit: 10, skip: tableView.numberOfRows(inSection: 0))
+                    }
+                }
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         
+         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedViewCell") as! FeedViewCell
+         let location = locations[indexPath.row]
+         
+        // Set name and category
+        cell.nameLabel.text = location["name"] as? String
+         cell.categoryLabel.text = location["category"] as? String ?? ""
+         
+        // Set distance label
+         let dist = userGeoPoint.distanceInMiles(to: location["geopoint"] as? PFGeoPoint)
         
         if(dist < 5) {
-            cell.distanceLabel.text = String(format: "%.1f", dist) + " miles away"
-        } else {
-            cell.distanceLabel.text = String(format: "%.0f", dist) + " miles away"
-        }
+             cell.distanceLabel.text = String(format: "%.1f", dist) + " miles away"
+         } else {
+             cell.distanceLabel.text = String(format: "%.0f", dist) + " miles away"
+         }
+         
+        // Set image
+         let imageFile = location["image"] as? PFFileObject ?? nil
         
-        
-        
-        let imageFile = post["image"] as? PFFileObject ?? nil
-        
-        if(imageFile != nil) {
-            //let imageUrl = URL(string: (imageFile?.url!)!)
-            let imageUrl = URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1920px-Grosser_Panda.JPG")
-        
-            cell.locationImage?.af.setImage(withURL: imageUrl!)
-        } else {
-            let imageUrl = URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1920px-Grosser_Panda.JPG")
+         if(imageFile != nil) {
+             let imageUrl = URL(string: (imageFile?.url!)!)
+             cell.locationImage?.af.setImage(withURL: imageUrl!)
             
-            cell.locationImage?.af.setImage(withURL: imageUrl!)
-            
-        }
-        
-        /*
-        if post["image"] != nil {
-            // Update location image
-            let imageFile = post["image"] as! PFFileObject
-            let imageUrl = URL(string: imageFile.url!)!
-            cell.imageView!.af.setImage(withURL: imageUrl)
-        }
- */
-        //cell.distanceLabel.text = "0.2 miles away"
-        
-        //cell.nameLabel.text = "Spartan Stadium"
-        
-        cell.setNeedsLayout() //invalidate current layout
-        cell.layoutIfNeeded() //update immediately
-        
-        return cell
+         } else {
+            cell.locationImage.image = nil
+         }
+         
+         cell.setNeedsLayout() // invalidate current layout
+         cell.layoutIfNeeded() // update immediately
+         
+         return cell
     }
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        
         if segue.identifier == "feedToLocation" {
             
             let cell = sender as! UITableViewCell
@@ -135,12 +143,12 @@ class FeedViewController: UIViewController, CLLocationManagerDelegate {
             let locationViewController = segue.destination as! LocationViewController
             
             locationViewController.location = location
+            
+            // Deselect cell before segue
+            if let path = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: path, animated: true)
+            }
         }
- 
     }
     
-    @objc func refresh(){
-        self.tableView.reloadData()
-    }
-
 }
