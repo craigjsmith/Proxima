@@ -173,12 +173,10 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.editedImage] as! UIImage
-        let size = CGSize(width: 1920, height: 1080)
-        let scaledImage = image.af_imageScaled(to: size)
         
         // Compress image before uploading
-        let imageData = scaledImage.jpegData(compressionQuality: 0.5)
-        let file = PFFileObject(data: imageData!)
+        let imageCompressed = image.jpegData(compressionQuality: 0.5)
+        let file = PFFileObject(data: imageCompressed!)
         
         self.locationImageFile = file
         

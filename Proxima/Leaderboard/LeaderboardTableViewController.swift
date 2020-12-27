@@ -25,10 +25,9 @@ class LeaderboardTableViewController: UITableViewController {
         tableView.refreshControl = tableRefreshControl
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        populate(limit: 10, skip: 0)
-    
+    override func viewWillAppear(_ animated: Bool) {
+        reset()
+        self.tableView.contentOffset = CGPoint.zero
     }
     
     @objc func reset() {
