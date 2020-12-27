@@ -16,5 +16,6 @@ target 'Proxima' do
   pod 'AlamofireImage'
   pod 'MessageInputBar'
   pod 'SkeletonView'
+  pod 'IQKeyboardManagerSwift'
   
 end

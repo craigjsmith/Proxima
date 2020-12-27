@@ -156,6 +156,11 @@ class LeaderboardTableViewController: UITableViewController {
             let profileController = segue.destination as! ProfileViewController
             profileController.currentUser = profile as! PFUser
         }
+        
+        // Deselect cell before segue
+        if let path = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: path, animated: true)
+        }
     }
     
 

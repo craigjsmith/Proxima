@@ -161,11 +161,9 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         picker.delegate = self
         picker.allowsEditing = true
         
-        if UIImagePickerController.isSourceTypeAvailable(.camera){
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             picker.sourceType = .photoLibrary
             
-        } else {
-            picker.sourceType = .photoLibrary
         }
         
         present(picker, animated: true, completion: nil)

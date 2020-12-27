@@ -31,11 +31,9 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         picker.delegate = self
         picker.allowsEditing = true
         
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             picker.sourceType = .photoLibrary
             
-        } else {
-            picker.sourceType = .camera
         }
         
         present(picker, animated: true, completion: nil)

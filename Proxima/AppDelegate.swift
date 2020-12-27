@@ -7,17 +7,20 @@
 
 import UIKit
 import Parse
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // Load keys from plist
         let filePath = Bundle.main.path(forResource: "keys", ofType: "plist")
         let plist = NSDictionary(contentsOfFile: filePath!)
-        // Connect to parse database
+        
+        // Parse setup
         let parseConfig = ParseClientConfiguration {
                     $0.applicationId = plist?.object(forKey: "PARSE_APPID") as! String
                     $0.clientKey = plist?.object(forKey: "PARSE_CLIENTKEY") as! String
@@ -25,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             Parse.initialize(with: parseConfig)
             
+        // IQ Keyboard Manager setup
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        
         return true
         
     }
@@ -42,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
+    
 
 }
 

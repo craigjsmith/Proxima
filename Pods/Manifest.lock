@@ -3,6 +3,7 @@ PODS:
   - AlamofireImage (4.1.0):
     - Alamofire (~> 5.1)
   - Bolts/Tasks (1.9.1)
+  - IQKeyboardManagerSwift (6.5.6)
   - MessageInputBar (0.4.1):
     - MessageInputBar/Core (= 0.4.1)
   - MessageInputBar/Core (0.4.1)
@@ -14,6 +15,7 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireImage
+  - IQKeyboardManagerSwift
   - MessageInputBar
   - Parse
   - SkeletonView
@@ -23,6 +25,7 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - Bolts
+    - IQKeyboardManagerSwift
     - MessageInputBar
     - Parse
     - SkeletonView
@@ -31,10 +34,11 @@ SPEC CHECKSUMS:
   Alamofire: 2c792affbdc2f18016e08fdbcacd60aebe1ba593
   AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
   Parse: e40fdb9c7d665823b7fe9865949cac9a53eb2ce7
   SkeletonView: 14fbe9702c7fb5c5f011b44ac3ae99fc73155726
 
-PODFILE CHECKSUM: 8fc42d82047d19baf9414d3d38f209806d4ac2a4
+PODFILE CHECKSUM: e01641a899887268dadef807d86d53cfc6ef1cfb
 
 COCOAPODS: 1.10.0
