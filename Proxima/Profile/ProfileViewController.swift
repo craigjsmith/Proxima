@@ -7,11 +7,13 @@
 
 import UIKit
 import Parse
+import SkeletonView
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     
 
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
@@ -28,13 +30,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         // Do any additional setup after loading the view.
+        view.isSkeletonable = true
+        view.showSkeleton()
         
         // Set profile image to circle
-        profileImage.layer.masksToBounds = true
         profileImage.layer.cornerRadius = (profileImage.frame.width / 2)
-        
+        profileImage.layer.masksToBounds = true
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -54,7 +57,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     // Called when the view appears. Gets current users info.
     //
     override func viewDidAppear(_ animated: Bool) {
+        
+        if(PFUser.current() == nil) {
+            //self.view.removeFromSuperview()
+            self.performSegue(withIdentifier: "loginSegue", sender: self)
+            return
+        }
+        
         super.viewDidAppear(animated)
+        
+        // If user logged in, show logout button
+        let backButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: Selector("logout"))
+        navigationItem.rightBarButtonItem = backButton
         
         // If passing in from leaderboard
         if(self.currentUser != nil) {
@@ -69,6 +83,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
 //        print(createdLocations)
         self.achievements = getAchievements(user: self.currentUser)
+        
+        view.hideSkeleton()
         collectionView.reloadData()
         tableView.reloadData()
     }
@@ -198,10 +214,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         picker.allowsEditing = true
         
         if UIImagePickerController.isSourceTypeAvailable(.camera){
-            picker.sourceType = .photoLibrary
+            picker.sourceType = .camera
             
         } else {
-            picker.sourceType = .camera
+            picker.sourceType = .photoLibrary
         }
         
         present(picker, animated: true, completion: nil)
@@ -232,21 +248,17 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    //
-    // Logs user out
-    //
-    @IBAction func onLogOut(_ sender: Any) {
+    @objc func logout() {
         PFUser.logOut()
         
         let main = UIStoryboard(name: "Main", bundle: nil)
         
-        let loginViewController = main.instantiateViewController(identifier: "LoginViewController")
+        let loginViewController = main.instantiateViewController(identifier: "FeedNavigationController")
         
         let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
         
         delegate.window?.rootViewController = loginViewController
     }
-    
 
     //
     // Prepare when a segue happens
@@ -258,7 +270,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if segue.identifier == "profileToLocation" {
             let cell = sender as! UICollectionViewCell
             let indexPath = collectionView.indexPath(for: cell)!
-            
             
             // Pass the selected object to the new view controller.
             let locationViewController = segue.destination as! LocationViewController

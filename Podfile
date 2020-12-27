@@ -15,5 +15,6 @@ target 'Proxima' do
   pod 'Parse'
   pod 'AlamofireImage'
   pod 'MessageInputBar'
+  pod 'SkeletonView'
   
 end

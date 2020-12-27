@@ -17,6 +17,17 @@ class FeedViewController: UITableViewController, CLLocationManagerDelegate {
     var locations = [PFObject]()
     var userGeoPoint = PFGeoPoint()
     
+    @IBAction func onAddLocation(_ sender: Any) {
+        if((PFUser.current()) != nil) {
+            performSegue(withIdentifier: "toAddLocation", sender: self)
+        } else {
+            let error = UIAlertController(title: "Not logged in", message: "Only registered users can add new locations. Go to the Profile tab to login or signup.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,8 +88,8 @@ class FeedViewController: UITableViewController, CLLocationManagerDelegate {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row + 1 == locations.count {
-            
+        if indexPath.row + 1 == locations.count && locations.count > 0 {
+
             let query = PFQuery(className:"Locations")
             query.countObjectsInBackground { (count: Int32, error: Error?) in
                 if let error = error {

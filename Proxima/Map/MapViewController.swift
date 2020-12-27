@@ -36,6 +36,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var mapDidLoad = false;
 
+    @IBAction func onAddLocation(_ sender: Any) {
+        if((PFUser.current()) != nil) {
+            performSegue(withIdentifier: "toAddLocation", sender: self)
+        } else {
+            let error = UIAlertController(title: "Not logged in", message: "Only registered users can add new locations. Go to the Profile tab to login or signup.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         map.delegate = self
@@ -85,7 +96,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let ne_coord = PFGeoPoint(latitude: ne.coordinate.latitude, longitude: ne.coordinate.longitude)
         let sw_coord = PFGeoPoint(latitude: sw.coordinate.latitude, longitude: sw.coordinate.longitude)
         
-        let userGeoPoint = PFGeoPoint(latitude: locationManager?.location?.coordinate.latitude as! Double, longitude: locationManager?.location?.coordinate.longitude as! Double)
+        let userGeoPoint = PFGeoPoint(latitude: locationManager?.location?.coordinate.latitude as? Double ?? 0, longitude: locationManager?.location?.coordinate.longitude as? Double ?? 0)
         // Create a query for places
         var query = PFQuery(className:"Locations")
         // Interested in locations near user.

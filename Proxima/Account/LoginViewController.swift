@@ -13,11 +13,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue)
+    {
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         usernameField.delegate = self
         passwordField.delegate = self
+        
+        // Setup nav bar
+        navigationItem.hidesBackButton = true
     }
     
     @IBAction func onLoginButton(_ sender: Any) {
@@ -28,8 +36,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         PFUser.logInWithUsername(inBackground: username, password: password)
         {
             (user, error) in
+            
             if user != nil {
-               self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                self.navigationController?.popToRootViewController(animated: true)
+                
             }
             else {
                 let alert = UIAlertController(title: "Invalid Credentials", message: error?.localizedDescription.localizedCapitalized, preferredStyle: .alert)
@@ -94,14 +104,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 let success = UIAlertController(title: "Success", message: "If this email matches an account, you will receive a link to reset your password.", preferredStyle: .alert)
                 let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
                 success.addAction(okButton)
-                self.present(success, animated: false, completion: nil)
+                self.present(success, animated: true, completion: nil)
 
             } else {
                 let errormessage = error as! NSString
                 let error = UIAlertController(title: "Cannot complete request", message: errormessage as String, preferredStyle: .alert)
                 let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
                 error.addAction(okButton)
-                self.present(error, animated: false, completion: nil)
+                self.present(error, animated: true, completion: nil)
             }
         }
     }

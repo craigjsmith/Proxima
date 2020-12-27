@@ -89,7 +89,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                     
                     user.saveInBackground{(success, error) in
                         if success {
-                            self.performSegue(withIdentifier: "registrationSegue", sender: nil)
+                            self.navigationController?.popToRootViewController(animated: true)
                         }
                     }
                     
@@ -121,6 +121,10 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                 passwordTextField.resignFirstResponder()
         }
         return false
+    }
+    
+    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue)
+    {
     }
     
     /*

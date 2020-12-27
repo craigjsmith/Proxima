@@ -25,15 +25,9 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
     
     @IBOutlet weak var locationName: UITextField!
     @IBOutlet weak var descriptionName: UITextField!
-    @IBOutlet weak var landmarkCheck: UISwitch!
-    @IBOutlet weak var natureCheck: UISwitch!
-    @IBOutlet weak var urbanCheck: UISwitch!
-    @IBOutlet weak var historicalCheck: UISwitch!
-    
     @IBOutlet weak var categoryChecker: UIPickerView!
-    
-    @IBOutlet weak var photoCheck: UISwitch!
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var postButton: UIButton!
     
     var locationManager: CLLocationManager?
     
@@ -85,6 +79,19 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
     }
     
     @IBAction func onSubmit(_ sender: Any) {
+        postButton.isEnabled = false
+        
+        // Prevents non-registered user from adding location. This screen should
+        // never show if that's the case, this is an extra catch
+        if(PFUser.current() == nil) {
+            let error = UIAlertController(title: "Not logged in", message: "Only registered users can add new locations.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
+            
+            return
+        }
+        
         let post = PFObject(className: "Locations")
         
         // Set write access to this user only
@@ -169,7 +176,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         let size = CGSize(width: 1920, height: 1080)
         let scaledImage = image.af_imageScaled(to: size)
         
-        let imageData = scaledImage.pngData()
+        // Compress image before uploading
+        let imageData = scaledImage.jpegData(compressionQuality: 0.5)
         let file = PFFileObject(data: imageData!)
         
         self.locationImageFile = file
