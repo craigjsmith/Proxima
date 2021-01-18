@@ -2,97 +2,117 @@
 //  ProfileViewController.swift
 //  Proxima
 //
-//  Created by Avni Avdulla on 11/29/20.
-//
 
 import UIKit
 import Parse
 import SkeletonView
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
-    
-    
+/// View controller for Profile
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SkeletonCollectionViewDataSource  {
 
-    @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var achievementTableView: UITableView!
+    @IBOutlet weak var addedLocationsCollectionView: UICollectionView!
+    @IBOutlet weak var visitedLocationsCollectionView: UICollectionView!
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    
-    
-    var createdLocations: [PFObject] = []
     var currentUser: PFUser!
-    
+    var createdLocations: [PFObject] = []
+    var visitedLocations: [PFObject] = []
     var achievements: [String] = []
-    
+
+
+    /**
+     Called when view loads
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        // Do any additional setup after loading the view.
+        
         view.isSkeletonable = true
         view.showSkeleton()
+        view.startSkeletonAnimation()
         
-        // Set profile image to circle
-        profileImage.layer.cornerRadius = (profileImage.frame.width / 2)
-        profileImage.layer.masksToBounds = true
+        self.addedLocationsCollectionView.isSkeletonable = true
+        self.addedLocationsCollectionView.showAnimatedSkeleton()
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        //achievementTableView.delegate = self
+        //achievementTableView.dataSource = self
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        addedLocationsCollectionView.delegate = self
+        addedLocationsCollectionView.dataSource = self
+        
+        visitedLocationsCollectionView.delegate = self
+        visitedLocationsCollectionView.dataSource = self
 
         // Configure collection view layout
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let layout = addedLocationsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
-        layout.minimumLineSpacing = 20 // controls space between rows
-        
+        // Space between rows
+        layout.minimumLineSpacing = 20
 
     }
     
-    //
-    // Called when the view appears. Gets current users info.
-    //
+    /**
+     Called when view appears
+     */
     override func viewDidAppear(_ animated: Bool) {
-        
-        if(PFUser.current() == nil) {
-            //self.view.removeFromSuperview()
+
+        if(currentUser == nil && PFUser.current() == nil) {
             self.performSegue(withIdentifier: "loginSegue", sender: self)
             return
         }
         
         super.viewDidAppear(animated)
         
-        // If user logged in, show logout button
-        let backButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: Selector("logout"))
-        navigationItem.rightBarButtonItem = backButton
+        // If user logged in, show logout button (only on Profile tab, not leaderboard)
+        if(PFUser.current() != nil && currentUser == nil){
+            let backButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: Selector("logout"))
+            navigationItem.rightBarButtonItem = backButton
+        }
         
         // If passing in from leaderboard
         if(self.currentUser != nil) {
-            updateInfo(user: self.currentUser)
+            populate(limit: 10, skip: 0)
         }
         // Not passing from leaderboard, use current logged in user
         else {
             self.currentUser = PFUser.current()!
-            updateInfo(user: self.currentUser)
+            populate(limit: 10, skip: 0)
         }
         
         self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
-//        print(createdLocations)
+
+        
+        self.visitedLocations = (currentUser["visited_locations"] as? [PFObject]) ?? []
+        
+        // Check that all locations still exist, if not remove from db and local array
+        for location in visitedLocations {
+            
+            location.fetchInBackground { (loc, error) in
+                if loc == nil {
+                    self.visitedLocations.remove(at: self.visitedLocations.firstIndex(of: location)!)
+                    
+                    PFUser.current()?.remove(location, forKey: "visited_locations")
+                }
+                self.visitedLocationsCollectionView.reloadData()
+                PFUser.current()?.saveInBackground()
+            }
+            
+        }
+
         self.achievements = getAchievements(user: self.currentUser)
         
         view.hideSkeleton()
-        collectionView.reloadData()
-        tableView.reloadData()
+        addedLocationsCollectionView.reloadData()
+        visitedLocationsCollectionView.reloadData()
+        //achievementTableView.reloadData()
     }
     
-
-    //
-    // Does calculation to find achievements for this user
-    //
+    /**
+     Determines acheivements awarded to user
+     */
     func getAchievements(user: PFUser) -> [String] {
         
         var achieve: [String] = []
@@ -124,76 +144,123 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
 
         }
-        
-        
         return achieve
     }
     
-    //
-    // Updates the labels and images using User data
-    //
-    func updateInfo(user: PFUser){
+    /**
+     Loads user info
+     */
+    func populate(limit: Int, skip: Int){
         
-        // update name
-        self.nameLabel.text = user["username"] as? String
+        // User name
+        self.nameLabel.text = currentUser["username"] as? String
 
-        // update score
-        let score = user["score"] as? Int ?? 0
+        // User score
+        let score = currentUser["score"] as? Int ?? 0
         self.starsLabel.text = "⭐️ " + String(score)
 
-        // Update profile image
-        if user["profile_image"] != nil {
-            let imageFile = user["profile_image"] as! PFFileObject
+        // User profile image
+        if currentUser["profile_image"] != nil {
+            let imageFile = currentUser["profile_image"] as! PFFileObject
             let imageUrl = URL(string: imageFile.url!)!
             self.profileImage.af.setImage(withURL: imageUrl)
         }
-        
+    }
 
+    
+    /**
+     Tell SkeletonView reusable cell identifier
+     */
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "LocationHorizontalCell"
     }
     
-    
-    //
-    // Controls Shared Locations for this user
-    //
+    /**
+     Returns number of created locations to load from user
+     */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return createdLocations.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LocationHorizontalCell", for: indexPath) as! LocationHorizontalCell
-        
-        let location = self.createdLocations[indexPath.row] as! PFObject
-        
-        // Loads each location associated with this user
-        location.fetchIfNeededInBackground { (location, error) in
-            if location != nil {
-                
-                cell.nameLabel.text = location!["name"] as! String
-                // Update location image
-                if location?["image"] != nil {
-                    let imageFile = location?["image"] as! PFFileObject
-                    let imageUrl = URL(string: imageFile.url!)!
-                    cell.imageView.af_setImage(withURL: imageUrl)
-                }
-                
-            } else {
-                print("error loading location: \(error?.localizedDescription)")
-                }
+        if collectionView == addedLocationsCollectionView {
+            return createdLocations.count
         }
-        
-        return cell
+        else {
+            return visitedLocations.count
+        }
     }
     
+    /**
+     Logic for creating Shared Location cells
+     */
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    //
-    // Controls the achievements for this user
-    //
+        if collectionView == addedLocationsCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LocationHorizontalCell", for: indexPath) as! LocationHorizontalCell
+            
+            let location = self.createdLocations[indexPath.row] as! PFObject
+            
+            // Loads each location associated with this user
+            location.fetchIfNeededInBackground { (location, error) in
+                if location != nil {
+                    cell.nameLabel.text = location!["name"] as! String
+                    // Set image
+                    let imageFile = location?["image"] as? PFFileObject ?? nil
+                    
+                    if(imageFile != nil) {
+                        let imageUrl = URL(string: (imageFile?.url!)!)
+                        cell.imageView?.af.setImage(withURL: imageUrl!)
+                        
+                    } else {
+                        cell.imageView.image = nil
+                    }
+
+                    
+                } else {
+                    print("error loading location: \(error?.localizedDescription)")
+                    }
+            }
+            
+            return cell
+        }
+        else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LocationHorizontalCell", for: indexPath) as! LocationHorizontalCell
+            
+            let location = self.visitedLocations[indexPath.row] as! PFObject
+            
+            // Loads each location associated with this user
+            location.fetchIfNeededInBackground { (location, error) in
+                if location != nil {
+                    
+                    cell.nameLabel.text = location!["name"] as! String
+                    // Set image
+                    let imageFile = location?["image"] as? PFFileObject ?? nil
+                    
+                    if(imageFile != nil) {
+                        let imageUrl = URL(string: (imageFile?.url!)!)
+                        cell.imageView?.af.setImage(withURL: imageUrl!)
+                        
+                    } else {
+                        cell.imageView.image = nil
+                    }
+                    
+                } else {
+                    print("error loading location: \(error?.localizedDescription)")
+                    }
+            }
+            
+            return cell
+        }
+    }
+    
+    /**
+     Returns number of rows in section, one per achievement
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return achievements.count
     }
     
+    /**
+     Logic for creating Achievement cells
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AchievementsCell") as! AchievementsCell
@@ -203,25 +270,29 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    
-    ///
-    // allows user to chose new profile picture from imaagePicker
-    ///
+    /**
+     Called when user image tapped, allows user to change their image
+     */
     @IBAction func updateProfilePicture(_ sender: Any) {
         
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        
-        if UIImagePickerController.isSourceTypeAvailable(.camera){
-            picker.sourceType = .camera
+        // Check that logged in user matches profile being viewed
+        if(PFUser.current() == currentUser) {
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = true
             
-        } else {
-            picker.sourceType = .photoLibrary
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                picker.sourceType = .photoLibrary
+                
+            }
+            
+            present(picker, animated: true, completion: nil)
         }
-        
-        present(picker, animated: true, completion: nil)
     }
+    
+    /**
+     Processes and uploads user profile image
+     */
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.editedImage] as! UIImage
         let size = CGSize(width: 300, height: 300)
@@ -230,7 +301,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.profileImage.image = scaledImage
         
         let user = PFUser.current()!
-        let imageData = self.profileImage.image!.pngData()
+        let imageData = self.profileImage.image!.jpegData(compressionQuality: 0.5)
         let file = PFFileObject(data: imageData!)
         
         user["profile_image"] = file  // set profile image element
@@ -247,33 +318,51 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
-    
+    /**
+     Log out from current account
+     */
     @objc func logout() {
         PFUser.logOut()
         
         let main = UIStoryboard(name: "Main", bundle: nil)
         
-        let loginViewController = main.instantiateViewController(identifier: "FeedNavigationController")
+        let map = main.instantiateViewController(identifier: "FeedNavigationController")
         
         let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
         
-        delegate.window?.rootViewController = loginViewController
+        delegate.window?.rootViewController = map
     }
 
-    //
-    // Prepare when a segue happens
-    //
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // Prepares profile to location segue
         // Loads location then passes it to locationViewController
-        if segue.identifier == "profileToLocation" {
+        if segue.identifier == "profileToSharedLocation" {
             let cell = sender as! UICollectionViewCell
-            let indexPath = collectionView.indexPath(for: cell)!
+            let indexPath = addedLocationsCollectionView.indexPath(for: cell)!
             
             // Pass the selected object to the new view controller.
             let locationViewController = segue.destination as! LocationViewController
             let location = createdLocations[indexPath.row].fetchIfNeededInBackground { (location, error) in
+                if location != nil {
+                    locationViewController.location = location
+                } else {
+                    print("Error: \(error?.localizedDescription) ")
+                }
+                
+            }
+        }
+        
+        if segue.identifier == "profileToVisitedLocation" {
+            let cell = sender as! UICollectionViewCell
+            let indexPath = visitedLocationsCollectionView.indexPath(for: cell)!
+            
+            // Pass the selected object to the new view controller.
+            let locationViewController = segue.destination as! LocationViewController
+            let location = visitedLocations[indexPath.row].fetchIfNeededInBackground { (location, error) in
                 if location != nil {
                     locationViewController.location = location
                 } else {

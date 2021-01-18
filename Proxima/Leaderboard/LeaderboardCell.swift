@@ -2,11 +2,10 @@
 //  LeaderboardCell.swift
 //  Proxima
 //
-//  Created by Avni Avdulla on 11/22/20.
-//
 
 import UIKit
 
+/// Cell for Leaderboard table view
 class LeaderboardCell: UITableViewCell {
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -15,8 +14,7 @@ class LeaderboardCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
+
         // Set profile image to circle
         profileImage.layer.cornerRadius = (profileImage.frame.width / 2)
         profileImage.layer.masksToBounds = true
@@ -24,9 +22,6 @@ class LeaderboardCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-
     }
 
 }

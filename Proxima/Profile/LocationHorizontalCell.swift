@@ -2,11 +2,10 @@
 //  LocationHorizontalCell.swift
 //  Proxima
 //
-//  Created by Avni Avdulla on 11/29/20.
-//
 
 import UIKit
 
+/// Cell for user's shared locations
 class LocationHorizontalCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!

@@ -2,15 +2,15 @@
 //  RegistrationViewController.swift
 //  Proxima
 //
-//  Created by Emmanuel Bangura on 11/30/20.
-//
 
 import UIKit
 import Parse
 import AlamofireImage
 
+/// Registration view controller
 class RegistrationViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
 
+    // If profile image is set
     var imageSet = false
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -18,6 +18,9 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    /**
+     Called when view loads
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +29,11 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         passwordTextField.delegate = self
     }
     
-    @IBAction func onCameraButton(_ sender: Any) {
+
+    /**
+     Called when profile picture is tapped, allows user to upload picture
+     */
+    @IBAction func onProfileImage(_ sender: Any) {
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
@@ -39,9 +46,12 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         present(picker, animated: true, completion: nil)
     }
     
+    /**
+     Image picker controller for profile picture
+     */
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.editedImage] as! UIImage
-        let size = CGSize(width: 300, height: 300)
+        let size = CGSize(width: 500, height: 500)
         let scaledImage = image.af_imageScaled(to: size)
         
         // Set image preview to newly uploaded image
@@ -56,16 +66,18 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         dismiss(animated: true, completion: nil)
     }
     
-    // Removes the keyboard
+    /**
+     Remove keyboard when background is tapped
+     */
     @IBAction func tapOnScreen(_ sender: Any) {
         emailTextField.resignFirstResponder()
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
-    
-    //
-    // Signs up user and adds their information to the database
-    //
+
+    /**
+     Called when user taps sign up button, registers user
+     */
     @IBAction func onSignupButton(_ sender: Any) {
         
         let user = PFUser()
@@ -78,7 +90,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                 if success {
                     
                     if self.imageSet {
-                        let imageData = self.profileImageView.image!.pngData()
+                        let imageData = self.profileImageView.image!.jpegData(compressionQuality: 0.5)
                         let file = PFFileObject(data: imageData!)
                         user["profile_image"] = file
                     }
@@ -105,6 +117,9 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         }
     }
     
+    /**
+     Logic for order of text fields
+     */
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
             case emailTextField:
@@ -119,10 +134,6 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                 passwordTextField.resignFirstResponder()
         }
         return false
-    }
-    
-    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue)
-    {
     }
     
     /*

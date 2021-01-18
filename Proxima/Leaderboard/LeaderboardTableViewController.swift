@@ -2,41 +2,65 @@
 //  LeaderboardTableViewController.swift
 //  Proxima
 //
-//  Created by Craig Smith on 12/26/20.
-//
 
 import UIKit
 import Parse
+import SkeletonView
 
-class LeaderboardTableViewController: UITableViewController {
+/// VIew controller for Leaderboard view
+class LeaderboardTableViewController: UITableViewController, SkeletonTableViewDataSource {
 
     let tableRefreshControl = UIRefreshControl()
     
+    /// Collection of Profile objects to show on feed
     var profiles = [PFObject]()
-    var selectedProfile: PFObject!
     
+    /**
+     Called when view loads
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.dataSource = self
         // Important for loading in new locations with correct scroll bar size
+        tableView.rowHeight = 100
         tableView.estimatedRowHeight = 100
         
         tableRefreshControl.addTarget(self, action: #selector(reset), for: .valueChanged)
         tableView.refreshControl = tableRefreshControl
+        
+        super.viewDidAppear(true)
+        self.tableView.isSkeletonable = true
+        self.tableView.showAnimatedSkeleton()
     }
     
+    /**
+     Called when view is about to appear
+     */
     override func viewWillAppear(_ animated: Bool) {
         reset()
-        self.tableView.contentOffset = CGPoint.zero
     }
     
+    /**
+     Called when view appears
+     */
+    override func viewDidAppear(_ animated: Bool) {
+
+    }
+    
+    /**
+     Reset and reload the Leaderboard
+     */
     @objc func reset() {
         profiles = [PFObject]()
         populate(limit: 10, skip: 0)
+        self.tableView.contentOffset = CGPoint.zero
         self.tableView.reloadData()
     }
 
-
+    /**
+     Populate the leaderboard with users
+     */
     func populate(limit: Int, skip: Int) {
         let query = PFQuery(className: "_User")
         query.addDescendingOrder("score")
@@ -48,23 +72,37 @@ class LeaderboardTableViewController: UITableViewController {
                 self.profiles.append(contentsOf: newProfiles!)
                 self.tableView.reloadData()
                 self.tableRefreshControl.endRefreshing()
+                self.tableView.hideSkeleton()
+                
+                // Scroll to top
+                self.tableView.scrollRectToVisible(CGRect(x:0, y:0, width:1, height:1), animated: false)
             }
         }
     }
     
     // MARK: - Table view data source
 
+    /**
+     Returns number of sections in table view, always 1
+     */
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
+    /**
+     Returns number of rows in section, one per location
+     */
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return profiles.count
     }
     
+    /**
+     Called when feed is scrolled
+     */
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        // When near end of feed, load more
         if indexPath.row + 1 == profiles.count && profiles.count > 0 {
-            
             let query = PFQuery(className:"_User")
             query.countObjectsInBackground { (count: Int32, error: Error?) in
                 if let error = error {
@@ -80,7 +118,9 @@ class LeaderboardTableViewController: UITableViewController {
         }
     }
 
-    
+    /**
+     Logic for creating Leaderboard cells
+     */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeaderboardCell") as! LeaderboardCell
@@ -108,47 +148,19 @@ class LeaderboardTableViewController: UITableViewController {
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    /**
+     Tell SkeletonView reusable cell identifier
+     */
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+       return "LeaderboardCell"
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         let cell = sender as! UITableViewCell
         
         if let indexPath = tableView.indexPath(for: cell) {
@@ -161,6 +173,7 @@ class LeaderboardTableViewController: UITableViewController {
         if let path = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: path, animated: true)
         }
+ 
     }
     
 

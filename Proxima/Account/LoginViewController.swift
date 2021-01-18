@@ -2,22 +2,20 @@
 //  LoginViewController.swift
 //  Proxima
 //
-//  Created by Avni Avdulla on 11/22/20.
-//
 
 import UIKit
 import Parse
 
+/// Login view controller
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
     
-    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue)
-    {
-    }
-
-    
+    /**
+     Called when view loads
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +26,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         navigationItem.hidesBackButton = true
     }
     
+    /**
+     Called when login button is pressed
+     */
     @IBAction func onLoginButton(_ sender: Any) {
+        
+        loginButton.isEnabled = false
         
         let username = usernameField.text!
         let password = passwordField.text!
@@ -39,9 +42,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
             if user != nil {
                 self.navigationController?.popToRootViewController(animated: true)
-                
             }
             else {
+                self.loginButton.isEnabled = true
+                
                 let alert = UIAlertController(title: "Invalid Credentials", message: error?.localizedDescription.localizedCapitalized, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
                 NSLog("The \"OK\" alert occured.")
@@ -52,23 +56,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-            case usernameField:
-                usernameField.resignFirstResponder()
-                passwordField.becomeFirstResponder()
-            default:
-                usernameField.resignFirstResponder()
-                passwordField.resignFirstResponder()
-        }
-        return false
-    }
-    
-    @IBAction func onTapScreen(_ sender: Any) {
-        usernameField.resignFirstResponder()
-        passwordField.resignFirstResponder()
-    }
-    
+    /**
+     Called when reset password button is pressed, prompts user to enter email
+     (curently not in use)
+     */
     @IBAction func resetPasswordPressed(sender: AnyObject) {
 
         let titlePrompt = UIAlertController(title: "Reset password",
@@ -87,13 +78,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         titlePrompt.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { (action) -> Void in
                 if let textField = titleTextField {
-                    self.resetPassword(email: textField.text as! String)
+                    self.resetPassword(email: textField.text!)
                 }
         }))
 
         self.present(titlePrompt, animated: true, completion: nil)
     }
 
+    /**
+     Calls backend to send password reset to email
+     (currently not in use)
+     */
     func resetPassword(email : String){
 
         // convert the email string to lower case
@@ -115,6 +110,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    /**
+     Called when background is tapped, closes keyboard
+     */
+    @IBAction func onTapScreen(_ sender: Any) {
+        usernameField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+    }
+    
+    /**
+     Logic for input order
+     */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+            case usernameField:
+                usernameField.resignFirstResponder()
+                passwordField.becomeFirstResponder()
+            default:
+                usernameField.resignFirstResponder()
+                passwordField.resignFirstResponder()
+        }
+        return false
+    }
+    
     /*
     // MARK: - Navigation
 
