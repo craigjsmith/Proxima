@@ -26,6 +26,12 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Observer for modal dismissal
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(MapViewController.handleModalDismissed),
+                                               name: NSNotification.Name(rawValue: "modalIsDimissed"),
+                                               object: nil)
+        
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
@@ -57,6 +63,13 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         
         // Fix row offset so scroll bar starts at top
         self.tableView.contentOffset = CGPoint(x: 0, y: -63)
+    }
+    
+    /**
+     Called when Add Location/View Location modal is dismissed
+     */
+    @objc func handleModalDismissed() {
+        reset()
     }
     
     /**

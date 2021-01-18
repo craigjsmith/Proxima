@@ -17,6 +17,11 @@ class ProximaPointAnnotation : MKPointAnnotation {
 /// View controller for interactive map
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    func modalDismissed() {
+        populateMap()
+    }
+    
+    
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var warningBox: UIView!
     var locationManager: CLLocationManager?
@@ -51,6 +56,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewDidLoad()
         map.delegate = self
         
+        // Observer for modal dismissal
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(MapViewController.handleModalDismissed),
+                                               name: NSNotification.Name(rawValue: "modalIsDimissed"),
+                                               object: nil)
+        
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
@@ -65,6 +76,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Set default user tracking mode
         map.setUserTrackingMode(MKUserTrackingMode.follow, animated: false)
         
+
+        
     }
     
     /**
@@ -72,6 +85,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
      */
     override func viewDidAppear(_ animated: Bool) {
         populateMap()
+    }
+    
+    /**
+     Called when Add Location/View Location modal is dismissed
+     */
+    @objc func handleModalDismissed() {
+        reset()
     }
     
     /**
@@ -101,6 +121,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let newWidth = rect.width
         let newHeight = rect.height
         loadRectangle = MKMapRect(x: (newX - (newWidth/2)), y: (newY - (newHeight/2)), width: (newWidth*2), height: (newHeight*2))
+    }
+    
+    /**
+     Reset map and fetch locations again
+     */
+    func reset() {
+        map.removeAnnotations(map.annotations)
+        locations.removeAll()
+        populateMap()
     }
     
     /**
@@ -288,7 +317,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // Set location of LocationViewController to that of the selected pin
             locationViewController.location = self.selectedAnnotation?.location as! PFObject
         }
-        
     }
     
     

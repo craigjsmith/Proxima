@@ -1257,10 +1257,11 @@
                     <size key="freeformSize" width="375" height="930"/>
                     <connections>
                         <outlet property="categoryChecker" destination="hEc-HQ-8Gm" id="173-ff-nFd"/>
-                        <outlet property="descriptionName" destination="m6d-fl-lmn" id="zq6-cX-jCS"/>
+                        <outlet property="locationDescription" destination="m6d-fl-lmn" id="zq6-cX-jCS"/>
                         <outlet property="locationName" destination="lZE-c2-zK0" id="Iqm-uV-IhN"/>
                         <outlet property="map" destination="CWR-i7-q7v" id="Qvi-at-GQA"/>
                         <outlet property="postButton" destination="zBO-ki-WyD" id="dad-fG-Qj7"/>
+                        <segue destination="Gba-JZ-aAc" kind="show" identifier="toMap" id="AMC-FW-KTM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUE-ll-4ma" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1523,6 +1524,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="mkD-kM-jRg"/>
         <segue reference="I5S-MR-QAo"/>
+        <segue reference="AMC-FW-KTM"/>
         <segue reference="ZCY-AN-CGf"/>
         <segue reference="3Av-IU-tGF"/>
         <segue reference="EB2-Vo-wdd"/>

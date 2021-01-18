@@ -12,7 +12,7 @@ import MapKit
 class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var locationName: UITextField!
-    @IBOutlet weak var descriptionName: UITextField!
+    @IBOutlet weak var locationDescription: UITextField!
     @IBOutlet weak var categoryChecker: UIPickerView!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var postButton: UIButton!
@@ -45,7 +45,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         map.delegate = self;
 
         locationName.delegate = self
-        descriptionName.delegate = self
+        locationDescription.delegate = self
         
         self.categoryChecker.delegate = self
         self.categoryChecker.dataSource = self
@@ -103,48 +103,67 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         acl.hasPublicReadAccess = true
         post.acl = acl
         
-        // Set location name
-        post["name"] = locationName.text as! String
-        
-        // Set location description
-        post["description"] = descriptionName.text as! String
-        
-        // Set location coordinate
-        let point = PFGeoPoint(latitude:dragPin.coordinate.latitude, longitude:dragPin.coordinate.longitude)
-        post["geopoint"] = point
+        // Check that required fields are entered
+        if (locationName.text == "") {
+            let error = UIAlertController(title: "Missing Field", message: "The Name field is required.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
+            postButton.isEnabled = true
+        } else if (locationDescription.text == "") {
+            let error = UIAlertController(title: "Missing Field", message: "The Description field is required.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
+            postButton.isEnabled = true
+        } else if (locationImageFile == nil) {
+            let error = UIAlertController(title: "No Image Set", message: "You must upload an image.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
+            postButton.isEnabled = true
+        } else {
+            // Set location name
+            post["name"] = locationName.text as! String
+            
+            // Set location description
+            post["description"] = locationDescription.text as! String
+            
+            // Set location coordinate
+            let point = PFGeoPoint(latitude:dragPin.coordinate.latitude, longitude:dragPin.coordinate.longitude)
+            post["geopoint"] = point
 
-        // Set location category
-        var category = pickerData[categoryChecker.selectedRow(inComponent: 0)] as! String
-        post["category"] = category
-        
-        // Set location author
-        post["author"] = PFUser.current()
-        
-        // Set location image
-        if locationImageFile != nil {
-            post["image"] = locationImageFile
-        } 
-        
-        // Save location to database
-        post.saveInBackground { (success, error) in
-            if success {
-                let user = PFUser.current()
-                user?.add(post, forKey: "created_locations") // Add this location to the ones created by the current user
-                user?.incrementKey("score") // Increase score every time they add location
-                user?.saveInBackground() // Save user with new info
-                
-                print("Location saved");
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                print("error saving location: \(error?.localizedDescription)")
-                
-                
-                // Add input checking
-                
-                
+            // Set location category
+            var category = pickerData[categoryChecker.selectedRow(inComponent: 0)] as! String
+            post["category"] = category
+            
+            // Set location author
+            post["author"] = PFUser.current()
+            
+            // Set location image
+            if locationImageFile != nil {
+                post["image"] = locationImageFile
             }
-        }
-        
+            
+            // Save location to database
+            post.saveInBackground { (success, error) in
+                if success {
+                    let user = PFUser.current()
+                    user?.add(post, forKey: "created_locations") // Add this location to the ones created by the current user
+                    user?.incrementKey("score") // Increase score every time they add location
+                    user?.saveInBackground() // Save user with new info
+                    
+                    print("Location saved");
+                    
+                    self.dismiss(animated: true) {
+                      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalIsDimissed"), object: nil)
+                    }
+                } else {
+                    print("error saving location: \(error?.localizedDescription)")
+                }
+            }
+            }
+            
         
     }
     
@@ -153,7 +172,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
      */
     @IBAction func tapOnScreen(_ sender: Any) {
         locationName.resignFirstResponder()
-        descriptionName.resignFirstResponder()
+        locationDescription.resignFirstResponder()
     }
     
     /**
@@ -163,13 +182,13 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         switch textField {
             case locationName:
                 locationName.resignFirstResponder()
-                descriptionName.becomeFirstResponder()
-            case descriptionName:
-                descriptionName.resignFirstResponder()
+                locationDescription.becomeFirstResponder()
+            case locationDescription:
+                locationDescription.resignFirstResponder()
                 locationName.becomeFirstResponder()
             default:
                 locationName.resignFirstResponder()
-                descriptionName.becomeFirstResponder()
+                locationDescription.becomeFirstResponder()
         }
         return false
     }
@@ -203,7 +222,6 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         self.locationImageFile = file
         
         dismiss(animated: true, completion: nil)
-        
     }
     
     /**
@@ -254,6 +272,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         pinSet = false;
+        
     }
     
 

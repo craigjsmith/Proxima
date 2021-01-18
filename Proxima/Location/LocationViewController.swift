@@ -184,7 +184,10 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
             if(success) {                
                 self.location?.deleteInBackground(block: { (success, error) in
                     if(success) {
-                        self.dismiss(animated: true, completion: nil)
+                        //self.dismiss(animated: true, completion: nil)
+                        self.dismiss(animated: true) {
+                          NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalIsDimissed"), object: nil)
+                        }
                     } else {
                         print(error?.localizedDescription)
                     }
