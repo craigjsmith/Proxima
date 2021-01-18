@@ -121,13 +121,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
      - sender : sender passed to segue
      */
     @IBAction func onAddLocation(_ sender: Any) {
-        if((PFUser.current()) != nil) {
-            performSegue(withIdentifier: "toAddLocation", sender: self)
-        } else {
+        // Disallow adding new location if user isn't logged in
+        if((PFUser.current()) == nil) {
             let error = UIAlertController(title: "Not logged in", message: "Only registered users can add new locations. Go to the Profile tab to login or signup.", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
             error.addAction(okButton)
             self.present(error, animated: true, completion: nil)
+            // Disallow adding new location if user didnt' grant location permissions
+        } else if (locationManager?.location?.coordinate.latitude == nil || locationManager?.location?.coordinate.latitude == 0) {
+            let error = UIAlertController(title: "No Location Permission", message: "Proxima must have permission to use your location to submit new locations.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
+        } else {
+            performSegue(withIdentifier: "toAddLocation", sender: self)
         }
     }
     
