@@ -16,6 +16,9 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     
     // If user has visted location
     var visited = false
+    
+    /// User's current location
+    var userGeoPoint = PFGeoPoint()
         
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userLabel: UILabel!
@@ -104,13 +107,13 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
      Runs whenever new GPS data is available
      */
     func locationManager(_ manager: CLLocationManager,  didUpdateLocations locations: [CLLocation]) {
-        let userGeoPoint = PFGeoPoint(latitude: locationManager?.location?.coordinate.latitude as! Double, longitude: locationManager?.location?.coordinate.longitude as! Double)
+        userGeoPoint = PFGeoPoint(latitude: locationManager?.location?.coordinate.latitude as! Double, longitude: locationManager?.location?.coordinate.longitude as! Double)
         
         // Get user's distance from location
         let dist = userGeoPoint.distanceInMiles(to: location!["geopoint"] as? PFGeoPoint)
         
-        // If user is in range of location, enable visit button
-        if(!visited && dist < 0.1) {
+        // If user geo point is valid and is in range of location, enable visit button
+        if(userGeoPoint.latitude != 0 && !visited && dist < 0.1) {
             enableVisitButton()
         } else {
             disableVisitButton(visited: visited)
@@ -251,7 +254,23 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         if(visited) {
             addLocationButton.setTitle("Visited", for: .normal)
         } else {
-            addLocationButton.setTitle("Out of range", for: .normal)
+            
+            // Check that user location is valid
+            if(userGeoPoint.latitude != 0) {
+                // Set distance label
+                let dist = userGeoPoint.distanceInMiles(to: location!["geopoint"] as? PFGeoPoint)
+                
+                var distString = ""
+                // If distance is more than 5 miles away, don't show floating point
+                if(dist < 5) {
+                    distString = String(format: "%.1f", dist)
+                } else {
+                    distString = String(format: "%.0f", dist)
+                }
+                addLocationButton.setTitle(String(distString + " miles away"), for: .normal)
+            } else {
+                addLocationButton.setTitle("Out of range", for: .normal)
+            }
         }
         
         self.addLocationButton.isEnabled = false

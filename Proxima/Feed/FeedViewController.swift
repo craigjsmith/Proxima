@@ -106,7 +106,7 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
      */
     func populate(limit: Int, skip: Int) {
         // User's location
-        userGeoPoint = PFGeoPoint(latitude: locationManager?.location?.coordinate.latitude as! Double, longitude: locationManager?.location?.coordinate.longitude as! Double)
+        userGeoPoint = PFGeoPoint(latitude: locationManager?.location?.coordinate.latitude as? Double ?? 0, longitude: locationManager?.location?.coordinate.longitude as? Double ?? 0)
         
         let query = PFQuery(className: "Locations")
         query.whereKey("geopoint", nearGeoPoint:userGeoPoint)
@@ -178,14 +178,19 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         cell.nameLabel.text = location["name"] as? String
         cell.categoryLabel.text = location["category"] as? String ?? ""
         
-        // Set distance label
-        let dist = userGeoPoint.distanceInMiles(to: location["geopoint"] as? PFGeoPoint)
-        
-        // If distance is more than 5 miles away, don't show floating point
-        if(dist < 5) {
-            cell.distanceLabel.text = String(format: "%.1f", dist) + " miles away"
+        // Check that user location is valid
+        if(userGeoPoint.latitude != 0) {
+            // Set distance label
+            let dist = userGeoPoint.distanceInMiles(to: location["geopoint"] as? PFGeoPoint)
+            
+            // If distance is more than 5 miles away, don't show floating point
+            if(dist < 5) {
+                cell.distanceLabel.text = String(format: "%.1f", dist) + " miles away"
+            } else {
+                cell.distanceLabel.text = String(format: "%.0f", dist) + " miles away"
+            }
         } else {
-            cell.distanceLabel.text = String(format: "%.0f", dist) + " miles away"
+            cell.distanceLabel.isHidden = true
         }
         
         // Set image

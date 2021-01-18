@@ -62,13 +62,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                                                name: NSNotification.Name(rawValue: "modalDismissed"),
                                                object: nil)
         
+        // Location manager setup
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.distanceFilter = kCLDistanceFilterNone
         locationManager?.startUpdatingLocation()
-        
+    
         // Adds user tracking mode toggle button to nav bar
         let buttonItem = MKUserTrackingBarButtonItem(mapView: map)
         self.navigationItem.leftBarButtonItem = buttonItem
@@ -85,6 +86,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
      */
     override func viewDidAppear(_ animated: Bool) {
         populateMap()
+    }
+    
+    func locationManager(_ manager: CLLocationManager,
+                         didChangeAuthorization status: CLAuthorizationStatus) {   switch status {
+          case .restricted, .denied:
+            let error = UIAlertController(title: "No Location Access", message: "Proxima works better with location access by showing locations near you and rewarding points for visiting. Please go into your Settings and enable location services for Proxima.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
+             break
+                
+          case .authorizedWhenInUse:
+             break
+                
+          case .authorizedAlways:
+             break
+                
+          case .notDetermined:
+             break
+       }
     }
     
     /**
@@ -270,8 +291,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
                 
                 populateMap()
-                print("populated")
-                
                 increaseLoadRectangle(rect: map.visibleMapRect)
             }
         } else {

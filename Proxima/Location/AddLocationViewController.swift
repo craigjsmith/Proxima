@@ -110,12 +110,6 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
             error.addAction(okButton)
             self.present(error, animated: true, completion: nil)
             postButton.isEnabled = true
-        } else if (locationDescription.text == "") {
-            let error = UIAlertController(title: "Missing Field", message: "The Description field is required.", preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-            error.addAction(okButton)
-            self.present(error, animated: true, completion: nil)
-            postButton.isEnabled = true
         } else if (locationImageFile == nil) {
             let error = UIAlertController(title: "No Image Set", message: "You must upload an image.", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
