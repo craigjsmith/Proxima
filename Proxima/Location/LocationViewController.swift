@@ -186,7 +186,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
                     if(success) {
                         //self.dismiss(animated: true, completion: nil)
                         self.dismiss(animated: true) {
-                          NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalIsDimissed"), object: nil)
+                          NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalDismissed"), object: nil)
                         }
                     } else {
                         print(error?.localizedDescription)
@@ -208,7 +208,11 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: "Destructive action"), style: .destructive, handler: { _ in
             self.deleteLocation()
-            self.dismiss(animated: true, completion: {})
+            //self.dismiss(animated: true, completion: {})
+            
+            self.dismiss(animated: true) {
+              NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalIsDimissed2"), object: nil)
+            }
         }))
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: { _ in

@@ -59,7 +59,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Observer for modal dismissal
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(MapViewController.handleModalDismissed),
-                                               name: NSNotification.Name(rawValue: "modalIsDimissed"),
+                                               name: NSNotification.Name(rawValue: "modalDismissed"),
                                                object: nil)
         
         locationManager = CLLocationManager()

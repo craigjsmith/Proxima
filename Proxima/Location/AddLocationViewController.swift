@@ -156,7 +156,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
                     print("Location saved");
                     
                     self.dismiss(animated: true) {
-                      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalIsDimissed"), object: nil)
+                      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalDismissed"), object: nil)
                     }
                 } else {
                     print("error saving location: \(error?.localizedDescription)")

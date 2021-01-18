@@ -29,7 +29,7 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         // Observer for modal dismissal
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(MapViewController.handleModalDismissed),
-                                               name: NSNotification.Name(rawValue: "modalIsDimissed"),
+                                               name: NSNotification.Name(rawValue: "modalDismissed"),
                                                object: nil)
         
         locationManager = CLLocationManager()

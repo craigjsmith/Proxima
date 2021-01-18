@@ -37,6 +37,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.addedLocationsCollectionView.isSkeletonable = true
         self.addedLocationsCollectionView.showAnimatedSkeleton()
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(ProfileViewController.handleModalDismissed),
+                                               name: NSNotification.Name(rawValue: "modalDismissed"),
+                                               object: nil)
+        
         //achievementTableView.delegate = self
         //achievementTableView.dataSource = self
         
@@ -108,6 +113,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         addedLocationsCollectionView.reloadData()
         visitedLocationsCollectionView.reloadData()
         //achievementTableView.reloadData()
+    }
+    
+    @objc func handleModalDismissed() {
+      // Do something
+        print("GOOD")
+        createdLocations.removeAll()
+        visitedLocations.removeAll()
+        addedLocationsCollectionView.reloadData()
+        visitedLocationsCollectionView.reloadData()
+        populate(limit: 10, skip: 0)
     }
     
     /**
