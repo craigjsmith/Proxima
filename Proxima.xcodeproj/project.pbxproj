@@ -28,7 +28,6 @@
 		44C47FB22565F6D300713672 /* ProximaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C47FB12565F6D300713672 /* ProximaUITests.swift */; };
 		44D782EF2575B5A700BFBEA5 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D782EE2575B5A700BFBEA5 /* AddLocationViewController.swift */; };
 		B27F67BF257436F500712650 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27F67BE257436F400712650 /* ProfileViewController.swift */; };
-		B27F67C425744B1800712650 /* AchievementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27F67C325744B1800712650 /* AchievementsCell.swift */; };
 		B27F67D12574592D00712650 /* LocationHorizontalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27F67D02574592D00712650 /* LocationHorizontalCell.swift */; };
 		B2985895256AA41D00E87A7E /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2985894256AA41D00E87A7E /* FeedViewCell.swift */; };
 		B29858AC256AB59200E87A7E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29858AB256AB59200E87A7E /* LoginViewController.swift */; };
@@ -81,7 +80,6 @@
 		6DC43EEA21538EA559720F7A /* Pods-Proxima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Proxima.release.xcconfig"; path = "Target Support Files/Pods-Proxima/Pods-Proxima.release.xcconfig"; sourceTree = "<group>"; };
 		A535E1B88D34273D271443B0 /* Pods-Proxima.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Proxima.debug.xcconfig"; path = "Target Support Files/Pods-Proxima/Pods-Proxima.debug.xcconfig"; sourceTree = "<group>"; };
 		B27F67BE257436F400712650 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		B27F67C325744B1800712650 /* AchievementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsCell.swift; sourceTree = "<group>"; };
 		B27F67D02574592D00712650 /* LocationHorizontalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHorizontalCell.swift; sourceTree = "<group>"; };
 		B2985894256AA41D00E87A7E /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
 		B29858AB256AB59200E87A7E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 		44DEB2762585EB46004B7486 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				B27F67C325744B1800712650 /* AchievementsCell.swift */,
 				B27F67BE257436F400712650 /* ProfileViewController.swift */,
 				B27F67D02574592D00712650 /* LocationHorizontalCell.swift */,
 			);
@@ -449,7 +446,6 @@
 				41525664257595E2001077F7 /* RegistrationViewController.swift in Sources */,
 				B27F67BF257436F500712650 /* ProfileViewController.swift in Sources */,
 				44D782EF2575B5A700BFBEA5 /* AddLocationViewController.swift in Sources */,
-				B27F67C425744B1800712650 /* AchievementsCell.swift in Sources */,
 				B27F67D12574592D00712650 /* LocationHorizontalCell.swift in Sources */,
 				44C47F922565F6D200713672 /* SceneDelegate.swift in Sources */,
 				4437AA56257CA15400A85F6A /* MapViewController.swift in Sources */,
@@ -637,7 +633,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = craigsmith.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.craigsmith.proxima;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -658,7 +654,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = craigsmith.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.craigsmith.proxima;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

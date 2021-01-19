@@ -8,7 +8,7 @@ import Parse
 import SkeletonView
 
 /// View controller for Profile
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SkeletonCollectionViewDataSource  {
+class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SkeletonCollectionViewDataSource  {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -106,8 +106,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             
         }
-
-        self.achievements = getAchievements(user: self.currentUser)
         
         view.hideSkeleton()
         addedLocationsCollectionView.reloadData()
@@ -123,43 +121,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         addedLocationsCollectionView.reloadData()
         visitedLocationsCollectionView.reloadData()
         populate(limit: 10, skip: 0)
-    }
-    
-    /**
-     Determines acheivements awarded to user
-     */
-    func getAchievements(user: PFUser) -> [String] {
-        
-        var achieve: [String] = []
-        
-        user.fetchIfNeededInBackground { (user, error) in
-            let userPF = user as? PFUser
-            
-            if userPF != nil {
-                let score = userPF?["score"] as? Int ?? 0
-                
-                if score == 0 {
-                    return 
-                }
-                for i in 0...score {
-                    if score >= 1 && i == 1{
-                        achieve.append("First Timer")
-                    }
-                    else if score >= 5 && i == 5 {
-                        achieve.append("Five Posts")
-                    }
-                    else if score >= 10 && i == 10 {
-                        achieve.append("Experienced Explorer")
-                    }
-                    else if score >= 20 && i == 20 {
-                        achieve.append("Top Contributor")
-                    }
-                }
-                
-            }
-
-        }
-        return achieve
     }
     
     /**
@@ -271,18 +232,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return achievements.count
-    }
-    
-    /**
-     Logic for creating Achievement cells
-     */
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AchievementsCell") as! AchievementsCell
-        
-        cell.nameLabel.text = achievements[indexPath.row] as! String
-        
-        return cell
     }
     
     /**

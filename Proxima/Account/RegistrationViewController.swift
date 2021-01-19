@@ -81,7 +81,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     @IBAction func onSignupButton(_ sender: Any) {
         
         let user = PFUser()
-        user.username = usernameTextField.text
+        user.username = usernameTextField.text?.lowercased()
         user.password = passwordTextField.text
         user.email = emailTextField.text
         

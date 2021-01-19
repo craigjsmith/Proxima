@@ -33,7 +33,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         loginButton.isEnabled = false
         
-        let username = usernameField.text!
+        let username = usernameField.text!.lowercased()
         let password = passwordField.text!
                        
         PFUser.logInWithUsername(inBackground: username, password: password)
