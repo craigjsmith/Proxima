@@ -58,7 +58,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
                     let userPF = user as! PFUser
                     self.userLabel.text = String("Shared by ") + (userPF["name"] as! String)
                 } else {
-                    print("Error: \(error?.localizedDescription)")
+                    self.userLabel.text = String("Shared by a Proxima user")
                 }
                 
             }
@@ -118,8 +118,6 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             disableVisitButton(visited: visited)
         }
-        
-        
     }
     
     /**
@@ -183,11 +181,11 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     func deleteLocation() {
         
         PFUser.current()?.remove(location!, forKey: "created_locations")
+        PFUser.current()?.incrementKey("score", byAmount: -1) // Remove star from user
         PFUser.current()?.saveInBackground(block: { (success, error) in
             if(success) {                
                 self.location?.deleteInBackground(block: { (success, error) in
                     if(success) {
-                        //self.dismiss(animated: true, completion: nil)
                         self.dismiss(animated: true) {
                           NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalDismissed"), object: nil)
                         }
@@ -239,6 +237,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             visited = true
             disableVisitButton(visited: visited)
+            PFUser.current()?.incrementKey("score") // Award user a star
             PFUser.current()?.add(location!, forKey: "visited_locations")
             PFUser.current()?.saveInBackground()
         }

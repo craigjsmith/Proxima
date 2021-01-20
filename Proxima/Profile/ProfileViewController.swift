@@ -52,7 +52,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         // Space between rows
         layout.minimumLineSpacing = 20
-
     }
     
     /**
@@ -78,39 +77,12 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         }
 
         
-        // If passing in from leaderboard
-        if(self.currentUser != nil) {
-            populate()
-        }
         // Not passing from leaderboard, use current logged in user
-        else {
+        if(self.currentUser == nil) {
             self.currentUser = PFUser.current()!
-            populate()
         }
         
-        self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
-
-        
-        self.visitedLocations = (currentUser["visited_locations"] as? [PFObject]) ?? []
-        
-        // Check that all locations still exist, if not remove from db and local array
-        for location in visitedLocations {
-            
-            location.fetchInBackground { (loc, error) in
-                if loc == nil {
-                    self.visitedLocations.remove(at: self.visitedLocations.firstIndex(of: location)!)
-                    
-                    PFUser.current()?.remove(location, forKey: "visited_locations")
-                }
-                self.visitedLocationsCollectionView.reloadData()
-                PFUser.current()?.saveInBackground()
-            }
-            
-        }
-        
-        view.hideSkeleton()
-        addedLocationsCollectionView.reloadData()
-        visitedLocationsCollectionView.reloadData()
+        populate()
     }
     
     @objc func handleModalDismissed() {
@@ -143,6 +115,27 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             let imageUrl = URL(string: imageFile.url!)!
             self.profileImage.af.setImage(withURL: imageUrl)
         }
+        
+        self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
+        self.visitedLocations = (currentUser["visited_locations"] as? [PFObject]) ?? []
+        
+        // Check that all locations still exist, if not remove from db and local array
+        for location in visitedLocations {
+            
+            location.fetchInBackground { (loc, error) in
+                if loc == nil {
+                    self.visitedLocations.remove(at: self.visitedLocations.firstIndex(of: location)!)
+                    PFUser.current()?.remove(location, forKey: "visited_locations")
+                }
+                self.visitedLocationsCollectionView.reloadData()
+                PFUser.current()?.saveInBackground()
+            }
+            
+        }
+        
+        addedLocationsCollectionView.reloadData()
+        visitedLocationsCollectionView.reloadData()
+        view.hideSkeleton()
     }
 
     

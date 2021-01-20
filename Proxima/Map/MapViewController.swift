@@ -123,7 +123,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBAction func onAddLocation(_ sender: Any) {
         // Disallow adding new location if user isn't logged in
         if((PFUser.current()) == nil) {
-            let error = UIAlertController(title: "Not logged in", message: "Only registered users can add new locations. Go to the Profile tab to login or signup.", preferredStyle: .alert)
+            let error = UIAlertController(title: "Not logged in", message: "Only registered users can add new locations. Go to the Profile tab to login.", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
             error.addAction(okButton)
             self.present(error, animated: true, completion: nil)

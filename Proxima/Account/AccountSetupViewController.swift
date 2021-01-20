@@ -33,6 +33,7 @@ class AccountSetupViewController: UIViewController, UIImagePickerControllerDeleg
             self.profileImageView.af.setImage(withURL: imageUrl)
         }
         
+        self.navigationItem.hidesBackButton = true
     }
     
     /**

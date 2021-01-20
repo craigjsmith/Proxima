@@ -128,7 +128,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ASAuthorizatio
                     // Apple Sign In success
                     DispatchQueue.main.async {
                         // If new account (display name not set), set a default and direct to profile edit
-                        if(PFUser.current()?["name"] as? String ?? "" == "") {
+                        if(PFUser.current()?["name"] as? String ?? "" == "Proxima User" || PFUser.current()?["name"] as? String ?? "" == "") {
                             let firstName = appleIDCredential.fullName?.givenName ?? ""
                             let lastName = appleIDCredential.fullName?.familyName ?? ""
                             PFUser.current()!["name"] = String(firstName + " " + lastName)
