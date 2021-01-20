@@ -27,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     $0.server = plist?.object(forKey: "PARSE_SERVER") as! String
             }
             Parse.initialize(with: parseConfig)
+        
+        // Setup Parse for authentication with Apple
+        PFUser.register(AuthDelegate(), forAuthType: "apple")
             
         // IQ Keyboard Manager setup
         IQKeyboardManager.shared.enable = true

@@ -146,7 +146,6 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
                     user?.add(post, forKey: "created_locations") // Add this location to the ones created by the current user
                     user?.incrementKey("score") // Increase score every time they add location
                     user?.saveInBackground() // Save user with new info
-                    
                     print("Location saved");
                     
                     self.dismiss(animated: true) {

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		08BD4A27C0CCDBF9D7F0219E /* Pods_Proxima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D51E8AB8F37A236B4607B209 /* Pods_Proxima.framework */; };
-		41525664257595E2001077F7 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41525663257595E2001077F7 /* RegistrationViewController.swift */; };
+		4409D34A25B7D55900AFBEA4 /* AccountSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4409D34925B7D55900AFBEA4 /* AccountSetupViewController.swift */; };
 		44360CE52597E0AD00F1AA04 /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44360CE42597E0AD00F1AA04 /* LeaderboardTableViewController.swift */; };
 		4437AA56257CA15400A85F6A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4437AA55257CA15400A85F6A /* MapViewController.swift */; };
 		44414C0D2583183F00799783 /* Pin-Square.png in Resources */ = {isa = PBXBuildFile; fileRef = 44414C0C2583183F00799783 /* Pin-Square.png */; };
@@ -17,7 +17,6 @@
 		446666C125916CA000EBFBE8 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 446666C025916CA000EBFBE8 /* keys.plist */; };
 		446E787925946FB900D0DEA7 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446E787825946FB900D0DEA7 /* FeedViewController.swift */; };
 		4473A491257C508F00C1BB96 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473A490257C508F00C1BB96 /* LocationViewController.swift */; };
-		44A1DF11258479850091A78B /* squidward.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 44A1DF10258479850091A78B /* squidward.jpg */; };
 		44C47F902565F6D200713672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C47F8F2565F6D200713672 /* AppDelegate.swift */; };
 		44C47F922565F6D200713672 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C47F912565F6D200713672 /* SceneDelegate.swift */; };
 		44C47F942565F6D200713672 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C47F932565F6D200713672 /* ViewController.swift */; };
@@ -52,7 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		41525663257595E2001077F7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		4409D34525B79D6A00AFBEA4 /* Proxima.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Proxima.entitlements; sourceTree = "<group>"; };
+		4409D34925B7D55900AFBEA4 /* AccountSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetupViewController.swift; sourceTree = "<group>"; };
 		44360CE42597E0AD00F1AA04 /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
 		4437AA55257CA15400A85F6A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		44414C0C2583183F00799783 /* Pin-Square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Pin-Square.png"; path = "Proxima/Images/Pin-Square.png"; sourceTree = SOURCE_ROOT; };
@@ -61,7 +61,6 @@
 		446666C025916CA000EBFBE8 /* keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		446E787825946FB900D0DEA7 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		4473A490257C508F00C1BB96 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
-		44A1DF10258479850091A78B /* squidward.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = squidward.jpg; path = Proxima/Images/squidward.jpg; sourceTree = SOURCE_ROOT; };
 		44C47F8C2565F6D200713672 /* Proxima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proxima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C47F8F2565F6D200713672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44C47F912565F6D200713672 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +147,7 @@
 		44C47F8E2565F6D200713672 /* Proxima */ = {
 			isa = PBXGroup;
 			children = (
+				4409D34525B79D6A00AFBEA4 /* Proxima.entitlements */,
 				44DEB27C2585EBD2004B7486 /* Location */,
 				44DEB27B2585EB94004B7486 /* Account */,
 				44DEB2762585EB46004B7486 /* Profile */,
@@ -223,7 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				B29858AB256AB59200E87A7E /* LoginViewController.swift */,
-				41525663257595E2001077F7 /* RegistrationViewController.swift */,
+				4409D34925B7D55900AFBEA4 /* AccountSetupViewController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -241,7 +241,6 @@
 			isa = PBXGroup;
 			children = (
 				444EA779257D894400C31CDB /* Proxima-Icon.png */,
-				44A1DF10258479850091A78B /* squidward.jpg */,
 				44414C0C2583183F00799783 /* Pin-Square.png */,
 				444EA77E257D8AC100C31CDB /* Pin.png */,
 			);
@@ -367,7 +366,6 @@
 				44414C0D2583183F00799783 /* Pin-Square.png in Resources */,
 				444EA77A257D894400C31CDB /* Proxima-Icon.png in Resources */,
 				44C47F992565F6D300713672 /* Assets.xcassets in Resources */,
-				44A1DF11258479850091A78B /* squidward.jpg in Resources */,
 				44C47F972565F6D200713672 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,11 +437,11 @@
 				B29858AC256AB59200E87A7E /* LoginViewController.swift in Sources */,
 				446E787925946FB900D0DEA7 /* FeedViewController.swift in Sources */,
 				44C47F942565F6D200713672 /* ViewController.swift in Sources */,
+				4409D34A25B7D55900AFBEA4 /* AccountSetupViewController.swift in Sources */,
 				44C47F902565F6D200713672 /* AppDelegate.swift in Sources */,
 				B2985895256AA41D00E87A7E /* FeedViewCell.swift in Sources */,
 				44360CE52597E0AD00F1AA04 /* LeaderboardTableViewController.swift in Sources */,
 				B29858B6256AB6EC00E87A7E /* LeaderboardCell.swift in Sources */,
-				41525664257595E2001077F7 /* RegistrationViewController.swift in Sources */,
 				B27F67BF257436F500712650 /* ProfileViewController.swift in Sources */,
 				44D782EF2575B5A700BFBEA5 /* AddLocationViewController.swift in Sources */,
 				B27F67D12574592D00712650 /* LocationHorizontalCell.swift in Sources */,
@@ -625,6 +623,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Proxima/Proxima.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S96SLWHZ5C;
 				INFOPLIST_FILE = Proxima/Info.plist;
@@ -633,6 +632,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.craigsmith.proxima;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -646,6 +646,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Proxima/Proxima.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S96SLWHZ5C;
 				INFOPLIST_FILE = Proxima/Info.plist;
@@ -654,6 +655,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.craigsmith.proxima;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

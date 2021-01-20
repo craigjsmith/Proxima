@@ -129,7 +129,7 @@ class LeaderboardTableViewController: UITableViewController, SkeletonTableViewDa
         let profile = profiles[indexPath.row]
         
         // Set username
-        cell.nameLabel.text = profile["username"] as? String
+        cell.nameLabel.text = profile["name"] as? String
         
         // Set score (if nil assume 0)
         let score: Int = profile["score"] as? Int ?? 0

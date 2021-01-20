@@ -14,7 +14,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
     
-    @IBOutlet weak var achievementTableView: UITableView!
     @IBOutlet weak var addedLocationsCollectionView: UICollectionView!
     @IBOutlet weak var visitedLocationsCollectionView: UICollectionView!
     
@@ -42,9 +41,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                                                name: NSNotification.Name(rawValue: "modalDismissed"),
                                                object: nil)
         
-        //achievementTableView.delegate = self
-        //achievementTableView.dataSource = self
-        
         addedLocationsCollectionView.delegate = self
         addedLocationsCollectionView.dataSource = self
         
@@ -71,20 +67,25 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         super.viewDidAppear(animated)
         
-        // If user logged in, show logout button (only on Profile tab, not leaderboard)
+        // If user logged in, show logout and edit profile button (only on Profile tab, not leaderboard)
         if(PFUser.current() != nil && currentUser == nil){
-            let backButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: Selector("logout"))
-            navigationItem.rightBarButtonItem = backButton
+            let logoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: Selector("logout"))
+            navigationItem.rightBarButtonItem = logoutButton
+            
+            let editProfileButton = UIBarButtonItem(title: "Edit Profile", style: UIBarButtonItem.Style.plain, target: self, action: Selector("editProfile"))
+            navigationItem.leftBarButtonItem = editProfileButton
+            editProfileButton.image = UIImage(systemName:"gear")
         }
+
         
         // If passing in from leaderboard
         if(self.currentUser != nil) {
-            populate(limit: 10, skip: 0)
+            populate()
         }
         // Not passing from leaderboard, use current logged in user
         else {
             self.currentUser = PFUser.current()!
-            populate(limit: 10, skip: 0)
+            populate()
         }
         
         self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
@@ -110,34 +111,35 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         view.hideSkeleton()
         addedLocationsCollectionView.reloadData()
         visitedLocationsCollectionView.reloadData()
-        //achievementTableView.reloadData()
     }
     
     @objc func handleModalDismissed() {
-      // Do something
-        print("GOOD")
         createdLocations.removeAll()
         visitedLocations.removeAll()
         addedLocationsCollectionView.reloadData()
         visitedLocationsCollectionView.reloadData()
-        populate(limit: 10, skip: 0)
+        populate()
+    }
+    
+    @objc func editProfile() {
+        performSegue(withIdentifier: "toEditProfile", sender: self)
     }
     
     /**
      Loads user info
      */
-    func populate(limit: Int, skip: Int){
+    func populate(){
         
         // User name
-        self.nameLabel.text = currentUser["username"] as? String
+        self.nameLabel.text = currentUser?["name"] as? String
 
         // User score
-        let score = currentUser["score"] as? Int ?? 0
+        let score = currentUser?["score"] as? Int ?? 0
         self.starsLabel.text = "⭐️ " + String(score)
 
         // User profile image
-        if currentUser["profile_image"] != nil {
-            let imageFile = currentUser["profile_image"] as! PFFileObject
+        if currentUser?["profile_image"] != nil {
+            let imageFile = currentUser?["profile_image"] as! PFFileObject
             let imageUrl = URL(string: imageFile.url!)!
             self.profileImage.af.setImage(withURL: imageUrl)
         }
@@ -188,10 +190,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                         cell.imageView.image = nil
                     }
 
-                    
-                } else {
-                    print("error loading location: \(error?.localizedDescription)")
-                    }
+                }
             }
             
             return cell
@@ -217,9 +216,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                         cell.imageView.image = nil
                     }
                     
-                } else {
-                    print("error loading location: \(error?.localizedDescription)")
-                    }
+                }
             }
             
             return cell
@@ -232,54 +229,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return achievements.count
-    }
-    
-    /**
-     Called when user image tapped, allows user to change their image
-     */
-    @IBAction func updateProfilePicture(_ sender: Any) {
-        
-        // Check that logged in user matches profile being viewed
-        if(PFUser.current() == currentUser) {
-            let picker = UIImagePickerController()
-            picker.delegate = self
-            picker.allowsEditing = true
-            
-            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-                picker.sourceType = .photoLibrary
-                
-            }
-            
-            present(picker, animated: true, completion: nil)
-        }
-    }
-    
-    /**
-     Processes and uploads user profile image
-     */
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[.editedImage] as! UIImage
-        let size = CGSize(width: 300, height: 300)
-        let scaledImage = image.af_imageScaled(to: size)
-        
-        self.profileImage.image = scaledImage
-        
-        let user = PFUser.current()!
-        let imageData = self.profileImage.image!.jpegData(compressionQuality: 0.5)
-        let file = PFFileObject(data: imageData!)
-        
-        user["profile_image"] = file  // set profile image element
-        
-        user.saveInBackground { (success, error) in
-            if success {
-                print("Image updated")
-            } else {
-                print("error saving: \(error?.localizedDescription)")
-            }
-        }
-        
-        dismiss(animated: true, completion: nil)
-        
     }
     
     /**

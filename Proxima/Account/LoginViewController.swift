@@ -5,133 +5,163 @@
 
 import UIKit
 import Parse
-
+import AuthenticationServices
+    
+/// Delegate class for Parse 3rd party authentication
+class AuthDelegate:NSObject, PFUserAuthenticationDelegate {
+    func restoreAuthentication(withAuthData authData: [String : String]?) -> Bool {
+        return true
+    }
+    
+    func restoreAuthenticationWithAuthData(authData: [String : String]?) -> Bool {
+        return true
+    }
+}
+    
 /// Login view controller
-class LoginViewController: UIViewController, UITextFieldDelegate {
-
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
+class LoginViewController: UIViewController, UITextFieldDelegate, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     /**
      Called when view loads
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        usernameField.delegate = self
-        passwordField.delegate = self
-        
+    
         // Setup nav bar
         navigationItem.hidesBackButton = true
     }
     
     /**
-     Called when login button is pressed
+     Called when view will appear
      */
-    @IBAction func onLoginButton(_ sender: Any) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        loginButton.isEnabled = false
-        
-        let username = usernameField.text!.lowercased()
-        let password = passwordField.text!
-                       
-        PFUser.logInWithUsername(inBackground: username, password: password)
-        {
-            (user, error) in
-            
-            if user != nil {
-                self.navigationController?.popToRootViewController(animated: true)
-            }
-            else {
-                self.loginButton.isEnabled = true
-                
-                let alert = UIAlertController(title: "Invalid Credentials", message: error?.localizedDescription.localizedCapitalized, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                NSLog("The \"OK\" alert occured.")
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
-        
+        // Sign In with Apple button
+        let signInWithAppleButton = ASAuthorizationAppleIDButton(type: .default, style: .whiteOutline)
+        signInWithAppleButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(signInWithAppleButton)
+
+        // Constraints for button
+        NSLayoutConstraint.activate([
+            signInWithAppleButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 375.0),
+            signInWithAppleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            signInWithAppleButton.widthAnchor.constraint(equalToConstant: 250.0),
+            signInWithAppleButton.heightAnchor.constraint(equalToConstant: 50.0)
+        ])
+
+        signInWithAppleButton.addTarget(self, action: #selector(appleSignInTapped), for: .touchDown)
+    }
+ 
+    /**
+     Sign In with Apple prompt will display over current window
+     */
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+            return self.view.window!
     }
     
     /**
-     Called when reset password button is pressed, prompts user to enter email
-     (curently not in use)
+     Handles authentication failure
      */
-    @IBAction func resetPasswordPressed(sender: AnyObject) {
-
-        let titlePrompt = UIAlertController(title: "Reset password",
-            message: "Enter the email you registered with:",
-            preferredStyle: .alert)
-
-        var titleTextField: UITextField?
-        titlePrompt.addTextField { (textField) -> Void in
-            titleTextField = textField
-            textField.placeholder = "Email"
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Authorization error")
+        guard let error = error as? ASAuthorizationError else {
+            return
         }
-
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-
-        titlePrompt.addAction(cancelAction)
-
-        titlePrompt.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { (action) -> Void in
-                if let textField = titleTextField {
-                    self.resetPassword(email: textField.text!)
-                }
+    
+        // Alert user
+        let alert = UIAlertController(title: "Login failed", message: error.localizedDescription.localizedCapitalized, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+        NSLog("The \"OK\" alert occured.")
         }))
+        
+        self.present(alert, animated: true, completion: nil)
 
-        self.present(titlePrompt, animated: true, completion: nil)
-    }
-
+            switch error.code {
+            case .canceled:
+                // user press "cancel" during the login prompt
+                print("Apple Login: Canceled")
+            case .unknown:
+                // user didn't login their Apple ID on the device
+                print("Apple Login: Unknown")
+            case .invalidResponse:
+                // invalid response received from the login
+                print("Apple Login: Invalid Respone")
+            case .notHandled:
+                // authorization request not handled, maybe internet failure during login
+                print("Apple Login: Not handled")
+            case .failed:
+                // authorization failed
+                print("Apple Login: Failed")
+            @unknown default:
+                print("Apple Login: Default")
+            }
+        }
+    
     /**
-     Calls backend to send password reset to email
-     (currently not in use)
+     Handles authentication
      */
-    func resetPassword(email : String){
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+            
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
 
-        // convert the email string to lower case
-        let emailClean = email.lowercased()
+            let userID = appleIDCredential.user
 
-        PFUser.requestPasswordResetForEmail(inBackground: emailClean) { (success, error) -> Void in
-            if (success) {
-                let success = UIAlertController(title: "Success", message: "If this email matches an account, you will receive a link to reset your password.", preferredStyle: .alert)
-                let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-                success.addAction(okButton)
-                self.present(success, animated: true, completion: nil)
+            var identityToken : String?
+            if let token = appleIDCredential.identityToken {
+                identityToken = String(bytes: token, encoding: .utf8)
+            }
 
-            } else {
-                let errormessage = error as! NSString
-                let error = UIAlertController(title: "Cannot complete request", message: errormessage as String, preferredStyle: .alert)
-                let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-                error.addAction(okButton)
-                self.present(error, animated: true, completion: nil)
+            PFUser.logInWithAuthType(inBackground: "apple", authData: ["token": String(identityToken!), "id": userID]).continueWith { task -> Any? in
+                    // Apple Sign In failed
+                    if ((task.error) != nil){
+                        let alert = UIAlertController(title: "Login failed", message: task.error!.localizedDescription.localizedCapitalized, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                        NSLog("The \"OK\" alert occured.")
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                        return task
+                    }
+                
+                    // Apple Sign In success
+                    DispatchQueue.main.async {
+                        // If new account (display name not set), set a default and direct to profile edit
+                        if(PFUser.current()?["name"] as? String ?? "" == "") {
+                            let firstName = appleIDCredential.fullName?.givenName ?? ""
+                            let lastName = appleIDCredential.fullName?.familyName ?? ""
+                            PFUser.current()!["name"] = String(firstName + " " + lastName)
+                            PFUser.current()?.saveInBackground(block: { (success, error) in
+                                self.performSegue(withIdentifier: "toAccountSetup", sender: self)
+                            })
+                            
+                        } else {
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }
+                    }
+                
+                return nil
             }
         }
     }
     
     /**
-     Called when background is tapped, closes keyboard
+     Runs when Sign In with Apple button is pressed
      */
-    @IBAction func onTapScreen(_ sender: Any) {
-        usernameField.resignFirstResponder()
-        passwordField.resignFirstResponder()
-    }
+    @objc func appleSignInTapped() {
+        let provider = ASAuthorizationAppleIDProvider()
+        let request = provider.createRequest()
+        
+        request.requestedScopes = [.fullName]
+
+        // Pass the request to the initializer of the controller
+        let authController = ASAuthorizationController(authorizationRequests: [request])
     
-    /**
-     Logic for input order
-     */
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-            case usernameField:
-                usernameField.resignFirstResponder()
-                passwordField.becomeFirstResponder()
-            default:
-                usernameField.resignFirstResponder()
-                passwordField.resignFirstResponder()
-        }
-        return false
+        authController.presentationContextProvider = self
+        authController.delegate = self
+          
+        authController.performRequests()
     }
     
     /*

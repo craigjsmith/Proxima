@@ -56,7 +56,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
             user.fetchIfNeededInBackground { (user, error) in
                 if user != nil {
                     let userPF = user as! PFUser
-                    self.userLabel.text = String("Shared by ") + (userPF.username as! String)
+                    self.userLabel.text = String("Shared by ") + (userPF["name"] as! String)
                 } else {
                     print("Error: \(error?.localizedDescription)")
                 }
@@ -239,7 +239,6 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             visited = true
             disableVisitButton(visited: visited)
-            print("VISITED LOCATION " + String(location!.objectId!))
             PFUser.current()?.add(location!, forKey: "visited_locations")
             PFUser.current()?.saveInBackground()
         }
