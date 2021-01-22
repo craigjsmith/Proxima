@@ -29,9 +29,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     /// Annotation view of map for ProximaPointAnnotation
     var annotationView: MKAnnotationView!
     
-    /// Collection of Location objects to show on map
-    var locations = [PFObject]()
-    
     /// Currently selected ProximaPointAnnotation, used for passing to segue
     var selectedAnnotation: ProximaPointAnnotation?
     
@@ -144,11 +141,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
      - rect : rectangle to increase
      */
     func increaseLoadRectangle(rect :MKMapRect) {
-        let newX = rect.minX
-        let newY = rect.minY
-        let newWidth = rect.width
-        let newHeight = rect.height
-        loadRectangle = MKMapRect(x: (newX - (newWidth/2)), y: (newY - (newHeight/2)), width: (newWidth*2), height: (newHeight*2))
+        let x = rect.minX
+        let y = rect.minY
+        let width = rect.width
+        let height = rect.height
+        loadRectangle = MKMapRect(x: (x - (width/2)), y: (y - (height/2)), width: (width*2), height: (height*2))
     }
     
     /**
@@ -156,7 +153,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
      */
     func reset() {
         map.removeAnnotations(map.annotations)
-        locations.removeAll()
         populateMap()
     }
     
@@ -164,7 +160,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
      Populate map with locations from the locations array
      */
     func populateMap() {
-        
         // User's location
         let ne = MKMapPoint(x: loadRectangle.maxX, y: loadRectangle.minY)
         let sw = MKMapPoint(x: loadRectangle.minX, y: loadRectangle.maxY)
@@ -234,6 +229,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.map.addAnnotation(pin)
             }
         }
+
     }
     
     /**
@@ -297,8 +293,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     loadRectangle = map.visibleMapRect
                 }
                 
-                populateMap()
                 increaseLoadRectangle(rect: map.visibleMapRect)
+                populateMap()
             }
         } else {
             if(mapDidLoad) {
@@ -321,7 +317,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             map.reloadInputViews()
             increaseLoadRectangle(rect: map.visibleMapRect)
             mapDidLoad = true
-            populateMap()
         }
     }
     
