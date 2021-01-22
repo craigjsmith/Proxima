@@ -124,7 +124,6 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         query.findObjectsInBackground { (newLocations, error) in
             if newLocations != nil {
                 self.locations.append(contentsOf: newLocations!)
-
             }
             self.tableView.reloadData()
             self.tableRefreshControl.endRefreshing()
@@ -181,9 +180,36 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedViewCell") as! FeedViewCell
         let location = locations[indexPath.row]
         
-        // Set name and category
+        // Set name
         cell.nameLabel.text = location["name"] as? String
-        cell.categoryLabel.text = location["category"] as? String ?? ""
+        
+        // Set category
+        let category = location["category"] as! String
+        var emoji = ""
+        
+        if (category == "Art") {
+            emoji = "🎨"
+        }
+        else if (category == "Nature") {
+            emoji = "🌳"
+        }
+        else if (category == "Urban") {
+            emoji = "🏬"
+        }
+        else if (category == "Rustic") {
+            emoji = "🏚"
+        }
+        else if (category == "Historical") {
+            emoji = "📜"
+        }
+        else if (category == "Landmark") {
+            emoji = "📍"
+        }
+        else {
+            emoji = "❓"
+        }
+        
+        cell.categoryLabel.text = emoji + " " + category
         
         // Check that user location is valid
         if(userGeoPoint.latitude != 0) {

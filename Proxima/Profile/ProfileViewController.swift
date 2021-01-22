@@ -22,7 +22,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     var visitedLocations: [PFObject] = []
     var achievements: [String] = []
 
-
     /**
      Called when view loads
      */
@@ -65,26 +64,13 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         
         super.viewDidAppear(animated)
-        
-        // If user logged in, show logout and edit profile button (only on Profile tab, not leaderboard)
-        if(PFUser.current() != nil && currentUser == nil){
-            let logoutButton = UIBarButtonItem(title: "Logout", style: UIBarButtonItem.Style.plain, target: self, action: Selector("logout"))
-            navigationItem.rightBarButtonItem = logoutButton
-            
-            let editProfileButton = UIBarButtonItem(title: "Edit Profile", style: UIBarButtonItem.Style.plain, target: self, action: Selector("editProfile"))
-            navigationItem.leftBarButtonItem = editProfileButton
-            editProfileButton.image = UIImage(systemName:"gear")
-        }
-
-        
-        // Not passing from leaderboard, use current logged in user
-        if(self.currentUser == nil) {
-            self.currentUser = PFUser.current()!
-        }
-        
+    
         populate()
     }
     
+    /**
+     Reloads data when modal is closed
+     */
     @objc func handleModalDismissed() {
         createdLocations.removeAll()
         visitedLocations.removeAll()
@@ -93,6 +79,9 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         populate()
     }
     
+    /**
+     Segues to profile editing screen
+     */
     @objc func editProfile() {
         performSegue(withIdentifier: "toEditProfile", sender: self)
     }
@@ -101,6 +90,22 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
      Loads user info
      */
     func populate(){
+        
+        // Set user
+        if(self.currentUser == nil) {
+            self.currentUser = PFUser.current()!
+        }
+        
+        // If user logged in, show logout and edit profile button (only on Profile tab, not leaderboard)
+        if(PFUser.current() == currentUser) {
+            let infoButton = UIBarButtonItem(title: "Info", style: UIBarButtonItem.Style.plain, target: self, action: Selector("showInfo"))
+            navigationItem.rightBarButtonItem = infoButton
+            infoButton.image = UIImage(systemName:"info.circle")
+            
+            let editProfileButton = UIBarButtonItem(title: "Edit Profile", style: UIBarButtonItem.Style.plain, target: self, action: Selector("editProfile"))
+            navigationItem.leftBarButtonItem = editProfileButton
+            editProfileButton.image = UIImage(systemName:"gear")
+        }
         
         // User name
         self.nameLabel.text = currentUser?["name"] as? String
@@ -119,18 +124,21 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
         self.visitedLocations = (currentUser["visited_locations"] as? [PFObject]) ?? []
         
-        // Check that all locations still exist, if not remove from db and local array
+        // Check that all visited locations still exist, if not remove from db and local array
         for location in visitedLocations {
-            
             location.fetchInBackground { (loc, error) in
                 if loc == nil {
+                    // Remove location on front-end
                     self.visitedLocations.remove(at: self.visitedLocations.firstIndex(of: location)!)
-                    PFUser.current()?.remove(location, forKey: "visited_locations")
+                    
+                    // If profile is of current user, remove location from user's profile on backend
+                    if(PFUser.current() == self.currentUser) {
+                        PFUser.current()?.remove(location, forKey: "visited_locations")
+                        PFUser.current()?.saveInBackground()
+                    }
                 }
                 self.visitedLocationsCollectionView.reloadData()
-                PFUser.current()?.saveInBackground()
             }
-            
         }
         
         addedLocationsCollectionView.reloadData()
@@ -225,18 +233,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     /**
-     Log out from current account
+     Show info page
      */
-    @objc func logout() {
-        PFUser.logOut()
-        
-        let main = UIStoryboard(name: "Main", bundle: nil)
-        
-        let map = main.instantiateViewController(identifier: "FeedNavigationController")
-        
-        let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
-        
-        delegate.window?.rootViewController = map
+    @objc func showInfo() {
+        performSegue(withIdentifier: "toInfo", sender: self)
     }
 
     // MARK: - Navigation

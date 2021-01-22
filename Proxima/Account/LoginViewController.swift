@@ -164,6 +164,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ASAuthorizatio
         authController.performRequests()
     }
     
+    @IBAction func openTos(_ sender: Any) {
+        if let url = URL(string: "https://www.craigsmith.dev/proxima/terms.html") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    @IBAction func openPrivacy(_ sender: Any) {
+        if let url = URL(string: "https://www.craigsmith.dev/proxima/privacy.html") {
+            UIApplication.shared.open(url)
+        }
+    }
     /*
     // MARK: - Navigation
 

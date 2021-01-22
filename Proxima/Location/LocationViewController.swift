@@ -223,6 +223,21 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    @IBAction func reportButton(_ sender: Any) {
+        let alert = UIAlertController(title: "Report Content?", message: "Would you like to report this content as abusive, profane, or innapropriate?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Report", comment: "Destructive action"), style: .destructive, handler: { _ in
+
+            self.dismiss(animated: true, completion: {})
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: { _ in
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     /**
      Marks location as visited by current user
      */

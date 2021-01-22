@@ -209,7 +209,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         let image = info[.editedImage] as! UIImage
         
         // Compress image before uploading
-        let imageCompressed = image.jpegData(compressionQuality: 0.5)
+        let imageCompressed = image.jpegData(compressionQuality: 0.4)
         let file = PFFileObject(data: imageCompressed!)
         
         self.locationImageFile = file

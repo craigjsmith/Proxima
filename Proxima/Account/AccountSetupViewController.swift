@@ -72,33 +72,62 @@ class AccountSetupViewController: UIViewController, UIImagePickerControllerDeleg
         dismiss(animated: true, completion: nil)
     }
     
+    /**
+     Submits and updates new user info
+     */
     @IBAction func onSubmit(_ sender: Any) {
-        let name = nameField.text
-        PFUser.current()!["name"] = name
+        let name = nameField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if self.imageSet {
-            let imageData = self.profileImageView.image!.jpegData(compressionQuality: 0.5)
-            let file = PFFileObject(data: imageData!)
-            PFUser.current()!["profile_image"] = file
+        if(name!.count >= 3 && name!.count <= 16 ) {
+            PFUser.current()!["name"] = name
+            if self.imageSet {
+                let imageData = self.profileImageView.image!.jpegData(compressionQuality: 0.4)
+                let file = PFFileObject(data: imageData!)
+                PFUser.current()!["profile_image"] = file
+            }
+            
+            PFUser.current()?.saveInBackground(block: { (success, error) in
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalDismissed"), object: nil)
+                self.navigationController?.popToRootViewController(animated: true)
+                self.dismiss(animated: true)
+            })
+        } else {
+            let error = UIAlertController(title: "Invalid Name", message: "Names must be between 3 and 16 characters.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
         }
-        
-        PFUser.current()?.saveInBackground(block: { (success, error) in
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalDismissed"), object: nil)
-            self.navigationController?.popToRootViewController(animated: true)
-            self.dismiss(animated: true)
-        })
 
     }
     
+    /**
+     Closes keyboard when background is clicked
+     */
     @IBAction func onBackground(_ sender: Any) {
         nameField.resignFirstResponder()
     }
     
+    /**
+     Keyboard closes when Done is pressed
+     */
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
-
         textField.resignFirstResponder()
         return true
+    }
+    
+    /**
+     Logout current user
+     */
+    @IBAction func logoutButton(_ sender: Any) {
+        PFUser.logOut()
+
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let map = main.instantiateViewController(identifier: "FeedNavigationController")
+        let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
+        
+        delegate.window?.rootViewController = map
+ 
     }
     
     /*
