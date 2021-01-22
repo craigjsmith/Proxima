@@ -27,7 +27,9 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var pictureView: UIImageView!
     @IBOutlet weak var addLocationButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    
+    // Becomes either delete/report location
+    @IBOutlet weak var destructiveButton: UIButton!
     
     /**
      Called when view loads
@@ -91,10 +93,16 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
                 }
             })
             
-            // If user created location, show delete button
-            if user.objectId == PFUser.current()?.objectId {
-                self.deleteButton.isHidden = false
+            
+            // If author show delete button, otherwise report button
+            if (user.objectId == PFUser.current()?.objectId) {
+                self.destructiveButton.setTitle("Delete Location", for: .normal)
+                self.destructiveButton.addTarget(self, action: #selector(onDelete), for: .touchUpInside)
+            } else {
+                self.destructiveButton.setTitle("Report Location", for: .normal)
+                self.destructiveButton.addTarget(self, action: #selector(onReport), for: .touchUpInside)
             }
+             
             
         }
         
@@ -203,7 +211,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     /**
      Runs when delete button is tapped, confirms with user
      */
-    @IBAction func onDeleteButton(_ sender: Any) {
+    @objc func onDelete() {
         
         let alert = UIAlertController(title: "Delete Location?", message: "Are you sure you want to pernamently delete this location?", preferredStyle: .alert)
         
@@ -223,19 +231,34 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    @IBAction func reportButton(_ sender: Any) {
-        let alert = UIAlertController(title: "Report Content?", message: "Would you like to report this content as abusive, profane, or innapropriate?", preferredStyle: .alert)
+    /**
+     Handles content reporting
+     */
+    @objc func onReport() {
+        let reportAlert = UIAlertController(title: "Report Content?", message: "Please let us know why you are reporting this content.", preferredStyle: .alert)
+        reportAlert.addTextField { (reportMessage) in }
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Report", comment: "Destructive action"), style: .destructive, handler: { _ in
-
-            self.dismiss(animated: true, completion: {})
+        reportAlert.addAction(UIAlertAction(title: NSLocalizedString("Report", comment: "Destructive action"), style: .destructive, handler: { _ in
             
+            // Post report to db
+            let post = PFObject(className: "Reports")
+            post["content"] = self.location
+            post["message"] = reportAlert.textFields![0].text
+            post.saveInBackground { (success, error) in
+            
+                // Display confirmation
+                let confirmAlert = UIAlertController(title: "Report Submitted", message: "Thanks for reporting, we'll take a look soon.", preferredStyle: .alert)
+                    confirmAlert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+                self.present(confirmAlert, animated: true, completion: nil)
+            
+            }
+
         }))
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: { _ in
+        reportAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: { _ in
         }))
         
-        self.present(alert, animated: true, completion: nil)
+        self.present(reportAlert, animated: true, completion: nil)
     }
     
     /**

@@ -478,7 +478,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Kw-bA-Q6d">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Kw-bA-Q6d">
                                 <rect key="frame" x="120" y="472.5" width="135" height="30"/>
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
@@ -492,18 +492,6 @@
                                         <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onDeleteButton:" destination="ffC-zv-YOK" eventType="touchUpInside" id="ZMy-h6-HtR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XD3-XQ-33o">
-                                <rect key="frame" x="134.5" y="527.5" width="106" height="30"/>
-                                <state key="normal" title="Report Content">
-                                    <color key="titleColor" systemColor="systemPinkColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="reportButton:" destination="ffC-zv-YOK" eventType="touchUpInside" id="psX-Vk-jqK"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KTn-Yc-G1l"/>
@@ -529,9 +517,7 @@
                             <constraint firstItem="xnE-r5-y7r" firstAttribute="leading" secondItem="KTn-Yc-G1l" secondAttribute="leading" constant="100" id="loE-gO-aJ6"/>
                             <constraint firstItem="KTn-Yc-G1l" firstAttribute="trailing" secondItem="Czb-3H-96J" secondAttribute="trailing" constant="20" id="nL7-rs-237"/>
                             <constraint firstItem="DlT-dT-mHV" firstAttribute="centerX" secondItem="KTn-Yc-G1l" secondAttribute="centerX" id="oGT-FV-yBE"/>
-                            <constraint firstItem="XD3-XQ-33o" firstAttribute="top" secondItem="1Kw-bA-Q6d" secondAttribute="bottom" constant="25" id="riy-ft-MvG"/>
                             <constraint firstItem="xnE-r5-y7r" firstAttribute="top" secondItem="37d-De-O6q" secondAttribute="bottom" constant="6" id="sXE-nD-O7A"/>
-                            <constraint firstItem="XD3-XQ-33o" firstAttribute="centerX" secondItem="KTn-Yc-G1l" secondAttribute="centerX" id="uqs-hN-ZsW"/>
                             <constraint firstItem="nvS-el-aFS" firstAttribute="leading" secondItem="KTn-Yc-G1l" secondAttribute="leading" constant="20" id="wUm-PH-eF8"/>
                             <constraint firstItem="fdP-XY-iny" firstAttribute="top" secondItem="xnE-r5-y7r" secondAttribute="bottom" constant="8" symbolic="YES" id="wXU-1n-ayo"/>
                             <constraint firstItem="nvS-el-aFS" firstAttribute="top" secondItem="DlT-dT-mHV" secondAttribute="bottom" constant="15" id="xff-7S-HXw"/>
@@ -541,8 +527,8 @@
                     <connections>
                         <outlet property="addLocationButton" destination="fdP-XY-iny" id="9E2-Cb-HVm"/>
                         <outlet property="categoryLabel" destination="1Aw-iI-unc" id="Pwx-uI-wru"/>
-                        <outlet property="deleteButton" destination="1Kw-bA-Q6d" id="7xN-QW-mbn"/>
                         <outlet property="descriptionLabel" destination="DlT-dT-mHV" id="mnb-pU-WK4"/>
+                        <outlet property="destructiveButton" destination="1Kw-bA-Q6d" id="7xN-QW-mbn"/>
                         <outlet property="nameLabel" destination="37d-De-O6q" id="ChM-Xy-Bw0"/>
                         <outlet property="pictureView" destination="Czb-3H-96J" id="jDW-Wj-7WX"/>
                         <outlet property="userLabel" destination="xnE-r5-y7r" id="0dY-ai-sbz"/>
@@ -1395,9 +1381,6 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
