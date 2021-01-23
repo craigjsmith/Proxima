@@ -143,7 +143,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         addedLocationsCollectionView.reloadData()
         visitedLocationsCollectionView.reloadData()
-        view.hideSkeleton()
+        view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 
     

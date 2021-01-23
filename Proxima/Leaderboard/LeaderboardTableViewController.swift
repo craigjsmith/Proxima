@@ -32,6 +32,7 @@ class LeaderboardTableViewController: UITableViewController, SkeletonTableViewDa
         super.viewDidAppear(true)
         self.tableView.isSkeletonable = true
         self.tableView.showAnimatedSkeleton()
+        
     }
     
     /**
@@ -45,7 +46,8 @@ class LeaderboardTableViewController: UITableViewController, SkeletonTableViewDa
      Called when view appears
      */
     override func viewDidAppear(_ animated: Bool) {
-
+        // Scroll to top
+        self.tableView.scrollRectToVisible(CGRect(x:0, y:0, width:1, height:1), animated: false)
     }
     
     /**
@@ -73,9 +75,6 @@ class LeaderboardTableViewController: UITableViewController, SkeletonTableViewDa
                 self.tableView.reloadData()
                 self.tableRefreshControl.endRefreshing()
                 self.tableView.hideSkeleton()
-                
-                // Scroll to top
-                self.tableView.scrollRectToVisible(CGRect(x:0, y:0, width:1, height:1), animated: false)
             }
         }
     }
