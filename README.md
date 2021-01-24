@@ -2,9 +2,13 @@
 <img src="assets/Proxima-Icon-Round.png" width="200">
 
 ## Table of Contents
+1. [Download](#Download)
 1. [Description](#Description)
 1. [Features](#Features)
 1. [Server](#Server)
+
+## Download
+<a href = "https://apps.apple.com/us/app/proxima-discover-your-world/id1549569394" target = "_blank"><img src="assets/appstore.png" width="200"></a>
 
 ## Description
 Proxima is an app for discovering and sharing the best points-of-interest near you. All locations in the app are crowdsourced by users.
