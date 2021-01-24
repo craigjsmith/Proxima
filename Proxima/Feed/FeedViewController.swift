@@ -129,9 +129,6 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
             self.tableRefreshControl.endRefreshing()
             self.tableView.hideSkeleton()
             self.tableView.stopSkeletonAnimation()
-            
-            // Scroll to top
-            self.tableView.scrollRectToVisible(CGRect(x:0, y:0, width:1, height:1), animated: false)
         }
     }
     
