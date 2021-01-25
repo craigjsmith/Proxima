@@ -9,7 +9,7 @@ import SkeletonView
 
 /// View controller for Profile
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SkeletonCollectionViewDataSource  {
-
+    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
@@ -51,6 +51,11 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         // Space between rows
         layout.minimumLineSpacing = 20
+        
+    }
+    
+    @objc func reset() {
+        
     }
     
     /**
@@ -118,7 +123,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         if currentUser?["profile_image"] != nil {
             let imageFile = currentUser?["profile_image"] as! PFFileObject
             let imageUrl = URL(string: imageFile.url!)!
-            self.profileImage.af.setImage(withURL: imageUrl)
+            self.profileImage.af.setImage(withURL: imageUrl, placeholderImage: UIImage.imageWithColor(color: UIColor.quaternaryLabel))
         }
         
         self.createdLocations = (currentUser["created_locations"] as? [PFObject]) ?? []
@@ -185,7 +190,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                     
                     if(imageFile != nil) {
                         let imageUrl = URL(string: (imageFile?.url!)!)
-                        cell.imageView?.af.setImage(withURL: imageUrl!)
+                        cell.imageView?.af.setImage(withURL: imageUrl!, placeholderImage: UIImage.imageWithColor(color: UIColor.quaternaryLabel))
                         
                     } else {
                         cell.imageView.image = nil
@@ -211,7 +216,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                     
                     if(imageFile != nil) {
                         let imageUrl = URL(string: (imageFile?.url!)!)
-                        cell.imageView?.af.setImage(withURL: imageUrl!)
+                        cell.imageView?.af.setImage(withURL: imageUrl!, placeholderImage: UIImage.imageWithColor(color: UIColor.quaternaryLabel))
                         
                     } else {
                         cell.imageView.image = nil

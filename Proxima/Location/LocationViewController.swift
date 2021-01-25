@@ -76,7 +76,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
             if location?["image"] != nil {
                 let imageFile = location?["image"] as! PFFileObject
                 let imageUrl = URL(string: imageFile.url!)!
-                self.pictureView.af_setImage(withURL: imageUrl)
+                self.pictureView?.af.setImage(withURL: imageUrl, placeholderImage: UIImage.imageWithColor(color: UIColor.quaternaryLabel))
             }
             
             getWeather(lat:coord.latitude, long:coord.longitude)
@@ -102,8 +102,6 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
                 self.destructiveButton.setTitle("Report Location", for: .normal)
                 self.destructiveButton.addTarget(self, action: #selector(onReport), for: .touchUpInside)
             }
-             
-            
         }
         
         else {
@@ -187,7 +185,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
      Delete location, only visible and functional by author
      */
     func deleteLocation() {
-        
+        destructiveButton.isEnabled = false;
         PFUser.current()?.remove(location!, forKey: "created_locations")
         PFUser.current()?.incrementKey("score", byAmount: -1) // Remove star from user
         PFUser.current()?.saveInBackground(block: { (success, error) in
@@ -275,7 +273,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             visited = true
             disableVisitButton(visited: visited)
-            PFUser.current()?.incrementKey("score") // Award user a star
+            PFUser.current()?.incrementKey("score", byAmount: 1) // Award user a star
             PFUser.current()?.add(location!, forKey: "visited_locations")
             PFUser.current()?.saveInBackground()
         }

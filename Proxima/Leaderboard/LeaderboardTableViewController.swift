@@ -55,7 +55,7 @@ class LeaderboardTableViewController: UITableViewController, SkeletonTableViewDa
      */
     @objc func reset() {
         profiles = [PFObject]()
-        populate(limit: 10, skip: 0)
+        populate(limit: 15, skip: 0)
         self.tableView.contentOffset = CGPoint.zero
         self.tableView.reloadData()
     }
@@ -109,8 +109,8 @@ class LeaderboardTableViewController: UITableViewController, SkeletonTableViewDa
                     print(error.localizedDescription)
                 } else {
                     if(count > self.profiles.count) {
-                        // Load 10 more, skip for rows already created
-                        self.populate(limit: 10, skip: tableView.numberOfRows(inSection: 0))
+                        // Load more, skip for rows already created
+                        self.populate(limit: 15, skip: tableView.numberOfRows(inSection: 0))
                     }
                 }
             }
@@ -138,11 +138,13 @@ class LeaderboardTableViewController: UITableViewController, SkeletonTableViewDa
         if profile["profile_image"] != nil {
             let imageFile = profile["profile_image"] as! PFFileObject
             let imageUrl = URL(string: imageFile.url!)
-            cell.profileImage.af.setImage(withURL: imageUrl!)
+            cell.profileImage.af.setImage(withURL: imageUrl!, placeholderImage: UIImage.imageWithColor(color: UIColor.quaternaryLabel))
         } else {
             cell.profileImage.image = UIImage(systemName: "person.circle.fill")
             cell.profileImage.tintColor = UIColor.darkGray
         }
+        
+        cell.hideSkeleton()
         
         return cell
     }

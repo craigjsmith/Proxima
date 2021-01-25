@@ -25,7 +25,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Proxima can use you camera to upload pictures to locations you add</string>
+	<string>Proxima can use your camera to upload pictures to locations you add</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Proxima needs your location to show you points of interest near you</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -62,7 +62,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

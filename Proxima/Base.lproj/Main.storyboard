@@ -366,7 +366,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Proxima" id="mLD-Mb-iIL">
-                        <barButtonItem key="rightBarButtonItem" title="+" systemItem="add" id="95s-GX-wgH">
+                        <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="95s-GX-wgH">
                             <connections>
                                 <action selector="onAddLocation:" destination="Tdg-vu-fim" id="zOF-4s-Bim"/>
                             </connections>
@@ -543,7 +543,7 @@
         <scene sceneID="MnJ-BP-poQ">
             <objects>
                 <tableViewController id="kJw-mx-Wyk" customClass="LeaderboardTableViewController" customModule="Proxima" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="Jvg-fJ-DUL">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="100" sectionHeaderHeight="28" estimatedSectionHeaderHeight="28" sectionFooterHeight="28" id="Jvg-fJ-DUL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -727,7 +727,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Feed" id="Hmw-DW-m42">
-                        <barButtonItem key="rightBarButtonItem" title="+" systemItem="add" id="t3n-O7-X7g">
+                        <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="t3n-O7-X7g">
                             <connections>
                                 <action selector="onAddLocation:" destination="6Sw-Vq-oGR" id="hEz-f1-Vj4"/>
                             </connections>
@@ -785,10 +785,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8d2-2A-X40">
-                                                <rect key="frame" x="20" y="210" width="80" height="36"/>
+                                                <rect key="frame" x="20" y="210" width="63" height="36"/>
                                                 <gestureRecognizers/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <state key="normal" title="Browse..."/>
+                                                <state key="normal" title="Upload"/>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="dnc-wY-xI4" appends="YES" id="LFt-ZA-7ms"/>
                                                 </connections>
@@ -899,6 +899,7 @@
                         <outlet property="locationName" destination="lZE-c2-zK0" id="Iqm-uV-IhN"/>
                         <outlet property="map" destination="CWR-i7-q7v" id="Qvi-at-GQA"/>
                         <outlet property="postButton" destination="zBO-ki-WyD" id="dad-fG-Qj7"/>
+                        <outlet property="uploadButton" destination="8d2-2A-X40" id="WNT-aJ-W9w"/>
                         <segue destination="Gba-JZ-aAc" kind="show" identifier="toMap" id="AMC-FW-KTM"/>
                     </connections>
                 </viewController>
@@ -1326,7 +1327,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="bdW-WC-ZQ7"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rgp-Ew-czV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1363,7 +1364,7 @@
         <segue reference="PCn-Lp-fLe"/>
         <segue reference="tR4-8n-OrL"/>
         <segue reference="3YW-Li-Za8"/>
-        <segue reference="LSd-ft-YUJ"/>
+        <segue reference="YvJ-70-cEu"/>
         <segue reference="EB2-Vo-wdd"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1371,6 +1372,7 @@
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="rectangle.stack.fill" catalog="system" width="128" height="122"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="quaternaryLabelColor">

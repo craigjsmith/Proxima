@@ -50,8 +50,6 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         tableRefreshControl.addTarget(self, action: #selector(reset), for: .valueChanged)
         tableView.refreshControl = tableRefreshControl
         
-        self.tableView.hideSkeleton()
-        
     }
     
     /**
@@ -100,7 +98,7 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
      */
     @objc func reset() {
         locations = [PFObject]()
-        populate(limit: 10, skip: 0)
+        populate(limit: 15, skip: 0)
         self.tableView.showAnimatedSkeleton()
         self.tableView.reloadData()
     }
@@ -128,7 +126,6 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
             self.tableView.reloadData()
             self.tableRefreshControl.endRefreshing()
             self.tableView.hideSkeleton()
-            self.tableView.stopSkeletonAnimation()
         }
     }
     
@@ -161,8 +158,8 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
                     print(error.localizedDescription)
                 } else {
                     if(count > self.locations.count) {
-                        // Load 10 more, skip for rows already created
-                        self.populate(limit: 10, skip: tableView.numberOfRows(inSection: 0))
+                        // Load more, skip for rows already created
+                        self.populate(limit: 15, skip: tableView.numberOfRows(inSection: 0))
                     }
                 }
             }
@@ -228,7 +225,8 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         
         if(imageFile != nil) {
             let imageUrl = URL(string: (imageFile?.url!)!)
-            cell.locationImage?.af.setImage(withURL: imageUrl!)
+            
+            cell.locationImage?.af.setImage(withURL: imageUrl!, placeholderImage: UIImage.imageWithColor(color: UIColor.quaternaryLabel))
             
         } else {
             cell.locationImage.image = nil
@@ -236,8 +234,6 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         
         cell.setNeedsLayout()
         cell.layoutIfNeeded()
-        
-        cell.stopSkeletonAnimation()
         cell.hideSkeleton()
         
         return cell
@@ -272,4 +268,15 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         }
     }
     
+}
+
+extension UIImage {
+    class func imageWithColor(color: UIColor, size: CGSize=CGSize(width: 1, height: 1)) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(CGRect(origin: CGPoint.zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return image
+    }
 }

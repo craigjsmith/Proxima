@@ -16,6 +16,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
     @IBOutlet weak var categoryChecker: UIPickerView!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var postButton: UIButton!
+    @IBOutlet weak var uploadButton: UIButton!
     
     var locationManager: CLLocationManager?
     
@@ -144,7 +145,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
                 if success {
                     let user = PFUser.current()
                     user?.add(post, forKey: "created_locations") // Add this location to the ones created by the current user
-                    user?.incrementKey("score") // Award user a star
+                    user?.incrementKey("score", byAmount: 1) // Award user a star
                     user?.saveInBackground() // Save user with new info
                     print("Location saved");
                     
@@ -194,12 +195,28 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         picker.delegate = self
         picker.allowsEditing = true
         
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            picker.sourceType = .photoLibrary
+        let optionMenu = UIAlertController(title: nil, message: "Choose Image Source", preferredStyle: .actionSheet)
             
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (UIAlertAction) in
+            picker.sourceType = .camera
+            self.present(picker, animated: true, completion: nil)
         }
+        let galleryAction = UIAlertAction(title: "Gallery", style: .default) { (UIAlertAction) in
+            picker.sourceType = .photoLibrary
+            self.present(picker, animated: true, completion: nil)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            
+        optionMenu.addAction(cameraAction)
+        optionMenu.addAction(galleryAction)
+        optionMenu.addAction(cancelAction)
+            
+        // Anchor point (for iPad)
+        optionMenu.popoverPresentationController?.sourceView = uploadButton
         
-        present(picker, animated: true, completion: nil)
+        self.present(optionMenu, animated: true, completion: nil)
+        
     }
     
     /**
@@ -213,6 +230,9 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         let file = PFFileObject(data: imageCompressed!)
         
         self.locationImageFile = file
+        
+        uploadButton.setTitle("Uploaded", for: .normal)
+        uploadButton.isEnabled = false
         
         dismiss(animated: true, completion: nil)
     }
