@@ -138,7 +138,7 @@ class LeaderboardTableViewController: UITableViewController, SkeletonTableViewDa
         if profile["profile_image"] != nil {
             let imageFile = profile["profile_image"] as! PFFileObject
             let imageUrl = URL(string: imageFile.url!)
-            cell.profileImage.af.setImage(withURL: imageUrl!, placeholderImage: UIImage.imageWithColor(color: UIColor.quaternaryLabel))
+            cell.profileImage.af.setImage(withURL: imageUrl!, placeholderImage: UIImage(systemName: "person.circle.fill"))
         } else {
             cell.profileImage.image = UIImage(systemName: "person.circle.fill")
             cell.profileImage.tintColor = UIColor.darkGray

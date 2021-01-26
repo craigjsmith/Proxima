@@ -105,8 +105,8 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZh-iu-tEk">
-                                                                    <rect key="frame" x="81" y="128" width="42" height="20.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZh-iu-tEk">
+                                                                    <rect key="frame" x="69" y="128" width="66" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -209,8 +209,8 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOk-Rd-0mc">
-                                                                    <rect key="frame" x="81" y="128" width="42" height="20.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOk-Rd-0mc">
+                                                                    <rect key="frame" x="69" y="128" width="66" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -305,7 +305,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="Qi9-9K-A4c"/>
                     <connections>
-                        <outlet property="addedLocationsCollectionView" destination="0q9-4d-sgS" id="W6J-VW-w6t"/>
+                        <outlet property="createdLocationsCollectionView" destination="0q9-4d-sgS" id="W6J-VW-w6t"/>
                         <outlet property="nameLabel" destination="pme-Pt-xHy" id="Of9-ga-2Iu"/>
                         <outlet property="profileImage" destination="Wm5-iQ-f7g" id="HQV-7D-wem"/>
                         <outlet property="starsLabel" destination="qit-cn-KjD" id="ghg-3N-ale"/>
@@ -691,7 +691,6 @@
                                         <constraint firstItem="gEO-Ct-aEe" firstAttribute="top" secondItem="poS-l7-Lw4" secondAttribute="top" constant="2" id="Di9-5a-reU"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="bc1-DE-hiU" secondAttribute="trailing" id="GHK-jF-GLX"/>
                                         <constraint firstItem="gEO-Ct-aEe" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="MPH-81-A89"/>
-                                        <constraint firstItem="bc1-DE-hiU" firstAttribute="top" secondItem="GiR-jw-ec0" secondAttribute="bottom" id="ab2-Jy-WzN"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="gEO-Ct-aEe" secondAttribute="trailing" id="iIU-im-C1q"/>
                                         <constraint firstItem="poS-l7-Lw4" firstAttribute="leading" secondItem="KF3-hi-KIy" secondAttribute="leadingMargin" constant="10" id="jEP-Ja-U7K"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="poS-l7-Lw4" secondAttribute="bottom" constant="8" id="khk-Lq-sCo"/>
@@ -785,7 +784,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8d2-2A-X40">
-                                                <rect key="frame" x="20" y="210" width="63" height="36"/>
+                                                <rect key="frame" x="20" y="210" width="335" height="36"/>
                                                 <gestureRecognizers/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <state key="normal" title="Upload"/>
@@ -846,6 +845,7 @@
                                             <constraint firstItem="KBK-6D-l3N" firstAttribute="top" secondItem="CWR-i7-q7v" secondAttribute="bottom" constant="8" symbolic="YES" id="Tg6-Sk-75V"/>
                                             <constraint firstItem="ltY-7y-x3P" firstAttribute="leading" secondItem="3Lx-xj-JqV" secondAttribute="leading" constant="20" symbolic="YES" id="WW2-tQ-Z09"/>
                                             <constraint firstItem="ntE-Sy-Ohf" firstAttribute="top" secondItem="3Lx-xj-JqV" secondAttribute="top" constant="30" id="WWo-PF-GPe"/>
+                                            <constraint firstAttribute="trailing" secondItem="8d2-2A-X40" secondAttribute="trailing" constant="20" symbolic="YES" id="Xis-HX-qhY"/>
                                             <constraint firstItem="lZE-c2-zK0" firstAttribute="leading" secondItem="3Lx-xj-JqV" secondAttribute="leading" constant="20" id="aXz-HC-s0x"/>
                                             <constraint firstItem="8d2-2A-X40" firstAttribute="top" secondItem="t4q-hE-4fA" secondAttribute="bottom" constant="8" symbolic="YES" id="bc2-Qu-OO4"/>
                                             <constraint firstItem="CWR-i7-q7v" firstAttribute="leading" secondItem="3Lx-xj-JqV" secondAttribute="leading" id="d3p-gS-4Po"/>
@@ -915,7 +915,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="982" y="1366"/>
+            <point key="canvasLocation" x="981.60000000000002" y="1365.5172413793105"/>
         </scene>
         <!--Login-->
         <scene sceneID="PtJ-Rr-Yqs">

@@ -41,10 +41,6 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         
         tableView.dataSource = self
         
-        // Important for loading in new locations with correct scroll bar size
-        tableView.estimatedRowHeight = 127
-        tableView.rowHeight = 127
-        
         self.tableView.isSkeletonable = true
         
         tableRefreshControl.addTarget(self, action: #selector(reset), for: .valueChanged)

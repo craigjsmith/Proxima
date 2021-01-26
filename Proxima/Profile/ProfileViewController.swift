@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
     
-    @IBOutlet weak var addedLocationsCollectionView: UICollectionView!
+    @IBOutlet weak var createdLocationsCollectionView: UICollectionView!
     @IBOutlet weak var visitedLocationsCollectionView: UICollectionView!
     
     var currentUser: PFUser!
@@ -32,22 +32,22 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         view.showSkeleton()
         view.startSkeletonAnimation()
         
-        self.addedLocationsCollectionView.isSkeletonable = true
-        self.addedLocationsCollectionView.showAnimatedSkeleton()
+        self.createdLocationsCollectionView.isSkeletonable = true
+        self.createdLocationsCollectionView.showAnimatedSkeleton()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(ProfileViewController.handleModalDismissed),
                                                name: NSNotification.Name(rawValue: "modalDismissed"),
                                                object: nil)
         
-        addedLocationsCollectionView.delegate = self
-        addedLocationsCollectionView.dataSource = self
+        createdLocationsCollectionView.delegate = self
+        createdLocationsCollectionView.dataSource = self
         
         visitedLocationsCollectionView.delegate = self
         visitedLocationsCollectionView.dataSource = self
 
         // Configure collection view layout
-        let layout = addedLocationsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let layout = createdLocationsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         // Space between rows
         layout.minimumLineSpacing = 20
@@ -79,7 +79,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     @objc func handleModalDismissed() {
         createdLocations.removeAll()
         visitedLocations.removeAll()
-        addedLocationsCollectionView.reloadData()
+        createdLocationsCollectionView.reloadData()
         visitedLocationsCollectionView.reloadData()
         populate()
     }
@@ -146,7 +146,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             }
         }
         
-        addedLocationsCollectionView.reloadData()
+        createdLocationsCollectionView.reloadData()
         visitedLocationsCollectionView.reloadData()
         view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
@@ -163,7 +163,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
      Returns number of created locations to load from user
      */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == addedLocationsCollectionView {
+        if collectionView == createdLocationsCollectionView {
             return createdLocations.count
         }
         else {
@@ -176,8 +176,12 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
      */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-        if collectionView == addedLocationsCollectionView {
+        if collectionView == createdLocationsCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LocationHorizontalCell", for: indexPath) as! LocationHorizontalCell
+            
+            // Set text blank so arbitrary label doesn't show before loading. This won't
+            // be necessary when/if skeletonview is implemented on these collection views
+            cell.nameLabel.text = ""
             
             let location = self.createdLocations[indexPath.row] as! PFObject
             
@@ -203,6 +207,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LocationHorizontalCell", for: indexPath) as! LocationHorizontalCell
+            
+            // Set text blank so arbitrary label doesn't show before loading. This won't
+            // be necessary when/if skeletonview is implemented on these collection views
+            cell.nameLabel.text = ""
             
             let location = self.visitedLocations[indexPath.row] as! PFObject
             
@@ -253,7 +261,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         // Loads location then passes it to locationViewController
         if segue.identifier == "profileToSharedLocation" {
             let cell = sender as! UICollectionViewCell
-            let indexPath = addedLocationsCollectionView.indexPath(for: cell)!
+            let indexPath = createdLocationsCollectionView.indexPath(for: cell)!
             
             // Pass the selected object to the new view controller.
             let locationViewController = segue.destination as! LocationViewController
