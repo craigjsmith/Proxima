@@ -173,31 +173,9 @@ class FeedViewController: UITableViewController, SkeletonTableViewDataSource, CL
         // Set name
         cell.nameLabel.text = location["name"] as? String
         
-        // Set category
+        // Set category and emoji
         let category = location["category"] as! String
-        var emoji = ""
-        
-        if (category == "Art") {
-            emoji = "🎨"
-        }
-        else if (category == "Nature") {
-            emoji = "🌳"
-        }
-        else if (category == "Urban") {
-            emoji = "🏬"
-        }
-        else if (category == "Rustic") {
-            emoji = "🏚"
-        }
-        else if (category == "Historical") {
-            emoji = "📜"
-        }
-        else if (category == "Landmark") {
-            emoji = "📍"
-        }
-        else {
-            emoji = "❓"
-        }
+        var emoji = category_emojis[category] ?? "❓"
         
         cell.categoryLabel.text = emoji + " " + category
         

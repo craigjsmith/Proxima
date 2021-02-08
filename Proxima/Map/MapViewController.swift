@@ -38,14 +38,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     /// If map has completed loading for the first time
     var mapDidLoad = false;
     
-    /// Colors to use for ProximaPointAnnotation
-    let landmarkColor = UIColor(red: 61/255, green: 183/255, blue: 224/255, alpha: 1.0)
-    let natureColor = UIColor(red: 22/255, green: 171/255, blue: 47/255, alpha: 1.0)
-    let urbanColor = UIColor(red: 232/255, green: 89/255, blue: 70/255, alpha: 1.0)
-    let historicColor = UIColor(red: 242/255, green: 251/255, blue: 157/255, alpha: 1.0)
-    let photoopColor = UIColor(red: 141/255, green: 108/255, blue: 224/255, alpha: 1.0)
-    let unknownColor = UIColor(red: 179/255, green: 179/255, blue: 179/255, alpha: 1.0)
-    
     /**
      Called when view loads
      */
@@ -191,39 +183,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 pin.title = location["name"] as! String
                 
-                // Set color of pin based on category
-                
                 // Unwrap category array
                 let category = location["category"] as! String
                 
-                if (category == "Art") {
-                    pin.pinTintColor = self.photoopColor
-                    pin.emoji = "🎨"
-                }
-                else if (category == "Nature") {
-                    pin.pinTintColor = self.natureColor
-                    pin.emoji = "🌳"
-                }
-                else if (category == "Urban") {
-                    pin.pinTintColor = self.urbanColor
-                    pin.emoji = "🏬"
-                }
-                else if (category == "Rustic") {
-                    pin.pinTintColor = self.urbanColor
-                    pin.emoji = "🏚"
-                }
-                else if (category == "Historical") {
-                    pin.pinTintColor = self.historicColor
-                    pin.emoji = "📜"
-                }
-                else if (category == "Landmark") {
-                    pin.pinTintColor = self.landmarkColor
-                    pin.emoji = "📍"
-                }
-                else {
-                    pin.pinTintColor = self.unknownColor
-                    pin.emoji = "❓"
-                }
+                // Set color and emoji of pin based on category
+                pin.emoji = category_emojis[category] ?? "❓"
+                pin.pinTintColor = UIColor(hex: category_colors[category] as? String ?? "#c2c2c2")
                 
                 // Add pin to map
                 self.map.addAnnotation(pin)
@@ -341,4 +306,32 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
+}
+
+extension UIColor {
+    public convenience init?(hex: String) {
+        let r, g, b, a: CGFloat
+
+        if hex.hasPrefix("#") {
+            let start = hex.index(hex.startIndex, offsetBy: 1)
+            let hexColor = String(hex[start...])
+
+            if hexColor.count == 6 {
+                let scanner = Scanner(string: hexColor)
+                var hexNumber: UInt64 = 0
+
+                if scanner.scanHexInt64(&hexNumber) {
+                    r = CGFloat((hexNumber & 0xff0000) >> 16) / 255
+                    g = CGFloat((hexNumber & 0x00ff00) >> 8) / 255
+                    b = CGFloat(hexNumber & 0x0000ff) / 255
+                    a = 1
+
+                    self.init(red: r, green: g, blue: b, alpha: a)
+                    return
+                }
+            }
+        }
+
+        return nil
+    }
 }

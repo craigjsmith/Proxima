@@ -34,9 +34,6 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
     /// Pin representing location, draggable by user
     let dragPin = MKPointAnnotation()
     
-    /// Collection of all location categories
-    var pickerData: [String] = ["Landmark", "Nature", "Art", "Urban", "Rustic", "Historical"]
-    
     /**
      Called when view loads
      */
@@ -104,7 +101,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
         acl.hasPublicReadAccess = true
         post.acl = acl
         
-        // Check that required fields are entered
+        // Check that required fields are entered and meets requirements
         if (locationName.text == "") {
             let error = UIAlertController(title: "Missing Field", message: "The Name field is required.", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -113,6 +110,18 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
             postButton.isEnabled = true
         } else if (locationImageFile == nil) {
             let error = UIAlertController(title: "No Image Set", message: "You must upload an image.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
+            postButton.isEnabled = true
+        } else if (locationName.text!.count > 30) {
+            let error = UIAlertController(title: "Title Too Long", message: "Title may not exceed 30 characters.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            error.addAction(okButton)
+            self.present(error, animated: true, completion: nil)
+            postButton.isEnabled = true
+        } else if (locationDescription.text!.count > 300) {
+            let error = UIAlertController(title: "Description Too Long", message: "Description may not exceed 300 characters.", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
             error.addAction(okButton)
             self.present(error, animated: true, completion: nil)
@@ -129,7 +138,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
             post["geopoint"] = point
 
             // Set location category
-            var category = pickerData[categoryChecker.selectedRow(inComponent: 0)] as! String
+            var category = category_names[categoryChecker.selectedRow(inComponent: 0)] as! String
             post["category"] = category
             
             // Set location author
@@ -165,6 +174,13 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
      Close keyboard when background tapped
      */
     @IBAction func tapOnScreen(_ sender: Any) {
+        closeKeyboard()
+    }
+    
+    /**
+     Close keyboard
+     */
+    func closeKeyboard() {
         locationName.resignFirstResponder()
         locationDescription.resignFirstResponder()
     }
@@ -191,6 +207,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
      Runs when upload image button tapped on Add Location screen
      */
     @IBAction func onImageButton(_ sender: Any) {
+        closeKeyboard()
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
@@ -270,12 +287,14 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate,UIImagePi
     
     /// Number of categories to show in picker
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        return category_names.count
     }
     
     /// Get current selected location from scroll index
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+        let category = category_names[row]
+        let emoji = category_emojis[category] ?? "❓"
+        return emoji + " " + category
     }
     
     // MARK: - Navigation

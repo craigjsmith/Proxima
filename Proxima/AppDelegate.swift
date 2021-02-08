@@ -9,6 +9,10 @@ import UIKit
 import Parse
 import IQKeyboardManagerSwift
 
+var category_names: [String] = []
+var category_emojis = [String:String]()
+var category_colors = [String:String]()
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -34,6 +38,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // IQ Keyboard Manager setup
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = false
+
+        // Get categories
+        PFConfig.getInBackground { (config: PFConfig?, error: Error?) in
+            category_names = config?["category_names"] as? [String] ?? []
+            let emojis = config?["category_emojis"] as? [String] ?? []
+            let colors = config?["category_colors"] as? [String] ?? []
+            
+            var i = 0
+            for category in category_names {
+                if(i+1 > emojis.count) {
+                    category_emojis[category] = "❓"
+                } else {
+                    category_emojis[category] = emojis[i]
+                }
+                
+                if(i+1 > colors.count) {
+                    category_colors[category] = "#c2c2c2"
+                } else {
+                    category_colors[category] = colors[i]
+                }
+
+                i+=1
+            }
+        }
         
         return true
         

@@ -66,7 +66,9 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
             }
             
             // Set categories
-            categoryLabel.text = location!["category"] as! String
+            let category = location!["category"] as! String
+            let emoji = category_emojis[category] ?? "❓"
+            categoryLabel.text = emoji + " " + category
             
             // Set weather
             let coord = location?["geopoint"] as! PFGeoPoint
@@ -174,7 +176,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
                     emoji = "🌦"
                 }
             
-                self.weatherLabel.text = emoji + String(Int(temp)) + "°"
+                self.weatherLabel.text = emoji + " " + String(Int(temp)) + "°F" + " (" + condition + ")"
  
            }
         }
@@ -308,7 +310,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         self.addLocationButton.isEnabled = false
-        addLocationButton.backgroundColor = UIColor.darkGray
+        addLocationButton.backgroundColor = UIColor.separator
     }
     
     /**
