@@ -180,14 +180,25 @@ class AccountSetupViewController: UIViewController, UIImagePickerControllerDeleg
      Handle delete account button press
      */
     @IBAction func deleteAccountButton(_ sender: Any) {
-        let alert = UIAlertController(title: "Delete Account?", message: "Are you sure you want to pernamently delete your Proxima account? This cannot be undone.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Delete Account?", message: "Are you sure you want to pernamently delete your Proxima account, including all shared locations? This cannot be undone. Confirm by typing 'delete' in the form below.", preferredStyle: .alert)
+        
+        alert.addTextField { (confirmDelete) in }
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Delete my account", comment: "Destructive action"), style: .destructive, handler: { _ in
-            self.deleteLocations()
             
-            self.dismiss(animated: true) {
-              NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalIsDimissed2"), object: nil)
+            if(alert.textFields![0].text?.lowercased() == "delete") {
+                // Fulfill account deletion
+                self.deleteLocations()
+                self.dismiss(animated: true) {
+                  NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalIsDimissed"), object: nil)
+                }
+            } else {
+                // Confirmation failed, do not delete account
+                let alert = UIAlertController(title: "Deletion confirmation failed", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default))
+                self.present(alert, animated: true, completion: nil)
             }
+            
         }))
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: { _ in
