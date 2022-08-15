@@ -24,7 +24,7 @@ class AccountSetupViewController: UIViewController, UIImagePickerControllerDeleg
         profileImageView.layer.cornerRadius = (profileImageView.frame.width / 2)
 
         // Set user's current name
-        nameField.text = PFUser.current()!["name"] as! String
+        nameField.text = PFUser.current()!["name"] as? String ?? "Proxima User"
 
         // Set user's current profile picture
         if PFUser.current()!["profile_image"] != nil {
@@ -128,6 +128,72 @@ class AccountSetupViewController: UIViewController, UIImagePickerControllerDeleg
         
         delegate.window?.rootViewController = map
  
+    }
+    
+    /**
+     Display error to user upon account deletion failure
+     */
+    func deleteAccountError() {
+        let alert = UIAlertController(title: "Something went wrong", message: "We could not delete your account. Please contact developer.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    /**
+     Delete all locations created by user
+     */
+    func deleteLocations() {
+        let query = PFQuery(className: "Locations")
+        query.whereKey("author", equalTo: PFUser.current()!)
+        query.findObjectsInBackground { locations, error in
+            do {
+                try PFObject.deleteAll(locations)
+                self.deleteAccount()
+            } catch {
+                self.deleteAccountError();
+            }
+        }
+    }
+    
+    /**
+     Delete account of user
+     */
+    func deleteAccount() {
+        PFCloud.callFunction(inBackground: "deleteUser", withParameters: ["userId":PFUser.current()!.objectId!]) {
+            (response, error) in
+            if(error == nil) {
+                PFUser.logOut()
+
+                let main = UIStoryboard(name: "Main", bundle: nil)
+                let map = main.instantiateViewController(identifier: "FeedNavigationController")
+                let delegate = self.view.window?.windowScene?.delegate as! SceneDelegate
+
+                delegate.window?.rootViewController = map
+
+            } else {
+                self.deleteAccountError();
+            }
+        }
+    }
+    
+    /**
+     Handle delete account button press
+     */
+    @IBAction func deleteAccountButton(_ sender: Any) {
+        let alert = UIAlertController(title: "Delete Account?", message: "Are you sure you want to pernamently delete your Proxima account? This cannot be undone.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Delete my account", comment: "Destructive action"), style: .destructive, handler: { _ in
+            self.deleteLocations()
+            
+            self.dismiss(animated: true) {
+              NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalIsDimissed2"), object: nil)
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: { _ in
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     /*
