@@ -660,7 +660,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="poS-l7-Lw4" userLabel="locationImage">
-                                            <rect key="frame" x="26" y="19" width="160" height="89"/>
+                                            <rect key="frame" x="16" y="19" width="160" height="89"/>
                                             <color key="backgroundColor" systemColor="quaternaryLabelColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="poS-l7-Lw4" secondAttribute="height" multiplier="160:89" id="4ZU-T4-fxv"/>
@@ -675,7 +675,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artistic Mural under the Bridge" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEO-Ct-aEe" userLabel="nameLabel">
-                                            <rect key="frame" x="194" y="21" width="165" height="41"/>
+                                            <rect key="frame" x="184" y="21" width="175" height="41"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -684,7 +684,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Art" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiR-jw-ec0" userLabel="categoriesLabel">
-                                            <rect key="frame" x="194" y="73" width="165" height="16"/>
+                                            <rect key="frame" x="184" y="73" width="175" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -693,7 +693,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.3 miles away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bc1-DE-hiU">
-                                            <rect key="frame" x="194" y="90" width="165" height="16"/>
+                                            <rect key="frame" x="184" y="90" width="175" height="16"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -709,7 +709,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="bc1-DE-hiU" secondAttribute="trailing" id="GHK-jF-GLX"/>
                                         <constraint firstItem="gEO-Ct-aEe" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="MPH-81-A89"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="gEO-Ct-aEe" secondAttribute="trailing" id="iIU-im-C1q"/>
-                                        <constraint firstItem="poS-l7-Lw4" firstAttribute="leading" secondItem="KF3-hi-KIy" secondAttribute="leadingMargin" constant="10" id="jEP-Ja-U7K"/>
+                                        <constraint firstItem="poS-l7-Lw4" firstAttribute="leading" secondItem="KF3-hi-KIy" secondAttribute="leadingMargin" id="jEP-Ja-U7K"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="poS-l7-Lw4" secondAttribute="bottom" constant="8" id="khk-Lq-sCo"/>
                                         <constraint firstItem="poS-l7-Lw4" firstAttribute="top" secondItem="KF3-hi-KIy" secondAttribute="topMargin" constant="8" id="knG-Qw-A9G"/>
                                         <constraint firstItem="bc1-DE-hiU" firstAttribute="leading" secondItem="poS-l7-Lw4" secondAttribute="trailing" constant="8" symbolic="YES" id="ln9-1i-yGk"/>
@@ -1063,39 +1063,9 @@
                                     <action selector="openContact:" destination="8QW-Db-XR2" eventType="touchUpInside" id="30z-b4-FIY"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Craig Smith" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRg-Pk-AoI">
-                                <rect key="frame" x="143" y="291" width="89" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lead Developer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZL-up-TI7">
-                                <rect key="frame" x="121" y="262" width="133" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avni Avdulla" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OcH-24-owG">
-                                <rect key="frame" x="142" y="376" width="91" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prototype Developers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GyL-Lq-EWm">
-                                <rect key="frame" x="93" y="347" width="189" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOj-a5-JGN">
                                 <rect key="frame" x="173" y="350" width="0.0" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emmanuel Bangura" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbC-BI-SsL">
-                                <rect key="frame" x="113.5" y="405" width="148" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1112,15 +1082,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="baV-YE-ObM" firstAttribute="top" secondItem="gjg-kz-bok" secondAttribute="bottom" constant="8" symbolic="YES" id="3Ep-2M-s1v"/>
-                            <constraint firstItem="MZL-up-TI7" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="3cb-T9-99R"/>
                             <constraint firstItem="iAs-GU-529" firstAttribute="top" secondItem="baV-YE-ObM" secondAttribute="bottom" constant="8" symbolic="YES" id="AK7-tn-KPa"/>
-                            <constraint firstItem="MZL-up-TI7" firstAttribute="top" secondItem="8dv-Km-4uY" secondAttribute="bottom" constant="25" id="B90-Hg-tMh"/>
-                            <constraint firstItem="GyL-Lq-EWm" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="C47-Pg-cJ2"/>
-                            <constraint firstItem="OcH-24-owG" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="Djs-cc-jsC"/>
-                            <constraint firstItem="DRg-Pk-AoI" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="HsU-Qd-NAW"/>
                             <constraint firstItem="pq3-ex-a8g" firstAttribute="top" secondItem="iAs-GU-529" secondAttribute="bottom" constant="8" symbolic="YES" id="JzD-8D-Nit"/>
-                            <constraint firstItem="AbC-BI-SsL" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="M2k-yb-C37"/>
-                            <constraint firstItem="AbC-BI-SsL" firstAttribute="top" secondItem="OcH-24-owG" secondAttribute="bottom" constant="8" symbolic="YES" id="NkG-0Y-ICZ"/>
                             <constraint firstItem="baV-YE-ObM" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="OSe-ae-eSG"/>
                             <constraint firstItem="gjg-kz-bok" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="OfT-cb-5aM"/>
                             <constraint firstItem="eDD-GD-TGZ" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="Puk-dj-dUV"/>
@@ -1128,14 +1091,11 @@
                             <constraint firstItem="vXj-qL-jYo" firstAttribute="top" secondItem="s4u-N0-Fik" secondAttribute="top" constant="20" id="UJH-wd-8b6"/>
                             <constraint firstItem="8dv-Km-4uY" firstAttribute="top" secondItem="eDD-GD-TGZ" secondAttribute="bottom" constant="8" symbolic="YES" id="UyP-38-1uC"/>
                             <constraint firstItem="vXj-qL-jYo" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="Xch-EE-pIB"/>
-                            <constraint firstItem="DRg-Pk-AoI" firstAttribute="top" secondItem="MZL-up-TI7" secondAttribute="bottom" constant="8" symbolic="YES" id="ZE4-gd-irj"/>
-                            <constraint firstItem="OcH-24-owG" firstAttribute="top" secondItem="GyL-Lq-EWm" secondAttribute="bottom" constant="8" symbolic="YES" id="enR-VV-SpO"/>
                             <constraint firstItem="s4u-N0-Fik" firstAttribute="bottom" secondItem="pq3-ex-a8g" secondAttribute="bottom" constant="15" id="nUW-vN-1eq"/>
                             <constraint firstItem="eDD-GD-TGZ" firstAttribute="top" secondItem="vXj-qL-jYo" secondAttribute="bottom" constant="8" symbolic="YES" id="o43-0f-HaP"/>
                             <constraint firstItem="pq3-ex-a8g" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="pe7-7X-nKE"/>
                             <constraint firstItem="iAs-GU-529" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="qFl-Uh-psa"/>
                             <constraint firstItem="8dv-Km-4uY" firstAttribute="centerX" secondItem="s4u-N0-Fik" secondAttribute="centerX" id="sKY-Os-qF7"/>
-                            <constraint firstItem="GyL-Lq-EWm" firstAttribute="top" secondItem="DRg-Pk-AoI" secondAttribute="bottom" constant="35" id="zMq-Bh-WQo"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1387,11 +1347,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="G0u-qE-LlD"/>
+        <segue reference="mkD-kM-jRg"/>
         <segue reference="UIf-bG-eQs"/>
         <segue reference="SAU-Ne-BwB"/>
         <segue reference="3YW-Li-Za8"/>
-        <segue reference="dmJ-bT-l39"/>
+        <segue reference="YvJ-70-cEu"/>
         <segue reference="EB2-Vo-wdd"/>
     </inferredMetricsTieBreakers>
     <resources>
