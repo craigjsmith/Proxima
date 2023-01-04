@@ -65,7 +65,9 @@ class LeaderboardTableViewController: UITableViewController, SkeletonTableViewDa
      */
     func populate(limit: Int, skip: Int) {
         let query = PFQuery(className: "_User")
-        query.addDescendingOrder("score")
+        query.order(byDescending: "score")
+        query.addAscendingOrder("name")
+        query.addAscendingOrder("username")
         query.limit = limit
         query.skip = skip
         
