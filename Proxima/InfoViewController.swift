@@ -26,7 +26,7 @@ class InfoViewController: UIViewController {
      Open TOS in webbrowser
      */
     @IBAction func openTos(_ sender: Any) {
-        if let url = URL(string: "https://www.craigsmith.dev/proxima/terms.html") {
+        if let url = URL(string: "https://www.craigsmith.dev/proxima/terms") {
             UIApplication.shared.open(url)
         }
     }
@@ -35,7 +35,7 @@ class InfoViewController: UIViewController {
      Open Privacy Policy in webbrowser
      */
     @IBAction func openPrivacy(_ sender: Any) {
-        if let url = URL(string: "https://www.craigsmith.dev/proxima/privacy.html") {
+        if let url = URL(string: "https://www.craigsmith.dev/proxima/privacy") {
             UIApplication.shared.open(url)
         }
     }
