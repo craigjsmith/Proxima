@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gba-JZ-aAc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gba-JZ-aAc">
     <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -30,6 +30,7 @@
                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Wm5-iQ-f7g" secondAttribute="height" multiplier="1:1" id="1Q9-ix-cEs"/>
                                                     <constraint firstAttribute="width" constant="150" id="BBP-Cv-LoB"/>
                                                     <constraint firstAttribute="height" constant="150" id="SaH-LA-Dcn"/>
                                                     <constraint firstAttribute="width" secondItem="Wm5-iQ-f7g" secondAttribute="height" multiplier="1:1" id="s2s-hZ-WOg"/>
@@ -253,7 +254,6 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="Wm5-iQ-f7g" firstAttribute="width" secondItem="Wm5-iQ-f7g" secondAttribute="height" multiplier="1:1" id="1Q9-ix-cEs"/>
                                             <constraint firstItem="qit-cn-KjD" firstAttribute="top" secondItem="pme-Pt-xHy" secondAttribute="bottom" constant="8" symbolic="YES" id="AOn-tT-LoG"/>
                                             <constraint firstItem="fOR-sB-ozL" firstAttribute="top" secondItem="0q9-4d-sgS" secondAttribute="bottom" constant="25" id="BP8-WK-Y1B"/>
                                             <constraint firstItem="Cvg-xW-jiY" firstAttribute="top" secondItem="qit-cn-KjD" secondAttribute="bottom" constant="16" id="Ddr-wA-igb"/>
@@ -462,8 +462,11 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RI7-47-V7C">
-                                <rect key="frame" x="20" y="497" width="27" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35°" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RI7-47-V7C">
+                                <rect key="frame" x="20" y="497" width="150" height="19.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="3Vq-ji-f12"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1277,7 +1280,7 @@
                     <tabBarItem key="tabBarItem" title="Feed" image="rectangle.stack.fill" catalog="system" id="gf0-Kh-rHP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="w6D-e3-8FI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1362,7 +1365,7 @@
         <image name="location.fill" catalog="system" width="128" height="119"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus.circle" catalog="system" width="128" height="123"/>
-        <image name="rectangle.stack.fill" catalog="system" width="128" height="122"/>
+        <image name="rectangle.stack.fill" catalog="system" width="126" height="128"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="quaternaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.17647058823529413" colorSpace="custom" customColorSpace="sRGB"/>
