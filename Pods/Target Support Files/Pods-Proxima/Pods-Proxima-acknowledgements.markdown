@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 ## AlamofireImage
 
-Copyright (c) 2015-2021 Alamofire Software Foundation (http://alamofire.org/)
+Copyright (c) 2015-2022 Alamofire Software Foundation (http://alamofire.org/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -84,7 +84,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 MIT License
 
-Copyright (c) 2013-2017 Iftekhar Qurashi
+Copyright (c) 2013-2023 Iftekhar Qurashi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

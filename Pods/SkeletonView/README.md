@@ -21,7 +21,7 @@
   • <a href="#️-contributing">Contributing</a>
 </p>
 
-**🌎 README is available in other languages:  [🇪🇸](Translations/README_es.md) . [🇨🇳](Translations/README_zh.md) . [🇧🇷](Translations/README_pt-br.md) . [🇰🇷](Translations/README_ko.md) . [🇫🇷](Translations/README_fr.md)**
+**🌎 README is available in other languages:  [🇪🇸](Translations/README_es.md) . [🇨🇳](Translations/README_zh.md) . [🇧🇷](Translations/README_pt-br.md) . [🇰🇷](Translations/README_ko.md) . [🇫🇷](Translations/README_fr.md) . [🇩🇪](Translations/README_de.md)**
 
 Today almost all apps have async processes, such as API requests, long running processes, etc. While the processes are working, usually developers place a loading view to show users that something is going on.
 
@@ -89,6 +89,10 @@ dependencies: [
   .package(url: "https://github.com/Juanpe/SkeletonView.git", from: "1.7.0")
 ]
 ```
+
+> 📣 **IMPORTANT!** 
+>
+> Since version 1.30.0, `SkeletonView` supports **XCFrameworks**, so if you want to install it as a **XCFramework**, please use [this repo](https://github.com/Juanpe/SkeletonView-XCFramework.git) instead.
 
 
 ## 🐒 Usage
