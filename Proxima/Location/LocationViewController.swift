@@ -7,6 +7,7 @@
 
 import UIKit
 import Parse
+import SkeletonView
 
 class LocationViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -36,6 +37,10 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+                    
+        weatherLabel.isSkeletonable = true
+        weatherLabel.showSkeleton()
+        weatherLabel.startSkeletonAnimation()
         
         if location != nil {
             // Setup location manager
@@ -175,10 +180,12 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
                 else if(condition == "Drizzle") {
                     emoji = "🌦"
                 }
+               
+                self.weatherLabel.hideSkeleton(reloadDataAfter: true)
             
                 self.weatherLabel.text = emoji + " " + String(Int(temp)) + "°F" + " (" + condition + ")"
- 
            }
+
         }
         task.resume()
     }
