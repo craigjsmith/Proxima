@@ -112,6 +112,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             editProfileButton.image = UIImage(systemName:"gear")
         }
         
+        view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+        
         // User name
         self.nameLabel.text = currentUser?["name"] as? String
 
@@ -148,7 +150,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         createdLocationsCollectionView.reloadData()
         visitedLocationsCollectionView.reloadData()
-        view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
     }
 
     
